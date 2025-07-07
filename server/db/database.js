@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://localhost/27017/book-list").then(() => {
+    await mongoose.connect("mongodb://localhost/27017/cruds").then(() => {
       console.log("Database connected");
     });
   } catch {
