@@ -2,22 +2,25 @@ import mongoose from "mongoose";
 
 const crudSchema = new mongoose.Schema(
   {
-    CrudName: {
+    name: {
       type: String,
-      required: true,
+      required: [true, "Name is required"],
+      trim: true
     },
-    CrudDesc: {
+    description: {
       type: String,
-      required: true,
+      required: [true, "Description is required"],
+      trim: true
     },
-    CrudNumber: {
+    number: {
       type: Number,
-      required: true,
+      required: [true, "Number is required"],
+      min: [0, "Number must be positive"]
     },
   },
   { timestamps: true }
 );
 
-const Crud = mongoose.model("crud", crudSchema);
+const Crud = mongoose.model("Crud", crudSchema);
 
 export default Crud;

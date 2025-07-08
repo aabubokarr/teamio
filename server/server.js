@@ -1,14 +1,19 @@
-import express from "express"
-import connectDB from "./db/database.js"
+import express, { urlencoded } from "express";
+import connectDB from "./db/database.js";
+import crudRoutes from "./routes/crud.routes.js";
 
-connectDB()
+connectDB();
 
-const app = express()
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res)=> {
-    res.send("Working")
-})
+app.get("/", (req, res) => {
+  res.send("Working");
+});
 
-app.listen(8000, (err)=>{
-    console.log('Port listening on 8000')
-})
+app.use("/crud", crudRoutes);
+
+app.listen(8000, (err) => {
+  console.log("Port listening on 8000");
+});
