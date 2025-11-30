@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "2daygoals-api",
+  "compatibility_date": "2025-05-01",
+  "main": "./src/index.ts",
+  "assets": {
+    "directory": "./dist"
+  },
+  "compatibility_flags": ["nodejs_compat"]
+}

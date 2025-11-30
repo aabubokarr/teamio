@@ -1,19 +1,37 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "api",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "dev": "vite --port 4000",
+    "build": "vite build && vite build --ssr",
+    "preview": "$npm_execpath run build && wrangler dev dist-server/index.js",
+    "deploy": "$npm_execpath run build && wrangler deploy dist-server/index.js",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0",
-    "mongoose": "^8.16.1",
-    "nodemon": "^3.1.10"
+    "@aws-sdk/client-s3": "^3.862.0",
+    "@neondatabase/serverless": "^1.0.0",
+    "@orpc/server": "^1.2.0",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "@t3-oss/env-core": "^0.13.4",
+    "better-auth": "^1.2.7",
+    "better-upload": "^1.0.1",
+    "drizzle-orm": "^0.43.1",
+    "drizzle-query-logger": "^1.0.7",
+    "hono": "^4.7.9",
+    "neverthrow": "^8.2.0",
+    "uuid": "^11.1.0",
+    "zod": "4.0.15"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.2.2",
+    "@hono/vite-build": "^1.6.1",
+    "drizzle-kit": "^0.31.1",
+    "vite": "^6.3.5",
+    "vite-plugin-ssr-hot-reload": "^0.5.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.28.1"
   }
 }

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#000000"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="description"
+      content="Set and track your short-term goals effectively. A simple and focused way to achieve what matters most in the next 48 hours."
+    />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>2 Day Goals</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .loading-screen {
+        position: absolute;
+        inset: 0;
+        background-color: white;
+        z-index: -1;
+      }
+
+      .loading-screen .center {
+        display: grid;
+        place-items: center;
+        height: 100%;
+      }
+    </style>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  </head>
+  <body>
+    <div class="loading-screen">
+      <div class="center">
+        <lottie-player
+          src="./loader.json"
+          background="transparent"
+          speed="1"
+          style="width: 200px; height: 200px"
+          loop
+          autoplay
+        ></lottie-player>
+      </div>
+    </div>
+
+    <div id="app" style="background-color: var(--color-background)"></div>
+
+    <script type="module" src="/src/main.tsx">
+            const player = document.querySelector("lottie-player");
+
+      // Wait until the lottie player is fully loaded
+      player.addEventListener("ready", () => {
+        // Get animation duration in seconds
+        const duration =
+          player.getLottie().totalFrames / player.getLottie().frameRate;
+
+        // Play animation and then load
+        setTimeout(() => {
+          import("/src/main.tsx");
+          document.querySelector(".loading-screen").style.display = "none";
+        }, duration * 1000);
+      });
+    </script>
+  </body>
+</html>

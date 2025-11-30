@@ -1,0 +1,87 @@
+@font-face {
+  font-family: Lufga;
+  src: url("/fonts/Lufga.ttf");
+}
+@font-face {
+  font-family: Lufga-Medium;
+  src: url("/fonts/Lufga-Medium.ttf");
+}
+@import "tailwindcss";
+
+@theme {
+  --font-lufga: Lufga, "sans-serif";
+  --font-lufga-medium: Lufga-Medium, "sans-serif";
+}
+
+@theme inline {
+  --color-background: #fefefe;
+  --color-inp-bg: #d9d9d9;
+  --color-foreground: #000;
+
+  --color-primary-dark: #163300;
+  --color-primary-light: #5cea00;
+
+  --color-off-white: #f8f8f8;
+  --color-gray: #4D5D78;
+  --color-green-light: #328100;
+  --color-green-dark: #153500;
+
+  --radius-default: 1.125rem;
+  --border-default: 0.5px solid #ebebeb;
+  --border-secondary: 1px solid #ededed;
+}
+
+@utility stack {
+  grid-template-areas: "stack";
+
+  & > * {
+    grid-area: stack;
+  }
+}
+
+@utility center-grid {
+  --_padding-inline: var(--padding-inline, --spacing(4));
+  --_container: var(--container, 100%);
+
+  /*
+	 * CAUTION: DOT NOT EDIT
+	 * The container is the minimum of the container width and 100svw minus the
+	 * padding. This allows for a full bleed effect on smaller screens.
+	 */
+  --_computed-container: min(
+    var(--_container) - (var(--_padding-inline) * 2),
+    100svw - (var(--_padding-inline) * 2)
+  );
+
+  grid-template-columns:
+    [full-start] 1fr [content-start] var(--_computed-container)
+    [content-end] 1fr [full-end];
+
+  & > * {
+    grid-column: content;
+  }
+}
+
+@utility full-bleed {
+  .center-grid > & {
+    padding-inline: 0;
+    grid-column: full;
+  }
+}
+
+@layer base {
+  :root {
+    overscroll-behavior: none;
+  }
+}
+
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+  }
+}
