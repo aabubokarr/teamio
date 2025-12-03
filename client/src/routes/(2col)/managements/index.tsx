@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { TaskCard } from "@/components/ui/task-card";
 import {
-  IconArrowRight,
   IconCheck,
   IconChevronDown,
   IconCircle,
-  IconDotsVertical,
   IconPlus,
   IconSearch,
 } from "@tabler/icons-react";
@@ -15,7 +14,7 @@ export const Route = createFileRoute("/_2col-layout/managements")({
   component: RouteComponent,
 });
 
-const columns = [
+const initialColumns = [
   {
     id: "todo",
     title: "To-do",
@@ -141,6 +140,10 @@ const columns = [
   },
 ];
 
+type ColumnId = "todo" | "in-progress" | "complete";
+
+type ColumnsState = typeof initialColumns;
+
 const teamMembers = [
   "https://i.pravatar.cc/120?img=12",
   "https://i.pravatar.cc/120?img=32",
@@ -150,6 +153,43 @@ const teamMembers = [
 
 function RouteComponent() {
   const [viewMode, setViewMode] = useState<"board" | "list">("board");
+  const [columns, setColumns] = useState<ColumnsState>(initialColumns);
+  const [dragging, setDragging] = useState<{
+    columnId: ColumnId;
+    taskId: number;
+  } | null>(null);
+
+  const handleTaskDragStart = (columnId: ColumnId, taskId: number) => {
+    setDragging({ columnId, taskId });
+  };
+
+  const handleTaskDragEnd = () => {
+    setDragging(null);
+  };
+
+  const handleColumnDrop = (targetColumnId: ColumnId) => {
+    if (!dragging) return;
+    if (dragging.columnId === targetColumnId) return;
+
+    setColumns((prev) => {
+      const next = prev.map((column) => ({ ...column, tasks: [...column.tasks] }));
+
+      const sourceColumn = next.find((col) => col.id === dragging.columnId);
+      const targetColumn = next.find((col) => col.id === targetColumnId);
+
+      if (!sourceColumn || !targetColumn) return prev;
+
+      const taskIndex = sourceColumn.tasks.findIndex((task) => task.id === dragging.taskId);
+      if (taskIndex === -1) return prev;
+
+      const [task] = sourceColumn.tasks.splice(taskIndex, 1);
+      targetColumn.tasks.push(task);
+
+      return next;
+    });
+
+    setDragging(null);
+  };
 
   return (
     <div className="space-y-6 font-lufga">
@@ -262,6 +302,10 @@ function RouteComponent() {
                 column.id === "todo" ? "border-2 border-blue-200" : ""
               }`}
               style={{ border: column.id !== "todo" ? "var(--border-secondary)" : undefined }}
+              onDragOver={(event) => {
+                event.preventDefault();
+              }}
+              onDrop={() => handleColumnDrop(column.id as ColumnId)}
             >
               {/* Column Header */}
               <div className="flex items-center justify-between mb-6">
@@ -288,99 +332,34 @@ function RouteComponent() {
               {/* Tasks */}
               <div className="space-y-4">
                 {column.tasks.map((task) => (
-                  <div
+                  <TaskCard
                     key={task.id}
-                    className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm relative"
-                  >
-                    {/* Options Button */}
-                    <button
-                      type="button"
-                      className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-                    >
-                      <IconDotsVertical className="size-5" />
-                    </button>
-
-                    {/* Task Title */}
-                    <h3 className="text-sm font-semibold text-gray-900 mb-3 pr-8">
-                      {task.title}
-                    </h3>
-
-                    {/* Progress Bar */}
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs text-gray-500">{task.progress}%</span>
-                      </div>
-                      <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-green-500 transition-all"
-                          style={{ width: `${task.progress}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Assignees */}
-                    <div className="mb-4">
-                      <p className="text-xs text-gray-500 mb-2">
-                        {task.assignees.length > 1 ? `${task.assignees.length} Assign to` : "Assign to"}
-                      </p>
-                      <div className="flex items-center gap-2">
-                        {task.assignees.map((avatar, index) => (
-                          <img
-                            key={index}
-                            src={avatar}
-                            alt="Assignee"
-                            className="size-6 rounded-full object-cover border border-white"
-                          />
-                        ))}
-                        <div className="size-6 rounded-full bg-green-500 text-white text-xs font-medium flex items-center justify-center">
-                          +{task.assigneeCount}+
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Priority and Due Date */}
-                    <div className="flex items-center gap-3 mb-4 flex-wrap">
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={`size-2 rounded-full ${
-                            task.priorityColor === "purple"
-                              ? "bg-purple-500"
-                              : task.priorityColor === "red"
-                              ? "bg-red-500"
-                              : "bg-gray-500"
-                          }`}
-                        />
-                        <span className="text-xs text-gray-600">{task.priority}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={`size-2 rounded-full ${
-                            task.dueDateColor === "yellow"
-                              ? "bg-yellow-500"
-                              : task.dueDateColor === "green"
-                              ? "bg-green-500"
-                              : task.dueDateColor === "purple"
-                              ? "bg-purple-500"
-                              : "bg-gray-500"
-                          }`}
-                        />
-                        <span className="text-xs text-gray-600">{task.dueDate}</span>
-                      </div>
-                    </div>
-
-                    {/* Open Button */}
-                    <Button
-                      type="button"
-                      variant="classic"
-                      color="black"
-                      className={{
-                        base: "w-full",
-                      }}
-                    >
-                      Open
-                      <IconArrowRight className="size-4 text-green-500" />
-                    </Button>
-                  </div>
+                    draggable
+                    onDragStart={() => handleTaskDragStart(column.id as ColumnId, task.id)}
+                    onDragEnd={handleTaskDragEnd}
+                    title={task.title}
+                    progress={task.progress}
+                    assignees={task.assignees}
+                    assigneeCount={task.assigneeCount}
+                    priority={task.priority}
+                    priorityColor={
+                      task.priorityColor === "purple"
+                        ? "purple"
+                        : task.priorityColor === "red"
+                        ? "red"
+                        : "gray"
+                    }
+                    dueDate={task.dueDate}
+                    dueDateColor={
+                      task.dueDateColor === "yellow"
+                        ? "yellow"
+                        : task.dueDateColor === "green"
+                        ? "green"
+                        : task.dueDateColor === "purple"
+                        ? "purple"
+                        : "gray"
+                    }
+                  />
                 ))}
               </div>
             </div>
