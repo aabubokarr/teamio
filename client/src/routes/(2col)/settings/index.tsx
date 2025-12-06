@@ -2,6 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { GoogleIcon } from "@/components/icons/google";
+import { IconPencil } from "@tabler/icons-react";
+import Avatar from "boring-avatars";
+import { EditProfilePictureModal } from "@/components/ui/edit-profile-picture-modal";
+import { PreviewProfilePictureModal } from "@/components/ui/preview-profile-picture-modal";
 
 export const Route = createFileRoute("/_2col-layout/settings")({
   component: RouteComponent,
@@ -9,6 +13,32 @@ export const Route = createFileRoute("/_2col-layout/settings")({
 
 function RouteComponent() {
   const [active, setActive] = useState("profile");
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
+  const handleFileSelect = (file: File) => {
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result as string);
+        setShowUploadModal(false);
+        setShowPreviewModal(true);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handlePreviewCancel = () => {
+    setShowPreviewModal(false);
+    setShowUploadModal(true);
+  };
+
+  const handlePreviewSubmit = () => {
+    // TODO: Save the image to the server/state
+    setShowPreviewModal(false);
+    setPreviewImage(null);
+  };
 
   const tabs = [
     {
@@ -16,9 +46,90 @@ function RouteComponent() {
       label: "Profile",
       content: (
         <div
-          className="mt-8 text-sm rounded-2xl"
+          className="mt-8 text-sm rounded-2xl bg-white overflow-hidden"
           style={{ border: "var(--border-secondary)" }}
         >
+          {/* Header Section with Banner and Profile */}
+          <div className="relative">
+            {/* Banner Image - 541 X 84 */}
+            <div 
+              className="relative bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 overflow-hidden w-full"
+              style={{ height: "140px" }}
+            >
+              {/* Abstract flowing design - swirling ribbon effect */}
+              <div className="absolute inset-0">
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 541 84" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="ribbon1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(255,255,255,0.4)" />
+                      <stop offset="50%" stopColor="rgba(147,197,253,0.6)" />
+                      <stop offset="100%" stopColor="rgba(59,130,246,0.4)" />
+                    </linearGradient>
+                    <linearGradient id="ribbon2" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(59,130,246,0.3)" />
+                      <stop offset="50%" stopColor="rgba(96,165,250,0.5)" />
+                      <stop offset="100%" stopColor="rgba(147,197,253,0.3)" />
+                    </linearGradient>
+                  </defs>
+                  {/* Swirling ribbon shapes */}
+                  <path
+                    d="M0,42 Q135,10 270,42 T540,42"
+                    fill="url(#ribbon1)"
+                    opacity="0.8"
+                  />
+                  <path
+                    d="M0,50 Q150,20 300,50 T540,50"
+                    fill="url(#ribbon2)"
+                    opacity="0.6"
+                  />
+                  <path
+                    d="M0,30 Q120,60 240,30 T480,30"
+                    fill="rgba(255,255,255,0.3)"
+                    opacity="0.7"
+                  />
+                </svg>
+              </div>
+              
+              {/* Cover size text - top right */}
+              <div className="absolute top-2 right-2 px-2.5 py-1 bg-white/80 backdrop-blur-sm rounded-md text-[10px] text-gray-600">
+                Cover size 541 X 84
+              </div>
+              
+              {/* Edit button - bottom right */}
+              <button
+                type="button"
+                className="absolute bottom-2 right-2 size-8 bg-gray-100/90 backdrop-blur-sm rounded-md flex items-center justify-center hover:bg-gray-200/90 transition"
+              >
+                <IconPencil className="size-4 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Profile Section */}
+            <div className="px-8 pb-6 pt-3">
+              <div className="flex items-end gap-4 -mt-16">
+                {/* Profile Picture */}
+                <div 
+                  className="relative cursor-pointer group"
+                  onClick={() => setShowUploadModal(true)}
+                >
+                  <Avatar
+                    name="Muhammad Shyed"
+                    variant="beam"
+                    className="size-32 rounded-full border-4 border-white shadow-lg group-hover:opacity-90 transition"
+                  />
+                  <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                    <IconPencil className="size-6 text-white" />
+                  </div>
+                </div>
+                {/* Name and Role */}
+                <div className="flex flex-col gap-0.5 pb-4">
+                  <h2 className="text-2xl font-bold text-gray-900">Muhammad Shyed</h2>
+                  <p className="text-sm text-gray-500">Designer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <form
             action=""
             method="post"
@@ -373,6 +484,23 @@ function RouteComponent() {
 
       {/* Active content */}
       <div>{tabs.find((tab) => tab.id === active)?.content}</div>
+
+      {/* Upload Modal */}
+      <EditProfilePictureModal
+        isOpen={showUploadModal}
+        onOpenChange={setShowUploadModal}
+        onFileSelect={handleFileSelect}
+      />
+
+      {/* Preview Modal */}
+      <PreviewProfilePictureModal
+        isOpen={showPreviewModal}
+        onOpenChange={setShowPreviewModal}
+        previewImage={previewImage}
+        onCancel={handlePreviewCancel}
+        onSubmit={handlePreviewSubmit}
+      />
     </div>
   );
 }
+

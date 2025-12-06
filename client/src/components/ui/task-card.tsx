@@ -48,16 +48,18 @@ export function TaskCard({
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
     >
+      {/* Header: Title and Menu */}
       <div className="flex items-start justify-between mb-4">
         <h3 className="text-sm font-bold text-gray-900 pr-8 leading-tight">{title}</h3>
         <button
           type="button"
-          className="text-gray-400 hover:text-gray-600 flex-shrink-0"
+          className="size-6 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 flex-shrink-0 transition"
         >
           <IconDotsVertical className="size-4" />
         </button>
       </div>
 
+      {/* Progress Bar */}
       <div className="mb-4">
         <div className="flex items-center justify-end mb-1.5">
           <span className="text-xs text-gray-500">{progress}%</span>
@@ -70,12 +72,12 @@ export function TaskCard({
         </div>
       </div>
 
+      {/* Assign to Section */}
       <div className="mb-4">
         <div className="flex items-center gap-2">
-          <div className="size-5 rounded-full bg-black flex-shrink-0" />
-          <span className="text-xs text-gray-600">Assign to</span>
+          <span className="text-xs text-gray-900">Assign to</span>
           <div className="flex items-center -ml-1">
-            {assignees.slice(0, 3).map((avatar, index) => (
+            {assignees.map((avatar, index) => (
               <img
                 key={index}
                 src={avatar}
@@ -90,6 +92,7 @@ export function TaskCard({
         </div>
       </div>
 
+      {/* Footer: Tags and Button */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5">
@@ -102,6 +105,7 @@ export function TaskCard({
           </div>
         </div>
 
+        {/* Open Button with Gradient */}
         <button
           type="button"
           className="relative px-4 py-2 rounded-lg text-sm font-medium text-white overflow-hidden group hover:opacity-90 transition"

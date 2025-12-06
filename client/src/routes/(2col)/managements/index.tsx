@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { TaskCard } from "@/components/ui/task-card";
 import {
   IconCheck,
@@ -25,8 +24,17 @@ const initialColumns = [
         id: 1,
         title: "Design UX on secret project",
         progress: 0,
-        assignees: ["https://i.pravatar.cc/120?img=12", "https://i.pravatar.cc/120?img=32", "https://i.pravatar.cc/120?img=48"],
-        assigneeCount: 90,
+        assignees: [
+          "https://i.pravatar.cc/120?img=12",
+          "https://i.pravatar.cc/120?img=32",
+          "https://i.pravatar.cc/120?img=48",
+          "https://i.pravatar.cc/120?img=55",
+          "https://i.pravatar.cc/120?img=60",
+          "https://i.pravatar.cc/120?img=65",
+          "https://i.pravatar.cc/120?img=70",
+          "https://i.pravatar.cc/120?img=75",
+        ],
+        assigneeCount: 98,
         priority: "Urgent",
         priorityColor: "purple",
         dueDate: "2 August",
@@ -298,17 +306,22 @@ function RouteComponent() {
           {columns.map((column) => (
             <div
               key={column.id}
-              className={`rounded-3xl bg-white p-6 shadow-sm ${
+              className={`rounded-3xl bg-white p-6 shadow-sm flex flex-col ${
                 column.id === "todo" ? "border-2 border-blue-200" : ""
               }`}
-              style={{ border: column.id !== "todo" ? "var(--border-secondary)" : undefined }}
+              style={{
+                border: column.id !== "todo" ? "var(--border-secondary)" : undefined,
+                height: "calc(100vh - 320px)",
+                minHeight: "650px",
+                maxHeight: "calc(100vh - 320px)",
+              }}
               onDragOver={(event) => {
                 event.preventDefault();
               }}
               onDrop={() => handleColumnDrop(column.id as ColumnId)}
             >
               {/* Column Header */}
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-6 flex-shrink-0">
                 <div className="flex items-center gap-2">
                   {column.isComplete ? (
                     <IconCheck className="size-5 text-gray-900" />
@@ -329,8 +342,8 @@ function RouteComponent() {
                 </button>
               </div>
 
-              {/* Tasks */}
-              <div className="space-y-4">
+              {/* Tasks - Scrollable */}
+              <div className="flex-1 overflow-y-auto space-y-4 pr-2 -mr-2 min-h-0">
                 {column.tasks.map((task) => (
                   <TaskCard
                     key={task.id}
