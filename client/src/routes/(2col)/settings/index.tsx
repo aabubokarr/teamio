@@ -6,6 +6,10 @@ import { IconPencil } from "@tabler/icons-react";
 import Avatar from "boring-avatars";
 import { EditProfilePictureModal } from "@/components/ui/edit-profile-picture-modal";
 import { PreviewProfilePictureModal } from "@/components/ui/preview-profile-picture-modal";
+import { PricingCard } from "@/components/ui/pricing-card";
+import { BillingHistory } from "@/components/ui/billing-history";
+import { IconTrash } from "@tabler/icons-react";
+import { IconUpload } from "@tabler/icons-react";
 
 export const Route = createFileRoute("/_2col-layout/settings")({
   component: RouteComponent,
@@ -327,7 +331,89 @@ function RouteComponent() {
     {
       id: "subscription",
       label: "Subscription",
-      content: "Subscription details go here",
+      content: (
+        <div className="w-[1000px] mt-8 bg-white rounded-[18px] shadow-sm p-8">
+          {/* Header Section */}
+          <div className="flex items-start justify-between mb-8">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Billing settings</h1>
+              <p className="text-gray-500 mt-1">Manage your plan and billing history here</p>
+            </div>
+            
+            <div className="bg-[#F8F9FA] rounded-xl p-4 flex items-start gap-12">
+              <div>
+                <h3 className="font-bold text-gray-900">Standard Plan / Monthly</h3>
+                <p className="text-xs text-gray-400 mt-1">End Date Nov 29</p>
+              </div>
+              <div className="flex flex-col gap-2 text-sm font-medium underline decoration-1 underline-offset-2">
+                <button className="text-[#3F6F62] hover:text-green-700 text-left flex items-center gap-1.5">
+                   <IconUpload className="size-3.5" /> Update Subscription
+                </button>
+                <button className="text-[#3F6F62] hover:text-green-700 text-left flex items-center gap-1.5">
+                   <IconTrash className="size-3.5" /> Cancel Subscription
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing Cards */}
+          <div className="flex gap-6 mb-12">
+            <PricingCard
+              title="Free Forever"
+              description="No minimum commitment pause or cancel anytime"
+              price="0$"
+              period="/Lifetime"
+              theme="blue"
+              features={[
+                "Ads",
+                "Unlimited Project",
+                "100 Seat",
+                "Management View",
+                "Calendar View",
+              ]}
+              buttons={[{ text: "Register - it's Free", variant: "ghost" }]}
+            />
+            <PricingCard
+              title="Monthly"
+              description="No minimum commitment pause or cancel anytime"
+              price="19$"
+              period="/month"
+              theme="green"
+              features={[
+                "Without Ads",
+                "Unlimited Project",
+                "Unlimited Seat",
+                "Management View",
+                "Calendar View",
+                "Chat View",
+              ]}
+              buttons={[
+                { text: "Get Started", variant: "primary" },
+                { text: "Contact to sales", variant: "secondary" },
+              ]}
+            />
+            <PricingCard
+              title="Yearly"
+              description="No minimum commitment pause or cancel anytime"
+              price="199$"
+              period="/yearly"
+              theme="orange"
+              features={[
+                "Without Ads",
+                "Unlimited Project",
+                "Unlimited Seat",
+                "Management View",
+                "Calendar View",
+                "Chat View",
+              ]}
+              buttons={[{ text: "Get Started", variant: "primary" }]}
+            />
+          </div>
+
+          {/* Billing History */}
+          <BillingHistory />
+        </div>
+      ),
     },
     {
       id: "notification",

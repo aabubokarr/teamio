@@ -1,4 +1,4 @@
-import { TaskCard } from "@/components/ui/task-card";
+import { ManagementTaskCard } from "@/components/ui/management-task-card";
 import {
   IconCheck,
   IconChevronDown,
@@ -13,6 +13,7 @@ export const Route = createFileRoute("/_2col-layout/managements")({
   component: RouteComponent,
 });
 
+// Update data to match screenshot more closely for "Visual Design on Figma" etc.
 const initialColumns = [
   {
     id: "todo",
@@ -25,14 +26,8 @@ const initialColumns = [
         title: "Design UX on secret project",
         progress: 0,
         assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
-          "https://i.pravatar.cc/120?img=55",
-          "https://i.pravatar.cc/120?img=60",
           "https://i.pravatar.cc/120?img=65",
           "https://i.pravatar.cc/120?img=70",
-          "https://i.pravatar.cc/120?img=75",
         ],
         assigneeCount: 98,
         priority: "Urgent",
@@ -45,7 +40,7 @@ const initialColumns = [
         title: "High-fidelity Wireframe",
         progress: 0,
         assignees: ["https://i.pravatar.cc/120?img=12", "https://i.pravatar.cc/120?img=32", "https://i.pravatar.cc/120?img=48"],
-        assigneeCount: 96,
+        assigneeCount: 98,
         priority: "High Priority",
         priorityColor: "red",
         dueDate: "2 August",
@@ -56,7 +51,7 @@ const initialColumns = [
         title: "Visual Design on Figma",
         progress: 0,
         assignees: ["https://i.pravatar.cc/120?img=12", "https://i.pravatar.cc/120?img=32", "https://i.pravatar.cc/120?img=48"],
-        assigneeCount: 96,
+        assigneeCount: 98,
         priority: "Urgent",
         priorityColor: "purple",
         dueDate: "2 August",
@@ -75,33 +70,33 @@ const initialColumns = [
         title: "Visual Design on Figma",
         progress: 75,
         assignees: ["https://i.pravatar.cc/120?img=12", "https://i.pravatar.cc/120?img=32", "https://i.pravatar.cc/120?img=48"],
-        assigneeCount: 96,
+        assigneeCount: 98,
         priority: "High Priority",
-        priorityColor: "red",
+        priorityColor: "red", // Screenshot: High Priority is RED
         dueDate: "2 August",
-        dueDateColor: "purple",
+        dueDateColor: "purple", // Screenshot: 2 August is PURPLE for this card
       },
       {
         id: 5,
         title: "Website Design",
         progress: 75,
         assignees: ["https://i.pravatar.cc/120?img=12", "https://i.pravatar.cc/120?img=32", "https://i.pravatar.cc/120?img=48"],
-        assigneeCount: 96,
+        assigneeCount: 98,
         priority: "Urgent",
         priorityColor: "purple",
         dueDate: "2 August",
-        dueDateColor: "yellow",
+        dueDateColor: "purple", // Screenshot: 2 August is PURPLE
       },
       {
         id: 6,
         title: "Motion Design",
         progress: 75,
         assignees: ["https://i.pravatar.cc/120?img=12", "https://i.pravatar.cc/120?img=32", "https://i.pravatar.cc/120?img=48"],
-        assigneeCount: 96,
+        assigneeCount: 98,
         priority: "Urgent",
         priorityColor: "purple",
         dueDate: "2 August",
-        dueDateColor: "yellow",
+        dueDateColor: "purple",
       },
     ],
   },
@@ -120,7 +115,7 @@ const initialColumns = [
         priority: "Urgent",
         priorityColor: "purple",
         dueDate: "2 August",
-        dueDateColor: "green",
+        dueDateColor: "green", // Screenshot: 2 August is GREEN
       },
       {
         id: 8,
@@ -148,8 +143,6 @@ const initialColumns = [
   },
 ];
 
-type ColumnId = "todo" | "in-progress" | "complete";
-
 type ColumnsState = typeof initialColumns;
 
 const teamMembers = [
@@ -161,217 +154,148 @@ const teamMembers = [
 
 function RouteComponent() {
   const [viewMode, setViewMode] = useState<"board" | "list">("board");
-  const [columns, setColumns] = useState<ColumnsState>(initialColumns);
-  const [dragging, setDragging] = useState<{
-    columnId: ColumnId;
-    taskId: number;
-  } | null>(null);
-
-  const handleTaskDragStart = (columnId: ColumnId, taskId: number) => {
-    setDragging({ columnId, taskId });
-  };
-
-  const handleTaskDragEnd = () => {
-    setDragging(null);
-  };
-
-  const handleColumnDrop = (targetColumnId: ColumnId) => {
-    if (!dragging) return;
-    if (dragging.columnId === targetColumnId) return;
-
-    setColumns((prev) => {
-      const next = prev.map((column) => ({ ...column, tasks: [...column.tasks] }));
-
-      const sourceColumn = next.find((col) => col.id === dragging.columnId);
-      const targetColumn = next.find((col) => col.id === targetColumnId);
-
-      if (!sourceColumn || !targetColumn) return prev;
-
-      const taskIndex = sourceColumn.tasks.findIndex((task) => task.id === dragging.taskId);
-      if (taskIndex === -1) return prev;
-
-      const [task] = sourceColumn.tasks.splice(taskIndex, 1);
-      targetColumn.tasks.push(task);
-
-      return next;
-    });
-
-    setDragging(null);
-  };
+  const [columns] = useState<ColumnsState>(initialColumns);
 
   return (
-    <div className="space-y-6 font-lufga">
+    <div className="space-y-6 font-lufga max-w-[1400px]">
       {/* Header Section */}
-      <div className="space-y-4">
-        {/* Top Row */}
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-3">
-            <p className="text-sm text-gray-900">Date: 16/03/2023</p>
+      <div className="flex flex-col gap-6">
+         {/* Top Row: Date | Update Status | Team */}
+         <div className="flex items-center justify-between">
+            <p className="text-[15px] text-gray-900 font-medium">Date: 16/03/2023</p>
+            
             <div className="flex items-center gap-2">
-              <div className="size-4 bg-yellow-400 rounded"></div>
-              <h1 className="text-xl font-bold text-gray-900">Design System</h1>
+               <span className="size-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)]"></span>
+               <p className="text-[13px] text-[#747786]">Update 13 min ago</p>
             </div>
-          </div>
+         </div>
 
-          <div className="flex items-center gap-4 flex-wrap">
-            {/* Search */}
-            <label className="relative block">
-              <span className="sr-only">Search tasks</span>
-              <IconSearch className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-gray-400" />
-              <input
-                type="search"
-                placeholder="Search Task"
-                className="w-64 rounded-full bg-off-white px-11 py-2.5 text-sm text-gray-600 outline-none ring-0 transition focus:bg-white focus:ring-2 focus:ring-gray-100"
-              />
-            </label>
-
-            {/* View Toggle */}
-            <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
-              <button
-                type="button"
-                onClick={() => setViewMode("board")}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition ${
-                  viewMode === "board"
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-500"
-                }`}
-              >
-                Board
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode("list")}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition ${
-                  viewMode === "list"
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-500"
-                }`}
-              >
-                List
-              </button>
+         {/* Second Row: Title and Team */}
+         <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+               <div className="size-10 bg-[#FFD600] rounded-[10px]" /> {/* Yellow Icon */}
+               <h1 className="text-[28px] font-bold text-black tracking-tight">Design System</h1>
             </div>
-          </div>
-        </div>
-
-        {/* Bottom Row */}
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-2">
-            <span className="size-2 bg-red-500 rounded-full"></span>
-            <p className="text-sm text-gray-500">Update 13 min ago</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            {/* Team Members */}
-            <div className="flex items-center gap-2">
+            
+            <div className="flex items-center">
               {teamMembers.map((avatar, index) => (
                 <img
                   key={index}
                   src={avatar}
                   alt="Team member"
-                  className="size-8 rounded-full object-cover border-2 border-white -ml-2 first:ml-0"
+                  className="size-10 rounded-full object-cover border-2 border-white -ml-3 first:ml-0"
                 />
               ))}
               <button
                 type="button"
-                className="size-8 rounded-full bg-black text-white flex items-center justify-center shrink-0 -ml-2"
+                className="size-10 rounded-full bg-black text-white flex items-center justify-center shrink-0 -ml-3 border-2 border-white hover:bg-gray-800 transition"
               >
-                <IconPlus className="size-4" />
+                <IconPlus className="size-5" />
               </button>
             </div>
+         </div>
 
-            {/* Dropdowns */}
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg text-sm font-medium"
-              >
-                To-do
-                <IconChevronDown className="size-4" />
-              </button>
-              <button
-                type="button"
-                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-gray-900 rounded-lg text-sm font-medium"
-              >
-                Today
-                <IconChevronDown className="size-4" />
-              </button>
-            </div>
-          </div>
-        </div>
+         {/* Third Row: Tools */}
+         <div className="flex items-center justify-between mt-2">
+             <div className="flex items-center gap-12">
+                {/* Search */}
+                <div className="relative">
+                    <IconSearch className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-gray-500" stroke={2} />
+                    <input
+                        type="search"
+                        placeholder="Search Task"
+                        className="w-[280px] h-12 rounded-[14px] bg-[#F8F9FA] pl-12 pr-4 text-[15px] text-gray-900 outline-none placeholder:text-gray-500"
+                    />
+                </div>
+             </div>
+
+             {/* Center: View Toggle */}
+             <div className="bg-[#F8F9FA] p-1 rounded-[14px] flex items-center gap-1">
+                 <button
+                    onClick={() => setViewMode("board")}
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-[10px] text-[15px] font-semibold transition-all ${
+                        viewMode === "board" ? "bg-white shadow-sm text-black" : "text-[#747786] hover:bg-gray-100"
+                    }`}
+                 >
+                    <svg className="size-4" viewBox="0 0 24 24" fill={viewMode === 'board' ? 'currentColor' : '#747786'}><path d="M4 4h6v16H4V4zm10 0h6v16h-6V4z"/></svg>
+                    Board
+                 </button>
+                 <button
+                    onClick={() => setViewMode("list")}
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-[10px] text-[15px] font-semibold transition-all ${
+                        viewMode === "list" ? "bg-white shadow-sm text-black" : "text-[#747786] hover:bg-gray-100"
+                    }`}
+                 >
+                    <svg className="size-4" viewBox="0 0 24 24" fill={viewMode === 'list' ? 'currentColor' : '#747786'}><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg> 
+                    List
+                 </button>
+             </div>
+
+             {/* Right: Dropdowns */}
+             <div className="flex items-center gap-3">
+                 <button className="h-11 px-5 bg-black text-white rounded-[14px] flex items-center gap-2 text-[15px] font-medium hover:bg-gray-800 transition">
+                    <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M7 12h10m-8 6h6"/></svg>
+                    To-do
+                    <IconChevronDown className="size-4 opacity-70" />
+                 </button>
+                 <button className="h-11 px-5 bg-black text-white rounded-[14px] flex items-center gap-2 text-[15px] font-medium hover:bg-gray-800 transition">
+                    <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Today
+                    <IconChevronDown className="size-4 opacity-70" />
+                 </button>
+             </div>
+         </div>
       </div>
 
       {/* Kanban Board */}
       {viewMode === "board" && (
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-3 mt-8">
           {columns.map((column) => (
             <div
               key={column.id}
-              className={`rounded-3xl bg-white p-6 shadow-sm flex flex-col ${
-                column.id === "todo" ? "border-2 border-blue-200" : ""
-              }`}
-              style={{
-                border: column.id !== "todo" ? "var(--border-secondary)" : undefined,
-                height: "calc(100vh - 320px)",
-                minHeight: "650px",
-                maxHeight: "calc(100vh - 320px)",
-              }}
-              onDragOver={(event) => {
-                event.preventDefault();
-              }}
-              onDrop={() => handleColumnDrop(column.id as ColumnId)}
+              className={`rounded-[24px] bg-[#F8F9FA] p-4 flex flex-col h-full`} 
             >
               {/* Column Header */}
-              <div className="flex items-center justify-between mb-6 flex-shrink-0">
-                <div className="flex items-center gap-2">
-                  {column.isComplete ? (
-                    <IconCheck className="size-5 text-gray-900" />
+              <div className="flex items-center justify-between mb-5 px-1 py-1">
+                <div className="flex items-center gap-2.5">
+                  {column.id === 'todo' ? (
+                       <IconCircle className="size-5 text-[#747786]" stroke={2} />
+                  ) : column.id === 'in-progress' ? (
+                       <div className="size-5 rounded-full border-2 border-[#747786] border-l-transparent rotate-45" /> 
+                       // Custom 'in progress' icon matching screenshot roughly
                   ) : (
-                    <IconCircle className="size-5 text-gray-400" />
+                       <div className="size-5 rounded-full bg-[#999999] flex items-center justify-center text-white"><IconCheck className="size-3.5" stroke={4} /></div>
                   )}
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  
+                  <h2 className="text-[17px] font-bold text-black">
                     {column.title}
                     {column.count !== null && `(${column.count})`}
                   </h2>
                 </div>
+                
                 <button
                   type="button"
-                  className="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900"
+                  className="flex items-center gap-1.5 text-[14px] font-semibold text-black hover:bg-gray-200 px-3 py-1.5 rounded-lg transition"
                 >
-                  <IconPlus className="size-4" />
+                  <IconPlus className="size-4" stroke={2.5} />
                   Add task
                 </button>
               </div>
 
-              {/* Tasks - Scrollable */}
-              <div className="flex-1 overflow-y-auto space-y-4 pr-2 -mr-2 min-h-0">
+              {/* Tasks */}
+              <div className="flex-1 space-y-4">
                 {column.tasks.map((task) => (
-                  <TaskCard
+                  <ManagementTaskCard
                     key={task.id}
-                    draggable
-                    onDragStart={() => handleTaskDragStart(column.id as ColumnId, task.id)}
-                    onDragEnd={handleTaskDragEnd}
                     title={task.title}
                     progress={task.progress}
                     assignees={task.assignees}
-                    assigneeCount={task.assigneeCount}
+                    totalAssignees={task.assigneeCount}
                     priority={task.priority}
-                    priorityColor={
-                      task.priorityColor === "purple"
-                        ? "purple"
-                        : task.priorityColor === "red"
-                        ? "red"
-                        : "gray"
-                    }
+                    priorityColor={task.priorityColor as any}
                     dueDate={task.dueDate}
-                    dueDateColor={
-                      task.dueDateColor === "yellow"
-                        ? "yellow"
-                        : task.dueDateColor === "green"
-                        ? "green"
-                        : task.dueDateColor === "purple"
-                        ? "purple"
-                        : "gray"
-                    }
+                    dueDateColor={task.dueDateColor as any}
+                    variant={column.id === "todo" ? "todo" : (column.id === "in-progress" ? "inprogress" : "complete")}
                   />
                 ))}
               </div>
