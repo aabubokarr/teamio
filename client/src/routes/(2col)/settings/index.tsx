@@ -50,7 +50,7 @@ function RouteComponent() {
       label: "Profile",
       content: (
         <div
-          className="mt-8 text-sm rounded-2xl bg-white overflow-hidden"
+          className="mt-6 md:mt-8 text-sm rounded-xl md:rounded-2xl bg-white overflow-hidden w-full"
           style={{ border: "var(--border-secondary)" }}
         >
           {/* Header Section with Banner and Profile */}
@@ -109,8 +109,8 @@ function RouteComponent() {
             </div>
 
             {/* Profile Section */}
-            <div className="px-8 pb-6 pt-3">
-              <div className="flex items-end gap-4 -mt-16">
+            <div className="px-4 md:px-8 pb-4 md:pb-6 pt-3">
+              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 -mt-16 sm:-mt-16">
                 {/* Profile Picture */}
                 <div 
                   className="relative cursor-pointer group"
@@ -119,15 +119,15 @@ function RouteComponent() {
                   <Avatar
                     name="Muhammad Shyed"
                     variant="beam"
-                    className="size-32 rounded-full border-4 border-white shadow-lg group-hover:opacity-90 transition"
+                    className="size-24 sm:size-32 rounded-full border-4 border-white shadow-lg group-hover:opacity-90 transition"
                   />
                   <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                     <IconPencil className="size-6 text-white" />
                   </div>
                 </div>
                 {/* Name and Role */}
-                <div className="flex flex-col gap-0.5 pb-4">
-                  <h2 className="text-2xl font-bold text-gray-900">Muhammad Shyed</h2>
+                <div className="flex flex-col gap-0.5 pb-2 sm:pb-4 text-center sm:text-left">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Muhammad Shyed</h2>
                   <p className="text-sm text-gray-500">Designer</p>
                 </div>
               </div>
@@ -137,9 +137,9 @@ function RouteComponent() {
           <form
             action=""
             method="post"
-            className="w-[730px] p-8 flex flex-col gap-4.5"
+            className="w-full max-w-[730px] p-4 md:p-8 flex flex-col gap-4"
           >
-            <div className="flex items-center justify-between gap-7">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-7">
               <div className="w-full flex flex-col gap-2">
                 <label htmlFor="name" className="font-medium">
                   Name
@@ -161,7 +161,7 @@ function RouteComponent() {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between gap-7">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-7">
               <div className="w-full flex flex-col gap-2">
                 <label htmlFor="role" className="font-medium">
                   Role
@@ -216,15 +216,15 @@ function RouteComponent() {
                 className="px-2 py-3 outline-none bg-inp-bg/15 rounded-lg h-36"
               ></textarea>
             </div>
-            <div className="flex items-center justify-between gap-7 w-full">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-7 w-full">
               <Button
                 className={{
-                  base: "w-[48%] bg-white text-black border-[#ededed]",
+                  base: "w-full sm:w-[48%] bg-white text-black border-[#ededed]",
                 }}
               >
                 <span className="text-black">Delete Account</span>
               </Button>
-              <Button className={{ base: "w-[48%]" }}>Save</Button>
+              <Button className={{ base: "w-full sm:w-[48%]" }}>Save</Button>
             </div>
           </form>
         </div>
@@ -235,13 +235,13 @@ function RouteComponent() {
       label: "Password",
       content: (
         <div
-          className="mt-8 text-sm rounded-2xl"
+          className="mt-6 md:mt-8 text-sm rounded-xl md:rounded-2xl w-full"
           style={{ border: "var(--border-secondary)" }}
         >
           <form
             action=""
             method="post"
-            className="w-[730px] p-8 flex flex-col gap-4.5"
+            className="w-full max-w-[730px] p-4 md:p-8 flex flex-col gap-4"
           >
             <div>
               <h1 className="font-medium text-xl">Password</h1>
@@ -249,7 +249,7 @@ function RouteComponent() {
                 Set a password to protect your account
               </p>
             </div>
-            <div className="flex items-center justify-between gap-7">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-7">
               <div className="w-full flex flex-col gap-2">
                 <label htmlFor="current" className="font-medium">
                   Current Password
@@ -271,7 +271,7 @@ function RouteComponent() {
                 />
               </div>
             </div>
-            <div className="flex items-end justify-between gap-7">
+            <div className="flex flex-col md:flex-row items-end justify-between gap-4 md:gap-7">
               <div className="w-full flex flex-col gap-2">
                 <label htmlFor="confirm" className="font-medium">
                   Confirm Password
@@ -282,7 +282,7 @@ function RouteComponent() {
                   className="px-2 py-3 outline-none bg-inp-bg/15 rounded-lg"
                 />
               </div>
-              <Button className={{ base: "w-[48%]" }}>Save</Button>
+              <Button className={{ base: "w-full md:w-[48%]" }}>Save</Button>
             </div>
             <div className="mt-1.5">
               <h1 className="font-medium text-xl">Two Step Verification</h1>
@@ -297,10 +297,10 @@ function RouteComponent() {
                 If you connect with this account you easily login this platform.
               </p>
             </div>
-            <div className="flex items-end justify-between gap-7">
+            <div className="flex flex-col sm:flex-row items-end justify-between gap-3 md:gap-7">
               <Button
                 className={{
-                  base: "w-[48%] rounded-[48px] bg-[#d9d9d9]/15 border-0",
+                  base: "w-full sm:w-[48%] rounded-[48px] bg-[#d9d9d9]/15 border-0",
                 }}
               >
                 <span className="flex items-center gap-1 text-black">
@@ -309,7 +309,7 @@ function RouteComponent() {
               </Button>
               <Button
                 className={{
-                  base: "w-[48%] rounded-[48px] bg-[#d9d9d9]/15 border-0",
+                  base: "w-full sm:w-[48%] rounded-[48px] bg-[#d9d9d9]/15 border-0",
                 }}
               >
                 <span className="flex items-center gap-1 text-black">
@@ -332,15 +332,15 @@ function RouteComponent() {
       id: "subscription",
       label: "Subscription",
       content: (
-        <div className="w-[1000px] mt-8 bg-white rounded-[18px] shadow-sm p-8">
+        <div className="w-full max-w-[1000px] mt-6 md:mt-8 bg-white rounded-xl md:rounded-[18px] shadow-sm p-4 md:p-8">
           {/* Header Section */}
-          <div className="flex items-start justify-between mb-8">
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mb-6 md:mb-8">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Billing settings</h1>
-              <p className="text-gray-500 mt-1">Manage your plan and billing history here</p>
+              <h1 className="text-xl md:text-2xl font-bold text-gray-900">Billing settings</h1>
+              <p className="text-sm md:text-base text-gray-500 mt-1">Manage your plan and billing history here</p>
             </div>
             
-            <div className="bg-[#F8F9FA] rounded-xl p-4 flex items-start gap-12">
+            <div className="bg-[#F8F9FA] rounded-xl p-4 flex flex-col sm:flex-row items-start gap-4 sm:gap-12 w-full lg:w-auto">
               <div>
                 <h3 className="font-bold text-gray-900">Standard Plan / Monthly</h3>
                 <p className="text-xs text-gray-400 mt-1">End Date Nov 29</p>
@@ -357,7 +357,7 @@ function RouteComponent() {
           </div>
 
           {/* Pricing Cards */}
-          <div className="flex gap-6 mb-12">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-6 mb-8 md:mb-12">
             <PricingCard
               title="Free Forever"
               description="No minimum commitment pause or cancel anytime"
@@ -420,13 +420,13 @@ function RouteComponent() {
       label: "Notification",
       content: (
         <div
-          className="mt-8 text-sm rounded-2xl"
+          className="mt-6 md:mt-8 text-sm rounded-xl md:rounded-2xl w-full"
           style={{ border: "var(--border-secondary)" }}
         >
           <form
             action=""
             method="post"
-            className="w-[730px] p-8 flex flex-col gap-4.5"
+            className="w-full max-w-[730px] p-4 md:p-8 flex flex-col gap-4"
           >
             <div>
               <h1 className="font-medium text-xl">Notification settings</h1>
@@ -435,7 +435,7 @@ function RouteComponent() {
                 and recommendations.
               </p>
             </div>
-            <div className="flex items-start gap-7">
+            <div className="flex flex-col md:flex-row items-start gap-4 md:gap-7">
               <div className="flex flex-col gap-3.5 w-full">
                 <div className="w-full flex flex-col gap-2">
                   <h2>Email notification</h2>
@@ -491,15 +491,15 @@ function RouteComponent() {
       label: "Community",
       content: (
         <div
-          className="mt-8 text-sm rounded-2xl"
+          className="mt-6 md:mt-8 text-sm rounded-xl md:rounded-2xl w-full"
           style={{ border: "var(--border-secondary)" }}
         >
           <form
             action=""
             method="post"
-            className="w-[730px] p-8 flex flex-col gap-4.5"
+            className="w-full max-w-[730px] p-4 md:p-8 flex flex-col gap-4"
           >
-            <div className="flex items-center justify-between gap-7">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-7">
               <div className="w-full flex flex-col gap-2">
                 <label htmlFor="name" className="font-medium">
                   Community Name
@@ -532,15 +532,15 @@ function RouteComponent() {
                 className="px-2 py-3 outline-none bg-inp-bg/15 rounded-lg h-36"
               ></textarea>
             </div>
-            <div className="flex items-center justify-between gap-7 w-full">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-7 w-full">
               <Button
                 className={{
-                  base: "w-[48%] bg-white text-black border-[#ededed]",
+                  base: "w-full sm:w-[48%] bg-white text-black border-[#ededed]",
                 }}
               >
                 <span className="text-black">Delete Community</span>
               </Button>
-              <Button className={{ base: "w-[48%]" }}>Save</Button>
+              <Button className={{ base: "w-full sm:w-[48%]" }}>Save</Button>
             </div>
           </form>
         </div>
@@ -549,23 +549,25 @@ function RouteComponent() {
   ];
 
   return (
-    <div className="flex flex-col items-center gap-9 font-lufga">
+    <div className="flex flex-col items-center gap-6 md:gap-9 font-lufga px-4 md:px-0">
       {/* Tabs */}
       <div
-        className="bg-white rounded-lg flex items-center"
+        className="bg-white rounded-lg flex items-center overflow-x-auto scrollbar-hide w-full max-w-full"
         style={{ border: "var(--border-default)" }}
       >
-        {tabs.map((tab) => (
-          <div
-            key={tab.id}
-            className={`px-5 py-4 m-1.5 rounded-md cursor-pointer ${
-              active === tab.id ? "bg-off-white" : ""
-            }`}
-            onClick={() => setActive(tab.id)}
-          >
-            {tab.label}
-          </div>
-        ))}
+        <div className="flex items-center min-w-max">
+          {tabs.map((tab) => (
+            <div
+              key={tab.id}
+              className={`px-4 md:px-5 py-3 md:py-4 m-1.5 rounded-md cursor-pointer whitespace-nowrap text-sm md:text-base ${
+                active === tab.id ? "bg-off-white" : ""
+              }`}
+              onClick={() => setActive(tab.id)}
+            >
+              {tab.label}
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Active content */}

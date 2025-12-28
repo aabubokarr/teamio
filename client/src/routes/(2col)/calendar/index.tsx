@@ -324,10 +324,10 @@ function RouteComponent() {
   }
 
   return (
-    <div className="space-y-6 font-lufga">
+    <div className="space-y-4 md:space-y-6 font-lufga px-4 md:px-0">
       {/* Top Bar */}
-      <div className="flex items-center justify-between flex-wrap gap-4">
-        <div className="flex items-center gap-4 flex-wrap">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 lg:gap-4">
+        <div className="flex items-center gap-3 md:gap-4 flex-wrap">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <button
@@ -337,8 +337,8 @@ function RouteComponent() {
                 <IconCalendar className="size-4 text-gray-700" />
               </button>
               <div className="flex flex-col">
-              <span className="text-sm font-bold text-gray-900">{monthName}</span>
-              <span className="text-xs text-gray-600">{formatDateRange()}</span>
+              <span className="text-xs md:text-sm font-bold text-gray-900">{monthName}</span>
+              <span className="text-[10px] md:text-xs text-gray-600">{formatDateRange()}</span>
               </div>
               <div className="relative" ref={calendarRef}>
                 <button
@@ -443,23 +443,23 @@ function RouteComponent() {
               </div>
             </div>
           </div>
-          <label className="relative block">
+          <label className="relative block w-full sm:w-auto">
             <span className="sr-only">Search</span>
             <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
             <input
               type="search"
               placeholder="Search"
-              className="w-48 rounded-full bg-off-white px-10 py-2 text-sm text-gray-600 outline-none ring-0 transition focus:bg-white focus:ring-2 focus:ring-gray-100"
+              className="w-full sm:w-48 rounded-full bg-off-white px-10 py-2 text-sm text-gray-600 outline-none ring-0 transition focus:bg-white focus:ring-2 focus:ring-gray-100"
             />
           </label>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+        <div className="flex items-center gap-2 md:gap-3 w-full lg:w-auto">
+          <div className="flex-1 lg:flex-none flex items-center gap-1 bg-gray-100 rounded-lg p-1">
             <button
               type="button"
               onClick={() => setViewMode("day")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition ${
+              className={`flex-1 lg:flex-none px-3 md:px-4 py-1.5 rounded-md text-xs md:text-sm font-medium transition ${
                 viewMode === "day"
                   ? "bg-white text-gray-900 shadow-sm"
                   : "text-gray-500"
@@ -470,7 +470,7 @@ function RouteComponent() {
             <button
               type="button"
               onClick={() => setViewMode("week")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition ${
+              className={`flex-1 lg:flex-none px-3 md:px-4 py-1.5 rounded-md text-xs md:text-sm font-medium transition ${
                 viewMode === "week"
                   ? "bg-white text-gray-900 shadow-sm"
                   : "text-gray-500"
@@ -481,7 +481,7 @@ function RouteComponent() {
             <button
               type="button"
               onClick={() => setViewMode("month")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition ${
+              className={`flex-1 lg:flex-none px-3 md:px-4 py-1.5 rounded-md text-xs md:text-sm font-medium transition ${
                 viewMode === "month"
                   ? "bg-white text-gray-900 shadow-sm"
                   : "text-gray-500"
@@ -505,28 +505,29 @@ function RouteComponent() {
       </div>
 
       {/* Calendar Grid */}
-      <div className="rounded-3xl bg-white p-6 shadow-sm" style={{ border: "var(--border-secondary)" }}>
+      <div className="rounded-2xl md:rounded-3xl bg-white p-3 md:p-6 shadow-sm overflow-x-auto" style={{ border: "var(--border-secondary)" }}>
         {/* Days of Week Header */}
-        <div className="grid grid-cols-7 gap-2 mb-2">
-          {daysOfWeek.map((day) => (
+        <div className="grid grid-cols-7 gap-1 md:gap-2 mb-2 min-w-[600px] md:min-w-0">
+          {daysOfWeek.map((day, index) => (
             <div
               key={day}
-              className="text-center text-sm font-semibold text-gray-600 py-2"
+              className="text-center text-xs md:text-sm font-semibold text-gray-600 py-2"
             >
-              {day}
+              <span className="hidden md:inline">{day}</span>
+              <span className="md:hidden">{daysOfWeekShort[index]}</span>
             </div>
           ))}
         </div>
 
         {/* Calendar Days */}
-        <div className="grid grid-cols-7 gap-2">
+        <div className="grid grid-cols-7 gap-1 md:gap-2 min-w-[600px] md:min-w-0">
           {/* Previous month trailing days */}
           {trailingDays.map((day) => (
             <div
               key={`prev-${day}`}
-              className="min-h-24 p-2 rounded-lg bg-gray-50 flex flex-col"
+              className="min-h-16 md:min-h-24 p-1.5 md:p-2 rounded-lg bg-gray-50 flex flex-col"
             >
-              <span className="text-sm text-gray-400 text-center">{day}</span>
+              <span className="text-xs md:text-sm text-gray-400 text-center">{day}</span>
             </div>
           ))}
 
@@ -548,14 +549,14 @@ function RouteComponent() {
                     setShowCreateModal(true);
                   }
                 }}
-                className={`min-h-24 p-2 rounded-lg border flex flex-col ${
+                className={`min-h-16 md:min-h-24 p-1.5 md:p-2 rounded-lg border flex flex-col ${
                   isToday 
                     ? "bg-blue-50 border-blue-200" 
                     : "bg-white border-transparent hover:border-gray-200"
                 }`}
               >
                 <span
-                  className={`text-sm font-medium text-center cursor-pointer ${
+                  className={`text-xs md:text-sm font-medium text-center cursor-pointer ${
                     isToday ? "text-blue-600" : "text-gray-900"
                   }`}
                 >
@@ -586,9 +587,9 @@ function RouteComponent() {
           {leadingDays.map((day) => (
             <div
               key={`next-${day}`}
-              className="min-h-24 p-2 rounded-lg bg-gray-50 flex flex-col"
+              className="min-h-16 md:min-h-24 p-1.5 md:p-2 rounded-lg bg-gray-50 flex flex-col"
             >
-              <span className="text-sm text-gray-400 text-center">{day}</span>
+              <span className="text-xs md:text-sm text-gray-400 text-center">{day}</span>
             </div>
           ))}
         </div>

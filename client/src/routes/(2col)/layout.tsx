@@ -26,7 +26,7 @@ function RouteComponent() {
       >
         <Header />
 
-        <main className="[grid-column:content] isolate grid-cols-[1fr_--spacing(64)] gap-x-4 grid [--container:initial]">
+        <main className="[grid-column:content] isolate grid-cols-1 lg:grid-cols-[1fr_--spacing(64)] gap-x-4 grid [--container:initial]">
           <div className="grid-cols-subgrid grid col-span-full sticky top-0 bg-background z-10">
             <Topbar className="md:py-10" />
 
