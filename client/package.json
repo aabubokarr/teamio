@@ -14,7 +14,7 @@
   "dependencies": {
     "@legendapp/state": "3.0.0-beta.30",
     "@react-aria/utils": "^3.29.0",
-    "@tabler/icons-react": "^3.33.0",
+    "@tabler/icons-react": "^3.36.1",
     "@tailwindcss/vite": "^4.1.8",
     "@tanstack/react-router": "^1.120.13",
     "@tanstack/react-router-devtools": "^1.120.13",

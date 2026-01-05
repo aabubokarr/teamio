@@ -1,4 +1,8 @@
+import { AddTaskModal } from "@/components/ui/add-task-modal";
 import { ManagementTaskCard } from "@/components/ui/management-task-card";
+import { ManagementListView } from "@/components/ui/management-list-view";
+import { StatusDropdown } from "@/components/ui/status-dropdown";
+import { CalendarDropdown } from "@/components/ui/calendar-dropdown";
 import {
   IconCheck,
   IconChevronDown,
@@ -152,30 +156,23 @@ const teamMembers = [
   "https://i.pravatar.cc/120?img=55",
 ];
 
+// ... existing imports
+
 function RouteComponent() {
   const [viewMode, setViewMode] = useState<"board" | "list">("board");
   const [columns] = useState<ColumnsState>(initialColumns);
+  const [activeDropdown, setActiveDropdown] = useState<"todo" | "today" | null>(null);
+  const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
 
   return (
     <div className="space-y-4 md:space-y-6 font-lufga max-w-[1400px] px-4 md:px-0">
       {/* Header Section */}
       <div className="flex flex-col gap-4 md:gap-6">
-         {/* Top Row: Date | Update Status | Team */}
-         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-            <p className="text-sm md:text-[15px] text-gray-900 font-medium">Date: 16/03/2023</p>
-            
-            <div className="flex items-center gap-2">
-               <span className="size-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)]"></span>
-               <p className="text-xs md:text-[13px] text-[#747786]">Update 13 min ago</p>
-            </div>
-         </div>
+         {/* ... (Date row) */}
 
          {/* Second Row: Title and Team */}
          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2 md:gap-3">
-               <div className="size-8 md:size-10 bg-[#FFD600] rounded-lg md:rounded-[10px]" /> {/* Yellow Icon */}
-               <h1 className="text-xl md:text-[28px] font-bold text-black tracking-tight">Design System</h1>
-            </div>
+             {/* ... (Title) */}
             
             <div className="flex items-center">
               {teamMembers.map((avatar, index) => (
@@ -188,6 +185,7 @@ function RouteComponent() {
               ))}
               <button
                 type="button"
+                onClick={() => setIsAddTaskOpen(true)}
                 className="size-8 md:size-10 rounded-full bg-black text-white flex items-center justify-center shrink-0 -ml-2 md:-ml-3 border-2 border-white hover:bg-gray-800 transition"
               >
                 <IconPlus className="size-4 md:size-5" />
@@ -232,19 +230,44 @@ function RouteComponent() {
              </div>
 
              {/* Right: Dropdowns */}
-             <div className="hidden lg:flex items-center gap-3">
-                 <button className="h-11 px-5 bg-black text-white rounded-[14px] flex items-center gap-2 text-[15px] font-medium hover:bg-gray-800 transition">
-                    <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M7 12h10m-8 6h6"/></svg>
-                    To-do
-                    <IconChevronDown className="size-4 opacity-70" />
-                 </button>
-                 <button className="h-11 px-5 bg-black text-white rounded-[14px] flex items-center gap-2 text-[15px] font-medium hover:bg-gray-800 transition">
-                    <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    Today
-                    <IconChevronDown className="size-4 opacity-70" />
-                 </button>
+             <div className="hidden lg:flex items-center gap-3 relative">
+                 {/* To-do Dropdown */}
+                 <div className="relative">
+                     <button 
+                        onClick={() => setActiveDropdown(activeDropdown === 'todo' ? null : 'todo')}
+                        className="h-11 px-5 bg-black text-white rounded-[14px] flex items-center gap-2 text-[15px] font-medium hover:bg-gray-800 transition"
+                     >
+                        <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M7 12h10m-8 6h6"/></svg>
+                        To-do
+                        <IconChevronDown className={`size-4 opacity-70 transition-transform ${activeDropdown === 'todo' ? 'rotate-180' : ''}`} />
+                     </button>
+                     
+                     {activeDropdown === 'todo' && (
+                        <div className="absolute top-full right-0 mt-2 z-50 animate-in fade-in zoom-in-95 duration-200">
+                             <StatusDropdown />
+                        </div>
+                     )}
+                 </div>
+
+                 {/* Today Dropdown */}
+                 <div className="relative">
+                     <button 
+                        onClick={() => setActiveDropdown(activeDropdown === 'today' ? null : 'today')}
+                        className="h-11 px-5 bg-black text-white rounded-[14px] flex items-center gap-2 text-[15px] font-medium hover:bg-gray-800 transition"
+                     >
+                        <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        Today
+                        <IconChevronDown className={`size-4 opacity-70 transition-transform ${activeDropdown === 'today' ? 'rotate-180' : ''}`} />
+                     </button>
+
+                     {activeDropdown === 'today' && (
+                        <div className="absolute top-full right-0 mt-2 z-50 animate-in fade-in zoom-in-95 duration-200">
+                             <CalendarDropdown />
+                        </div>
+                     )}
+                 </div>
              </div>
-         </div>
+          </div>
       </div>
 
       {/* Kanban Board */}
@@ -263,7 +286,6 @@ function RouteComponent() {
                          <IconCircle className="size-4 md:size-5 text-[#747786]" stroke={2} />
                     ) : column.id === 'in-progress' ? (
                          <div className="size-4 md:size-5 rounded-full border-2 border-[#747786] border-l-transparent rotate-45" /> 
-                         // Custom 'in progress' icon matching screenshot roughly
                     ) : (
                          <div className="size-4 md:size-5 rounded-full bg-[#999999] flex items-center justify-center text-white"><IconCheck className="size-3 md:size-3.5" stroke={4} /></div>
                     )}
@@ -276,6 +298,7 @@ function RouteComponent() {
                   
                   <button
                     type="button"
+                    onClick={() => setIsAddTaskOpen(true)}
                     className="flex items-center gap-1.5 text-xs md:text-[14px] font-semibold text-black hover:bg-gray-200 px-2 md:px-3 py-1.5 rounded-lg transition"
                   >
                     <IconPlus className="size-3.5 md:size-4" stroke={2.5} />
@@ -306,6 +329,20 @@ function RouteComponent() {
           </div>
         </div>
       )}
+
+      {/* List View */}
+      {viewMode === "list" && (
+         <div className="mt-8 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4">
+             <ManagementListView 
+                tasks={columns.flatMap(col => col.tasks.map(t => ({
+                    ...t,
+                    status: col.title as "To-do" | "In progress" | "Complete"
+                })))} 
+             />
+         </div>
+      )}
+
+      <AddTaskModal isOpen={isAddTaskOpen} onOpenChange={setIsAddTaskOpen} />
     </div>
   );
 }

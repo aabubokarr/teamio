@@ -1,6 +1,8 @@
-
+import { useState, useRef, useEffect } from "react";
 import { IconArrowRight, IconDots } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
+import { TaskMenuDropdown } from "@/components/ui/task-menu-dropdown";
+import { DeleteTaskModal } from "@/components/ui/delete-task-modal";
 
 interface ManagementTaskCardProps {
   title: string;
@@ -27,7 +29,24 @@ export function ManagementTaskCard({
   variant = "todo",
   onClick,
 }: ManagementTaskCardProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
+    <>
     <div 
       className="bg-white rounded-[20px] p-5 shadow-[0px_4px_20px_rgba(0,0,0,0.02)] border border-transparent hover:border-gray-100 transition-all cursor-pointer group mb-4 last:mb-0"
       onClick={onClick}
@@ -37,9 +56,31 @@ export function ManagementTaskCard({
         <h3 className="text-[17px] font-bold text-black tracking-tight leading-snug">
           {title}
         </h3>
-        <button className="size-8 rounded-full border border-gray-200 flex items-center justify-center bg-white text-black hover:bg-gray-50 flex-shrink-0 -mt-1 -mr-1">
-          <IconDots className="size-4" stroke={2} />
-        </button>
+        
+        <div className="relative" ref={menuRef}>
+            <button 
+              onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMenuOpen(!isMenuOpen);
+              }}
+              className="size-8 rounded-full border border-gray-200 flex items-center justify-center bg-white text-black hover:bg-gray-50 flex-shrink-0 -mt-1 -mr-1"
+            >
+              <IconDots className="size-4" stroke={2} />
+            </button>
+
+            {isMenuOpen && (
+                <div className="absolute top-full right-0 mt-2 z-20">
+                    <TaskMenuDropdown 
+                        onGenericClick={() => setIsMenuOpen(false)} 
+                        onAction={(action) => {
+                            if (action === 'delete') {
+                                setIsDeleteModalOpen(true);
+                            }
+                        }}
+                    />
+                </div>
+            )}
+        </div>
       </div>
 
       {/* Progress & Assignees Container */}
@@ -61,23 +102,7 @@ export function ManagementTaskCard({
         <div className="flex items-center gap-2">
            <div className="size-2 rounded-full bg-black flex-shrink-0" />
            <span className="text-[13px] font-medium text-black mr-1">
-             {variant === 'todo' ? 'Assign to' : '2 Assign to'} 
-             {/* Note: In screenshot 'To-do' says 'Assign to', others say '2 Assign to'. 
-                 Maybe '2' is count of something else? Or just static text in design? 
-                 I'll mimic the logic: if variant is not todo, prefix with 2? 
-                 Actually looking closely at screenshot, "To-do" has "Assign to", "In progress" has "Assign to", "Complete" has "Assign to". 
-                 WAIT, in the SECOND screenshot (Step 103), "To-do" has "Assign to". "In progress" has "Assign to". "Complete" has "Assign to".
-                 BUT in Step 47 Image 1: "Assign to". Image 2: "2 Assign to".
-                 The user says "pixel perfect". In the LATEST screenshot (Step 103):
-                 - To-do card 1: "Assign to"
-                 - To-do card 2: "2 Assign to"
-                 - In Progress card 1: "Assign to"
-                 - In Progress card 2: "2 Assign to"
-                 It seems purely data driven or random in mockup. 
-                 I will just expose a prop or keep it simple "Assign to" unless user complains, OR better, check if I can just use "Assign to" and maybe the "2" was a typo or specific data in mockup.
-                 Actually "2 Assign to" likely means "2 people assigned"? No, the avatars show many. 
-                 Let's stick to "Assign to" + black dot.
-             */}
+             Assign to
            </span>
            
            <div className="flex items-center -space-x-2">
@@ -137,6 +162,13 @@ export function ManagementTaskCard({
           </div>
         </button>
       </div>
+
+      <DeleteTaskModal 
+        isOpen={isDeleteModalOpen} 
+        onOpenChange={setIsDeleteModalOpen} 
+        onConfirm={() => console.log("Deleted")} 
+      />
     </div>
+    </>
   );
 }
