@@ -185,7 +185,7 @@ function RouteComponent() {
       </aside>
 
       {/* Right Panel - Dashboard */}
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 h-full">
         {/* Stats Cards */}
         <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-3">
           {stats.map((item) => (
@@ -196,11 +196,11 @@ function RouteComponent() {
             >
               {/* Blur Effect */}
               <div
-                className={`absolute -right-6 -top-6 h-24 w-24 rounded-full blur-[50px] opacity-40 group-hover:opacity-60 transition-opacity ${item.accent}`}
+                className={`absolute -right-6 -top-6 h-24 w-24 rounded-full blur-[50px] opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none ${item.accent}`}
               />
               
-              <div className="relative z-10">
-                <div className="mb-4 text-[#1A1D1F]">
+              <div className="relative h-full flex flex-col justify-between">
+                <div className="text-[#1A1D1F]">
                   {item.icon}
                 </div>
                 <div className="flex flex-col gap-1">
@@ -216,7 +216,7 @@ function RouteComponent() {
 
         {/* Action Panel */}
         <div
-          className="rounded-[32px] bg-white p-6 md:p-8 shadow-sm flex flex-col gap-8"
+          className="rounded-[32px] bg-white p-6 md:p-8 shadow-sm flex flex-col gap-8 flex-1"
           style={{ border: "var(--border-secondary)" }}
         >
           {/* Add Member */}
@@ -281,7 +281,7 @@ function RouteComponent() {
           </div>
 
           {/* Link To Share */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 mt-auto">
             <h4 className="text-sm font-bold text-[#6F767E]">
               Link To Share
             </h4>
