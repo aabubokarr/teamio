@@ -1,17 +1,9 @@
 import { AddTaskModal } from "@/components/ui/add-task-modal";
 import { ManagementTaskCard } from "@/components/ui/management-task-card";
-import { ManagementListView } from "@/components/ui/management-list-view";
-import { StatusDropdown } from "@/components/ui/status-dropdown";
-import { CalendarDropdown } from "@/components/ui/calendar-dropdown";
 import {
   IconCheck,
-  IconChevronDown,
   IconCircle,
-  IconFilter,
   IconPlus,
-  IconSearch,
-  IconLayoutKanban,
-  IconList,
   IconDots,
   IconUsers,
   IconCalendar,
@@ -195,19 +187,8 @@ const teamMembers = [
 ];
 
 function RouteComponent() {
-  const [viewMode, setViewMode] = useState<"board" | "list">("board");
   const [columns] = useState<ColumnsState>(initialColumns);
-
-  const [activeDropdown, setActiveDropdown] = useState<"todo" | "today" | null>(
-    null
-  );
-
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
-
-  const totalTasks = columns.reduce(
-    (total, column) => total + column.tasks.length,
-    0
-  );
 
   return (
     <div className="mt-3 space-y-0 font-lufga px-4 md:px-0">
