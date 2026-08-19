@@ -15,7 +15,6 @@ import { Route as R2colLayoutRouteImport } from './routes/(2col)/layout'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 import { Route as R2colSettingsIndexRouteImport } from './routes/(2col)/settings/index'
 import { Route as R2colMessagesIndexRouteImport } from './routes/(2col)/messages/index'
-import { Route as R2colMembersIndexRouteImport } from './routes/(2col)/members/index'
 import { Route as R2colManagementsIndexRouteImport } from './routes/(2col)/managements/index'
 import { Route as R2colCalendarIndexRouteImport } from './routes/(2col)/calendar/index'
 import { Route as indexRouteImport } from './routes/index'
@@ -49,11 +48,6 @@ const R2colMessagesIndexRoute = R2colMessagesIndexRouteImport.update({
   path: '/messages',
   getParentRoute: () => R2colLayoutRoute,
 } as any)
-const R2colMembersIndexRoute = R2colMembersIndexRouteImport.update({
-  id: '/members',
-  path: '/members',
-  getParentRoute: () => R2colLayoutRoute,
-} as any)
 const R2colManagementsIndexRoute = R2colManagementsIndexRouteImport.update({
   id: '/managements',
   path: '/managements',
@@ -84,7 +78,6 @@ export interface FileRoutesByFullPath {
   '/': typeof indexRoute
   '/calendar': typeof R2colCalendarIndexRoute
   '/managements': typeof R2colManagementsIndexRoute
-  '/members': typeof R2colMembersIndexRoute
   '/messages': typeof R2colMessagesIndexRoute
   '/settings': typeof R2colSettingsIndexRoute
   '/login': typeof authLoginIndexRoute
@@ -95,7 +88,6 @@ export interface FileRoutesByTo {
   '/': typeof indexRoute
   '/calendar': typeof R2colCalendarIndexRoute
   '/managements': typeof R2colManagementsIndexRoute
-  '/members': typeof R2colMembersIndexRoute
   '/messages': typeof R2colMessagesIndexRoute
   '/settings': typeof R2colSettingsIndexRoute
   '/login': typeof authLoginIndexRoute
@@ -110,7 +102,6 @@ export interface FileRoutesById {
   '/_layout/': typeof indexRoute
   '/_2col-layout/calendar': typeof R2colCalendarIndexRoute
   '/_2col-layout/managements': typeof R2colManagementsIndexRoute
-  '/_2col-layout/members': typeof R2colMembersIndexRoute
   '/_2col-layout/messages': typeof R2colMessagesIndexRoute
   '/_2col-layout/settings': typeof R2colSettingsIndexRoute
   '/_auth/login': typeof authLoginIndexRoute
@@ -123,7 +114,6 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/managements'
-    | '/members'
     | '/messages'
     | '/settings'
     | '/login'
@@ -134,7 +124,6 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/managements'
-    | '/members'
     | '/messages'
     | '/settings'
     | '/login'
@@ -148,7 +137,6 @@ export interface FileRouteTypes {
     | '/_layout/'
     | '/_2col-layout/calendar'
     | '/_2col-layout/managements'
-    | '/_2col-layout/members'
     | '/_2col-layout/messages'
     | '/_2col-layout/settings'
     | '/_auth/login'
@@ -206,13 +194,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R2colMessagesIndexRouteImport
       parentRoute: typeof R2colLayoutRoute
     }
-    '/_2col-layout/members': {
-      id: '/_2col-layout/members'
-      path: '/members'
-      fullPath: '/members'
-      preLoaderRoute: typeof R2colMembersIndexRouteImport
-      parentRoute: typeof R2colLayoutRoute
-    }
     '/_2col-layout/managements': {
       id: '/_2col-layout/managements'
       path: '/managements'
@@ -254,7 +235,6 @@ declare module '@tanstack/react-router' {
 interface R2colLayoutRouteChildren {
   R2colCalendarIndexRoute: typeof R2colCalendarIndexRoute
   R2colManagementsIndexRoute: typeof R2colManagementsIndexRoute
-  R2colMembersIndexRoute: typeof R2colMembersIndexRoute
   R2colMessagesIndexRoute: typeof R2colMessagesIndexRoute
   R2colSettingsIndexRoute: typeof R2colSettingsIndexRoute
 }
@@ -262,7 +242,6 @@ interface R2colLayoutRouteChildren {
 const R2colLayoutRouteChildren: R2colLayoutRouteChildren = {
   R2colCalendarIndexRoute: R2colCalendarIndexRoute,
   R2colManagementsIndexRoute: R2colManagementsIndexRoute,
-  R2colMembersIndexRoute: R2colMembersIndexRoute,
   R2colMessagesIndexRoute: R2colMessagesIndexRoute,
   R2colSettingsIndexRoute: R2colSettingsIndexRoute,
 }

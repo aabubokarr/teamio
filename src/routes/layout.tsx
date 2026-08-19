@@ -2,7 +2,6 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import React from "react";
 
 import { Sidebar } from "@/components/layout/sidebar";
-import { ProfileSwitcher } from "@/features/profile/profile-switcher";
 import { Topbar } from "@/components/layout/topbar";
 
 export const Route = createFileRoute("/_layout")({
