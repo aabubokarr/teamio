@@ -106,7 +106,8 @@ const initialMessages = [
     sender: "Shyed",
     time: "12:29 PM",
     type: "media",
-    content: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400&h=300&fit=crop",
+    content:
+      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400&h=300&fit=crop",
     isOwn: false,
     reactions: "👍 😍",
     showDate: true,
@@ -148,38 +149,41 @@ function RouteComponent() {
   const [selectedConversation, setSelectedConversation] = useState(1);
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState(initialMessages);
-  const [showChat, setShowChat] = useState(false); // Mobile view toggle
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [showChat, setShowChat] = useState(false);
+
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const selectedUser = conversations.find(
-    (c) => c.id === selectedConversation
+    (conversation) => conversation.id === selectedConversation
   );
 
   const getCurrentTime = () => {
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
+
     const ampm = hours >= 12 ? "PM" : "AM";
     const displayHours = hours % 12 || 12;
     const displayMinutes = minutes.toString().padStart(2, "0");
+
     return `${displayHours}:${displayMinutes} ${ampm}`;
   };
 
   const handleSelectConversation = (id: number) => {
     setSelectedConversation(id);
-    setShowChat(true); // Show chat on mobile when conversation is selected
+    setShowChat(true);
   };
 
   const handleBackToList = () => {
-    setShowChat(false); // Return to conversation list on mobile
+    setShowChat(false);
   };
 
   const handleSendMessage = () => {
     if (!messageInput.trim()) return;
 
-    setMessages((prev) => {
-      const newMessage = {
+    setMessages((prev) => [
+      ...prev,
+      {
         id: prev.length + 1,
         sender: "You",
         time: getCurrentTime(),
@@ -187,12 +191,11 @@ function RouteComponent() {
         content: messageInput.trim(),
         isOwn: true,
         showDate: false,
-      };
-      return [...prev, newMessage];
-    });
+      },
+    ]);
+
     setMessageInput("");
 
-    // Scroll to bottom after message is added
     requestAnimationFrame(() => {
       setTimeout(() => {
         if (messagesContainerRef.current) {
@@ -211,355 +214,527 @@ function RouteComponent() {
   };
 
   useEffect(() => {
-    // Scroll to bottom when messages change or conversation changes
-    if (messagesContainerRef.current) {
-      const scrollToBottom = () => {
-        if (messagesContainerRef.current) {
-          messagesContainerRef.current.scrollTop =
-            messagesContainerRef.current.scrollHeight;
-        }
-      };
-      // Use requestAnimationFrame to ensure DOM is updated
-      requestAnimationFrame(() => {
-        scrollToBottom();
-        // Double check after a small delay to handle any async rendering
-        setTimeout(scrollToBottom, 50);
-      });
-    }
+    if (!messagesContainerRef.current) return;
+
+    const scrollToBottom = () => {
+      if (messagesContainerRef.current) {
+        messagesContainerRef.current.scrollTop =
+          messagesContainerRef.current.scrollHeight;
+      }
+    };
+
+    requestAnimationFrame(() => {
+      scrollToBottom();
+      setTimeout(scrollToBottom, 50);
+    });
   }, [messages, selectedConversation]);
 
   return (
-    <div className="grid gap-4 md:gap-6 font-lufga lg:grid-cols-[minmax(0,380px)_1fr] pb-4 md:pb-6 overflow-hidden max-h-[calc(100svh-100px)] md:max-h-[calc(100svh-140px)]">
-      {/* Conversations List */}
-      <aside
-        className={`rounded-2xl md:rounded-3xl bg-white p-4 md:p-6 shadow-sm overflow-hidden flex flex-col sticky top-20 md:top-24 lg:top-28 max-h-[calc(100svh-120px)] md:max-h-[calc(100svh-180px)] lg:max-h-[calc(100svh-200px)] ${
-          showChat ? "hidden lg:flex" : "flex"
-        }`}
-        style={{ border: "var(--border-secondary)" }}
-      >
-        <div className="mb-4 md:mb-6 flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-2">
-            <IconBrandHipchat className="size-5 md:size-6 text-gray-900" />
-            <h2 className="text-base md:text-lg font-semibold text-gray-900">
-              Conversations
-            </h2>
-          </div>
-          <button
-            type="button"
-            className="inline-grid size-9 md:size-9 place-items-center rounded-lg bg-off-white text-gray-500 transition hover:bg-gray-100 hover:text-gray-900"
-          >
-            <span className="sr-only">Filter conversations</span>
-            <IconDotsVertical className="size-4" />
-          </button>
-        </div>
-
-        <label className="relative block mb-4 md:mb-5 shrink-0">
-          <span className="sr-only">Search conversations</span>
-          <IconSearch className="pointer-events-none absolute left-3 md:left-4 top-1/2 size-4 md:size-4.5 -translate-y-1/2 text-gray-400" />
-          <input
-            type="search"
-            placeholder="Search"
-            className="w-full rounded-lg md:rounded-xl bg-off-white px-9 md:px-11 py-2 md:py-2.5 text-sm text-gray-600 outline-none ring-0 transition placeholder:text-gray-400 focus:bg-white focus:ring-1 focus:ring-gray-200"
-          />
-        </label>
-
-        <div className="flex-1 overflow-y-auto space-y-1 min-h-0 -mx-1 md:-mx-2 px-1 md:px-2">
-          {conversations.map((conversation) => (
-            <button
-              key={conversation.id}
-              type="button"
-              onClick={() => handleSelectConversation(conversation.id)}
-              className={`w-full flex items-start gap-2.5 md:gap-3 rounded-lg md:rounded-xl p-2.5 md:p-3 text-left transition ${
-                selectedConversation === conversation.id
-                  ? "bg-[#E8E4F3]"
-                  : "hover:bg-gray-50"
-              }`}
-            >
-              <img
-                src={conversation.avatar}
-                alt={conversation.name}
-                className="size-10 md:size-11 rounded-full object-cover shrink-0 mt-0.5"
-              />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2 mb-0.5">
-                  <p className="font-semibold text-sm md:text-[15px] text-gray-900 truncate">
-                    {conversation.name}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                    className="inline-grid size-6 place-items-center rounded text-gray-400 transition hover:text-gray-600 shrink-0 -mt-0.5"
-                  >
-                    <span className="sr-only">Conversation options</span>
-                    <IconDotsVertical className="size-4" />
-                  </button>
-                </div>
-                <p className="text-xs md:text-[13px] text-gray-500 truncate mb-1">
-                  {conversation.lastMessage}
+    <div className="mt-3 h-[100vh] overflow-hidden font-lufga">
+      <div className="mx-auto grid h-full w-full gap-4 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <aside
+          className={`flex h-full min-h-0 flex-col overflow-hidden rounded-[24px] border border-[#E8EAE7] bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] ${
+            showChat ? "hidden lg:flex" : "flex"
+          }`}
+        >
+          {/* Sidebar Header */}
+          <div className="border-b border-[#F0F1F0] px-5 py-5">
+            <div className="mb-5 flex items-center justify-between">
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-[#9A9E9A]">
+                  Messages
                 </p>
-                <div className="flex items-center gap-1.5 text-[10px] md:text-[11px] text-gray-400">
-                  <span className="inline-flex items-center gap-1">
-                    <svg className="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" strokeWidth="2"/>
-                      <line x1="16" y1="2" x2="16" y2="6" strokeWidth="2"/>
-                      <line x1="8" y1="2" x2="8" y2="6" strokeWidth="2"/>
-                      <line x1="3" y1="10" x2="21" y2="10" strokeWidth="2"/>
-                    </svg>
-                    {conversation.time}
-                  </span>
-                  <span>•</span>
-                  <span className="inline-flex items-center gap-1">
-                    <svg className="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <circle cx="12" cy="12" r="10" strokeWidth="2"/>
-                      <polyline points="12 6 12 12 16 14" strokeWidth="2"/>
-                    </svg>
-                    {conversation.timestamp}
-                  </span>
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
-      </aside>
 
-      {/* Chat View */}
-      <section
-        className={`rounded-2xl md:rounded-3xl bg-white shadow-sm overflow-hidden flex flex-col sticky top-20 md:top-24 lg:top-28 max-h-[calc(100svh-120px)] md:max-h-[calc(100svh-180px)] lg:max-h-[calc(100svh-200px)] ${
-          !showChat ? "hidden lg:flex" : "flex"
-        }`}
-        style={{ border: "var(--border-secondary)" }}
-      >
-        {selectedUser ? (
-          <>
-            {/* Chat Header */}
-            <div className="px-4 md:px-6 py-3 md:py-4 border-b border-gray-100 flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-2 md:gap-3">
-                {/* Back button for mobile */}
-                <button
-                  type="button"
-                  onClick={handleBackToList}
-                  className="lg:hidden inline-grid size-9 place-items-center rounded-lg bg-off-white text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 mr-1"
-                >
-                  <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <div className="relative">
-                  <img
-                    src={selectedUser.avatar}
-                    alt={selectedUser.name}
-                    className="size-10 md:size-11 rounded-full object-cover"
-                  />
-                  <span className="absolute bottom-0 right-0 size-2 md:size-2.5 bg-green-500 rounded-full border-2 border-white"></span>
-                </div>
-                <div>
-                  <p className="font-semibold text-sm md:text-[15px] text-gray-900">
-                    {selectedUser.name}
-                  </p>
-                  <p className="text-[11px] md:text-xs text-green-500 font-medium flex items-center gap-1">
-                    <span className="size-1.5 bg-green-500 rounded-full"></span>
-                    Active
-                  </p>
-                </div>
+                <h2 className="mt-1 text-[20px] font-semibold tracking-[-0.02em] text-[#171A18]">
+                  Conversations
+                </h2>
               </div>
-              <div className="flex items-center gap-1.5 md:gap-2">
-                <button
-                  type="button"
-                  className="hidden sm:inline-grid size-9 place-items-center rounded-lg border border-gray-200 bg-white text-gray-600 transition hover:bg-gray-50 hover:text-gray-900"
-                >
-                  <IconPhone className="size-4.5" />
-                </button>
-                <button
-                  type="button"
-                  className="hidden sm:inline-grid size-9 place-items-center rounded-lg border border-gray-200 bg-white text-gray-600 transition hover:bg-gray-50 hover:text-gray-900"
-                >
-                  <IconVideo className="size-4.5" />
-                </button>
-                <button
-                  type="button"
-                  className="inline-grid size-9 place-items-center rounded-lg bg-off-white text-gray-500 transition hover:bg-gray-100 hover:text-gray-900"
-                >
-                  <span className="sr-only">More options</span>
-                  <IconDotsVertical className="size-4" />
-                </button>
-              </div>
+
+              <button
+                type="button"
+                className="grid size-9 place-items-center rounded-xl border border-[#ECEEEC] bg-[#FAFBFA] text-[#737873] transition-all duration-200 hover:border-[#D9DED9] hover:bg-[#F3F5F3] hover:text-[#171A18]"
+              >
+                <IconDotsVertical className="size-[17px]" />
+              </button>
             </div>
 
-            {/* Messages Area */}
-            <div
-              ref={messagesContainerRef}
-              className="flex-1 overflow-y-auto px-4 md:px-6 py-4 md:py-5 space-y-3 md:space-y-4 min-h-0"
-            >
-              {messages.map((message) => (
-                <div key={message.id}>
-                  {message.showDate && (
-                    <div className="flex justify-center mb-4">
-                      <span className="text-xs text-gray-400 font-medium">
-                        {message.date}
-                      </span>
-                    </div>
-                  )}
-                  <div className="flex gap-2 md:gap-2.5">
-                    <img
-                      src={
-                        message.isOwn
-                          ? "https://i.pravatar.cc/120?img=12"
-                          : selectedUser.avatar
-                      }
-                      alt={message.sender}
-                      className="size-7 md:size-8 rounded-full object-cover shrink-0"
-                    />
-                    <div className="max-w-[80%] md:max-w-[65%] items-start flex flex-col gap-1.5">
-                      <div className="flex items-center gap-1.5 md:gap-2 px-0.5">
-                        <p className="text-[11px] md:text-xs font-semibold text-gray-900">
-                          {message.sender}
+            {/* Search */}
+            <label className="relative block">
+              <span className="sr-only">Search conversations</span>
+
+              <IconSearch className="pointer-events-none absolute left-3.5 top-1/2 size-[17px] -translate-y-1/2 text-[#9A9E9A]" />
+
+              <input
+                type="search"
+                placeholder="Search conversations..."
+                className="h-11 w-full rounded-xl border border-transparent bg-[#F6F7F6] pl-10 pr-4 text-[13px] text-[#171A18] outline-none transition-all placeholder:text-[#A5A9A5] focus:border-[#DCE4DD] focus:bg-white focus:ring-4 focus:ring-[#4A7C59]/5"
+              />
+            </label>
+          </div>
+
+          {/* Conversation List */}
+          <div className="conversation-scrollbar flex-1 overflow-y-auto px-3 py-3">
+            <div className="space-y-1">
+              {conversations.map((conversation) => {
+                const isSelected = selectedConversation === conversation.id;
+
+                return (
+                  <div
+                    key={conversation.id}
+                    className={`group relative flex w-full items-center gap-3 rounded-2xl p-3 transition-all duration-200 ${
+                      isSelected ? "bg-[#F0F6F1]" : "hover:bg-[#F7F8F7]"
+                    }`}
+                  >
+                    {/* Avatar */}
+                    <button
+                      type="button"
+                      onClick={() => handleSelectConversation(conversation.id)}
+                      className="relative shrink-0"
+                    >
+                      <img
+                        src={conversation.avatar}
+                        alt={conversation.name}
+                        className="size-[46px] rounded-full object-cover ring-2 ring-white"
+                      />
+
+                      {/* Online indicator */}
+                      {isSelected && (
+                        <span className="absolute bottom-0 right-0 size-3 rounded-full border-2 border-white bg-[#4A7C59]" />
+                      )}
+                    </button>
+
+                    {/* Conversation info */}
+                    <button
+                      type="button"
+                      onClick={() => handleSelectConversation(conversation.id)}
+                      className="min-w-0 flex-1 text-left"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <p
+                          className={`truncate text-[14px] font-semibold ${
+                            isSelected ? "text-[#31563C]" : "text-[#202420]"
+                          }`}
+                        >
+                          {conversation.name}
                         </p>
-                        <span className="text-[10px] md:text-[11px] text-gray-400">
-                          {message.time}
+
+                        <span className="shrink-0 text-[10px] font-medium text-[#A1A5A1]">
+                          {conversation.timestamp}
                         </span>
                       </div>
-                      
-                      {message.replyTo && (
-                        <div className="px-2.5 md:px-3 py-1.5 bg-gray-50 rounded-lg text-[11px] md:text-xs text-gray-500 mb-0.5">
-                          <p className="font-medium text-gray-700">{message.replyTo}</p>
-                          <p className="text-[10px] md:text-[11px]">{message.replyMessage}</p>
+
+                      <p className="mt-1 truncate pr-2 text-[12px] leading-5 text-[#858A85]">
+                        {conversation.lastMessage}
+                      </p>
+
+                      <div className="mt-1.5 flex items-center gap-1.5 text-[10px] text-[#A5A9A5]">
+                        <span>{conversation.time}</span>
+
+                        <span className="size-0.5 rounded-full bg-[#C7CBC7]" />
+
+                        <span>Today</span>
+                      </div>
+                    </button>
+
+                    {/* More */}
+                    <button
+                      type="button"
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute right-2 top-2 hidden size-7 place-items-center rounded-lg bg-white text-[#9A9E9A] shadow-sm group-hover:grid hover:text-[#303530]"
+                    >
+                      <IconDotsVertical className="size-3.5" />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Sidebar Footer */}
+          <div className="border-t border-[#F0F1F0] px-4 py-3">
+            <div className="flex items-center justify-between rounded-xl bg-[#F8F9F8] px-3 py-2.5">
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-[#4A7C59]" />
+
+                <span className="text-[11px] font-medium text-[#6E746E]">
+                  You're online
+                </span>
+              </div>
+
+              <span className="text-[10px] text-[#A3A7A3]">
+                {conversations.length} chats
+              </span>
+            </div>
+          </div>
+        </aside>
+        <section
+          className={`relative flex h-full min-h-0 flex-col overflow-hidden rounded-[24px] border border-[#E8EAE7] bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] ${
+            !showChat ? "hidden lg:flex" : "flex"
+          }`}
+        >
+          {selectedUser ? (
+            <>
+              {/* =================================================
+                  CHAT HEADER
+              ================================================== */}
+              <header className="flex shrink-0 items-center justify-between border-b border-[#F0F1F0] bg-white px-4 py-3.5 md:px-6">
+                <div className="flex min-w-0 items-center gap-3">
+                  {/* Mobile Back */}
+                  <button
+                    type="button"
+                    onClick={handleBackToList}
+                    className="grid size-9 shrink-0 place-items-center rounded-xl bg-[#F6F7F6] text-[#606660] transition hover:bg-[#ECEFEC] lg:hidden"
+                  >
+                    <svg
+                      className="size-[18px]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                  </button>
+
+                  {/* Avatar */}
+                  <div className="relative shrink-0">
+                    <img
+                      src={selectedUser.avatar}
+                      alt={selectedUser.name}
+                      className="size-10 rounded-full object-cover md:size-11"
+                    />
+
+                    <span className="absolute bottom-0 right-0 size-3 rounded-full border-2 border-white bg-[#4A7C59]" />
+                  </div>
+
+                  {/* User */}
+                  <div className="min-w-0">
+                    <h3 className="truncate text-[14px] font-semibold text-[#171A18] md:text-[15px]">
+                      {selectedUser.name}
+                    </h3>
+
+                    <div className="mt-0.5 flex items-center gap-1.5">
+                      <span className="size-1.5 rounded-full bg-[#4A7C59]" />
+
+                      <span className="text-[11px] font-medium text-[#4A7C59]">
+                        Active now
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    className="hidden size-9 place-items-center rounded-xl text-[#737873] transition hover:bg-[#F5F6F5] hover:text-[#202420] sm:grid"
+                  >
+                    <IconPhone className="size-[17px]" />
+                  </button>
+
+                  <button
+                    type="button"
+                    className="hidden size-9 place-items-center rounded-xl text-[#737873] transition hover:bg-[#F5F6F5] hover:text-[#202420] sm:grid"
+                  >
+                    <IconVideo className="size-[18px]" />
+                  </button>
+
+                  <button
+                    type="button"
+                    className="grid size-9 place-items-center rounded-xl text-[#737873] transition hover:bg-[#F5F6F5] hover:text-[#202420]"
+                  >
+                    <IconDotsVertical className="size-[17px]" />
+                  </button>
+                </div>
+              </header>
+
+              {/* =================================================
+                  MESSAGES
+              ================================================== */}
+              <div
+                ref={messagesContainerRef}
+                className="conversation-scrollbar flex-1 overflow-y-auto bg-[#FCFDFC] px-4 py-5 md:px-7 md:py-6"
+              >
+                <div className="mx-auto max-w-[900px] space-y-5">
+                  {/* Date label */}
+                  <div className="flex items-center gap-3 py-1">
+                    <div className="h-px flex-1 bg-[#EEF0EE]" />
+
+                    <span className="rounded-full bg-[#F0F2F0] px-3 py-1 text-[10px] font-medium text-[#8D938D]">
+                      Today
+                    </span>
+
+                    <div className="h-px flex-1 bg-[#EEF0EE]" />
+                  </div>
+
+                  {messages.map((message) => (
+                    <div key={message.id}>
+                      {message.showDate && (
+                        <div className="mb-5 mt-6 flex items-center gap-3">
+                          <div className="h-px flex-1 bg-[#EEF0EE]" />
+
+                          <span className="rounded-full bg-[#F0F2F0] px-3 py-1 text-[10px] font-medium text-[#8D938D]">
+                            {message.date}
+                          </span>
+
+                          <div className="h-px flex-1 bg-[#EEF0EE]" />
                         </div>
                       )}
 
                       <div
-                        className={`rounded-xl md:rounded-2xl text-gray-900 ${
-                          message.type === "text"
-                            ? message.isOwn
-                              ? "bg-[#F5F5F7] px-3 md:px-3.5 py-2 md:py-2.5"
-                              : "bg-[#ECF4EC] px-3 md:px-3.5 py-2 md:py-2.5"
-                            : ""
+                        className={`flex gap-2.5 ${
+                          message.isOwn ? "justify-end" : "justify-start"
                         }`}
                       >
-                        {message.type === "text" && (
-                          <p className="text-[12.5px] md:text-[13.5px] leading-relaxed">
-                            {message.content}
-                          </p>
+                        {/* Incoming Avatar */}
+                        {!message.isOwn && (
+                          <img
+                            src={selectedUser.avatar}
+                            alt={message.sender}
+                            className="mt-5 size-8 shrink-0 rounded-full object-cover"
+                          />
                         )}
-                        {message.type === "media" && (
-                          <div className="relative group">
-                            <img
-                              src={message.content}
-                              alt="Media"
-                              className="rounded-xl md:rounded-2xl max-w-full h-auto"
-                              style={{ maxHeight: "240px" }}
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center">
+
+                        <div
+                          className={`flex max-w-[82%] flex-col ${
+                            message.isOwn ? "items-end" : "items-start"
+                          } md:max-w-[65%]`}
+                        >
+                          {/* Name + Time */}
+                          <div
+                            className={`mb-1.5 flex items-center gap-2 px-1 ${
+                              message.isOwn ? "flex-row-reverse" : ""
+                            }`}
+                          >
+                            <span className="text-[11px] font-semibold text-[#343934]">
+                              {message.sender}
+                            </span>
+
+                            <span className="text-[10px] text-[#A3A7A3]">
+                              {message.time}
+                            </span>
+                          </div>
+
+                          {/* Reply */}
+                          {message.replyTo && (
+                            <div className="mb-1 w-full rounded-xl border border-[#E8EBE8] bg-white px-3 py-2 text-left">
+                              <p className="text-[10px] font-semibold text-[#4A7C59]">
+                                {message.replyTo}
+                              </p>
+
+                              <p className="mt-0.5 truncate text-[11px] text-[#858A85]">
+                                {message.replyMessage}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* Message Content */}
+                          {message.type === "text" && (
+                            <div
+                              className={`rounded-2xl px-4 py-2.5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] ${
+                                message.isOwn
+                                  ? "rounded-tr-md bg-[#4A7C59] text-white"
+                                  : "rounded-tl-md border border-[#E9ECE9] bg-white text-[#292D29]"
+                              }`}
+                            >
+                              <p className="text-[13px] leading-[1.65]">
+                                {message.content}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* Media */}
+                          {message.type === "media" && (
+                            <div className="group relative overflow-hidden rounded-2xl border border-[#E6E9E6] bg-white shadow-sm">
+                              <img
+                                src={message.content}
+                                alt="Shared media"
+                                className="max-h-[280px] max-w-full object-cover"
+                              />
+
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition group-hover:bg-black/10">
+                                <button
+                                  type="button"
+                                  className="grid size-11 scale-90 place-items-center rounded-full bg-white/90 text-[#303530] opacity-0 shadow-xl backdrop-blur-sm transition group-hover:scale-100 group-hover:opacity-100"
+                                >
+                                  <svg
+                                    className="ml-0.5 size-4"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path d="M8 5v14l11-7z" />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Audio */}
+                          {message.type === "audio" && (
+                            <div className="flex min-w-[250px] items-center gap-3 rounded-2xl rounded-tl-md bg-[#4A7C59] px-3.5 py-3 shadow-sm md:min-w-[300px]">
                               <button
                                 type="button"
-                                className="size-10 md:size-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center hover:bg-black/60 transition"
+                                className="grid size-9 shrink-0 place-items-center rounded-full bg-white text-[#4A7C59] transition hover:scale-105"
                               >
                                 <svg
-                                  className="size-4 md:size-5 text-white ml-0.5"
+                                  className="ml-0.5 size-3.5"
                                   fill="currentColor"
                                   viewBox="0 0 24 24"
                                 >
                                   <path d="M8 5v14l11-7z" />
                                 </svg>
                               </button>
+
+                              <div className="flex h-6 flex-1 items-center gap-[3px]">
+                                {[
+                                  7, 12, 17, 11, 20, 14, 8, 16, 22, 13, 18, 9,
+                                  15, 21, 11, 7, 14, 19, 12, 8, 16, 11, 18, 14,
+                                ].map((height, index) => (
+                                  <div
+                                    key={index}
+                                    className="w-[2px] rounded-full bg-white/70"
+                                    style={{
+                                      height: `${height}px`,
+                                    }}
+                                  />
+                                ))}
+                              </div>
+
+                              <span className="text-[10px] font-semibold text-white">
+                                {message.duration}
+                              </span>
                             </div>
-                          </div>
-                        )}
-                        {message.type === "audio" && (
-                          <div className="flex items-center gap-2 md:gap-2.5 min-w-[240px] md:min-w-[280px] bg-[#4A7C59] rounded-xl md:rounded-2xl px-2.5 md:px-3 py-2 md:py-2.5">
-                            <button
-                              type="button"
-                              className="size-7 md:size-8 rounded-full bg-white flex items-center justify-center text-[#4A7C59] shrink-0"
-                            >
-                              <svg
-                                className="size-3.5 md:size-4"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path d="M8 5v14l11-7z" />
-                              </svg>
-                            </button>
-                            <div className="flex-1 flex items-center gap-0.5 h-5 md:h-6">
-                              {[
-                                6, 10, 14, 18, 16, 12, 8, 13, 20, 16, 10, 6, 12,
-                                18, 14, 8, 10, 16, 12, 6, 10, 14, 18, 16,
-                              ].map((height, i) => (
-                                <div
-                                  key={i}
-                                  className="w-0.5 bg-white/80 rounded-full"
-                                  style={{
-                                    height: `${height}px`,
-                                  }}
-                                />
-                              ))}
+                          )}
+
+                          {/* Reactions */}
+                          {message.reactions && (
+                            <div className="mt-1.5 flex items-center gap-1 rounded-full border border-[#E5E8E5] bg-white px-2.5 py-1 shadow-sm">
+                              <span className="text-[11px]">
+                                {message.reactions}
+                              </span>
                             </div>
-                            <span className="text-[11px] md:text-xs text-white shrink-0 font-medium">
-                              {message.duration}
-                            </span>
-                          </div>
+                          )}
+                        </div>
+
+                        {/* Own Avatar */}
+                        {message.isOwn && (
+                          <img
+                            src="https://i.pravatar.cc/120?img=12"
+                            alt="You"
+                            className="mt-5 hidden size-8 shrink-0 rounded-full object-cover sm:block"
+                          />
                         )}
                       </div>
-                      {message.reactions && (
-                        <div className="flex items-center gap-1 px-0.5">
-                          <span className="text-[11px] md:text-xs">{message.reactions}</span>
-                        </div>
-                      )}
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-              <div ref={messagesEndRef} />
-            </div>
+              </div>
 
-            {/* Message Input */}
-            <div className="px-4 md:px-6 py-3 md:py-4 border-t border-gray-100 shrink-0">
-              <div className="flex items-end gap-2 md:gap-3">
-                <img
-                  src="https://i.pravatar.cc/120?img=12"
-                  alt="You"
-                  className="hidden sm:block size-8 md:size-9 rounded-full object-cover shrink-0"
-                />
-                <div className="flex-1 flex items-center gap-1.5 md:gap-2 rounded-full bg-off-white pl-3 md:pl-4 pr-1.5 md:pr-2 py-2">
-                  <input
-                    type="text"
-                    placeholder="Type your message"
-                    value={messageInput}
-                    onChange={(e) => setMessageInput(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    className="flex-1 bg-transparent outline-none text-sm md:text-[13.5px] text-gray-900 placeholder:text-gray-400"
+              {/* =================================================
+                  MESSAGE COMPOSER
+              ================================================== */}
+              <div className="shrink-0 border-t border-[#EEF0EE] bg-white px-4 py-3.5 md:px-6 md:py-4">
+                <div className="mx-auto flex max-w-[900px] items-end gap-2.5">
+                  <img
+                    src="https://i.pravatar.cc/120?img=12"
+                    alt="You"
+                    className="hidden size-9 shrink-0 rounded-full object-cover sm:block"
                   />
+
+                  <div className="flex min-h-[46px] flex-1 items-center rounded-2xl border border-[#E7EAE7] bg-[#F8F9F8] px-2.5 pl-4 transition-all focus-within:border-[#C9D8CC] focus-within:bg-white focus-within:ring-4 focus-within:ring-[#4A7C59]/5">
+                    <input
+                      type="text"
+                      placeholder="Write a message..."
+                      value={messageInput}
+                      onChange={(e) => setMessageInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      className="min-w-0 flex-1 bg-transparent py-2 text-[13px] text-[#202420] outline-none placeholder:text-[#A3A7A3]"
+                    />
+
+                    <button
+                      type="button"
+                      className="grid size-8 shrink-0 place-items-center rounded-lg text-[#8D938D] transition hover:bg-[#EEF1EE] hover:text-[#4A7C59]"
+                    >
+                      <IconPhoto className="size-[17px]" />
+                    </button>
+
+                    <button
+                      type="button"
+                      className="grid size-8 shrink-0 place-items-center rounded-lg text-[#8D938D] transition hover:bg-[#EEF1EE] hover:text-[#4A7C59]"
+                    >
+                      <IconMicrophone className="size-[17px]" />
+                    </button>
+                  </div>
+
                   <button
                     type="button"
-                    className="inline-grid size-8 place-items-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-900"
+                    onClick={handleSendMessage}
+                    disabled={!messageInput.trim()}
+                    className="grid size-[46px] shrink-0 place-items-center rounded-2xl bg-[#4A7C59] text-white shadow-[0_6px_18px_rgba(74,124,89,0.20)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#3D6849] hover:shadow-[0_8px_22px_rgba(74,124,89,0.25)] active:translate-y-0 disabled:cursor-not-allowed disabled:bg-[#DCE2DD] disabled:shadow-none"
                   >
-                    <IconPhoto className="size-4 md:size-4.5" />
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-grid size-8 place-items-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-900"
-                  >
-                    <IconMicrophone className="size-4 md:size-4.5" />
+                    <IconSend className="size-[18px]" />
                   </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={handleSendMessage}
-                  className="inline-grid size-10 md:size-11 place-items-center rounded-full bg-[#4A7C59] text-white transition hover:bg-[#3d6849] active:scale-95 shrink-0"
-                >
-                  <IconSend className="size-4.5 md:size-5" />
-                </button>
+
+                <p className="mt-2 hidden text-center text-[9px] text-[#B0B4B0] sm:block">
+                  Press Enter to send
+                </p>
+              </div>
+            </>
+          ) : (
+            /* =================================================
+               EMPTY STATE
+            ================================================== */
+            <div className="flex flex-1 items-center justify-center bg-[#FCFDFC] p-6">
+              <div className="max-w-sm text-center">
+                <div className="mx-auto mb-5 grid size-16 place-items-center rounded-2xl bg-[#EEF4EF] text-[#4A7C59]">
+                  <IconBrandHipchat className="size-7" />
+                </div>
+
+                <h3 className="text-[18px] font-semibold text-[#202420]">
+                  Start a conversation
+                </h3>
+
+                <p className="mt-2 text-[13px] leading-6 text-[#8A908A]">
+                  Select a conversation from the sidebar to continue chatting
+                  with your contacts.
+                </p>
               </div>
             </div>
-          </>
-        ) : (
-          <div className="flex-1 flex items-center justify-center">
-            <p className="text-gray-400">
-              Select a conversation to start chatting
-            </p>
-          </div>
-        )}
-      </section>
+          )}
+        </section>
+      </div>
+
+      {/* =======================================================
+          CUSTOM SCROLLBAR
+      ======================================================== */}
+      <style>{`
+        .conversation-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #dfe4df transparent;
+        }
+
+        .conversation-scrollbar::-webkit-scrollbar {
+          width: 5px;
+        }
+
+        .conversation-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .conversation-scrollbar::-webkit-scrollbar-thumb {
+          background: #dfe4df;
+          border-radius: 999px;
+        }
+
+        .conversation-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #cbd2cc;
+        }
+      `}</style>
     </div>
   );
 }

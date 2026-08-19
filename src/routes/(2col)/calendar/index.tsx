@@ -324,7 +324,7 @@ function RouteComponent() {
   }
 
   return (
-    <div className="space-y-0 font-lufga px-4 md:px-0">
+    <div className="mt-3 space-y-0 font-lufga px-4 md:px-0">
       {/* Top Bar Header */}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 lg:gap-4 bg-white p-4 rounded-t-3xl border-x border-t transition-all" style={{ borderColor: "#ededed" }}>
         <div className="flex items-center gap-3 md:gap-4 flex-wrap">

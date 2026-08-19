@@ -1,5 +1,4 @@
-import { Header } from "@/components/layout/header";
-import { ProfileSwitcher } from "@/features/profile/profile-switcher";
+import { Sidebar } from "@/components/layout/sidebar";
 import { Topbar } from "@/components/layout/topbar";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import React from "react";
@@ -24,20 +23,12 @@ function RouteComponent() {
             "[left-sidebar-start] auto [left-sidebar-end content-start] 1fr [content-end right-sidebar-start] auto [right-sidebar-end]",
         }}
       >
-        <Header />
+        <Sidebar />
 
-        <main className="[grid-column:content] isolate grid-cols-1 lg:grid-cols-[1fr_--spacing(64)] gap-x-4 grid [--container:initial]">
-          <div className="grid-cols-subgrid grid col-span-full sticky top-0 bg-background z-10">
-            <Topbar className="md:py-10" />
+        <main>
+          <Topbar />
 
-            <div className="sticky top-0 py-6 md:py-10 hidden lg:block">
-              <ProfileSwitcher />
-            </div>
-          </div>
-
-          <div className="col-span-full">
-            <Outlet />
-          </div>
+          <Outlet />
         </main>
       </div>
     </div>
