@@ -20,7 +20,7 @@ function RouteComponent() {
     <div className="overflow-hidden rounded-3xl border border-[#E4E6EB] bg-white shadow-sm">
       {/* Header */}
       <div className="border-b border-[#E4E6EB] px-5 py-5 md:px-8">
-        <h2 className="text-xl font-bold text-[#1C1E21]">Profile</h2>
+        <h2 className="text-xl font-bold text-[#1C1E21]">Settings</h2>
 
         <p className="mt-1 text-sm text-[#65676B]">
           Manage your profile information and how people see you.
@@ -35,7 +35,7 @@ function RouteComponent() {
               className="group relative cursor-pointer"
             >
               <Avatar
-                name="Muhammad Shyed"
+                name="John Doe"
                 variant="beam"
                 className="
                   size-20 rounded-full
@@ -61,7 +61,7 @@ function RouteComponent() {
             </div>
 
             <div>
-              <h3 className="font-bold text-[#1C1E21]">Muhammad Shyed</h3>
+              <h3 className="font-bold text-[#1C1E21]">John Doe</h3>
 
               <p className="mt-0.5 text-sm text-[#65676B]">Designer</p>
 
@@ -114,7 +114,7 @@ function RouteComponent() {
             <input
               id="name"
               type="text"
-              defaultValue="Muhammad Shyed"
+              defaultValue="John Doe"
               placeholder="Your name"
               className="
                 w-full rounded-lg

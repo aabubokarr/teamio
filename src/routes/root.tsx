@@ -1,4 +1,4 @@
-import { BreakpointIndicator } from "@/components/ui/breakpoint-indicator";
+import { BreakpointIndicator } from "@/components/ui/breakpoint";
 import {
   HeadContent,
   Outlet,

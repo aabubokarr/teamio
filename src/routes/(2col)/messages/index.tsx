@@ -230,7 +230,7 @@ function RouteComponent() {
   }, [messages, selectedConversation]);
 
   return (
-    <div className="mt-3 h-[100vh] overflow-hidden font-lufga">
+    <div className="mt-3 h-[calc(100vh-80px)] overflow-hidden font-lufga">
       <div className="mx-auto grid h-full w-full gap-4 lg:grid-cols-[360px_minmax(0,1fr)]">
         <aside
           className={`flex h-full min-h-0 flex-col overflow-hidden rounded-[24px] border border-[#E8EAE7] bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] ${

@@ -31,7 +31,7 @@ if (rootElement && !rootElement.innerHTML) {
 	const root = ReactDOM.createRoot(rootElement);
 	root.render(
 		<StrictMode>
-			<RouterProvider router={router} />
+			<RouterProvider router={router} basepath="/teamio" />
 		</StrictMode>,
 	);
 }

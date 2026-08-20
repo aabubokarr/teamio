@@ -1,5 +1,5 @@
-import { AddTaskModal } from "@/components/ui/add-task-modal";
-import { ManagementTaskCard } from "@/components/ui/management-task-card";
+import { AddTaskModal } from "@/components/ui/addTask";
+import { ManagementTaskCard } from "@/components/ui/taskCard";
 import {
   IconCheck,
   IconCircle,

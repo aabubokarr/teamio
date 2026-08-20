@@ -83,11 +83,7 @@ export function Topbar({ className, ...props }: React.ComponentProps<"div">) {
             w-full
             items-center
             gap-2
-            px-3
-            py-2.5
-            sm:px-4
-            md:px-6
-            md:py-3
+            py-3
           "
         >
           {/* =====================================================

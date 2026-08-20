@@ -16,7 +16,7 @@ export const Route = createFileRoute("/_layout/")({
 
 function Page() {
   return (
-    <div className="space-y-4 mb-10 justify-self-center md:w-130">
+    <div className="space-y-4 my-3 justify-self-center">
       {Array(10)
         .fill({})
         .map((_, index) => (

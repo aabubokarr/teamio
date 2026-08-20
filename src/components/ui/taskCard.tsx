@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { IconArrowRight, IconDots } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-import { TaskMenuDropdown } from "@/components/ui/task-menu-dropdown";
-import { DeleteTaskModal } from "@/components/ui/delete-task-modal";
 
 interface ManagementTaskCardProps {
   title: string;
@@ -30,7 +28,6 @@ export function ManagementTaskCard({
   onClick,
 }: ManagementTaskCardProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,19 +64,6 @@ export function ManagementTaskCard({
             >
               <IconDots className="size-4" stroke={2} />
             </button>
-
-            {isMenuOpen && (
-              <div className="absolute top-full right-0 mt-2 z-20">
-                <TaskMenuDropdown
-                  onGenericClick={() => setIsMenuOpen(false)}
-                  onAction={(action) => {
-                    if (action === "delete") {
-                      setIsDeleteModalOpen(true);
-                    }
-                  }}
-                />
-              </div>
-            )}
           </div>
         </div>
 
@@ -105,9 +89,7 @@ export function ManagementTaskCard({
           <div className="flex items-center justify-between bg-white p-1 rounded-md drop-shadow-xs">
             <div className="flex items-center gap-1">
               <div className="size-3 rounded-full bg-black flex-shrink-0" />
-              <span className="text-xs text-black mr-1">
-                Assign to
-              </span>
+              <span className="text-xs text-black mr-1">Assign to</span>
             </div>
 
             <div className="flex items-center -space-x-2">
@@ -206,12 +188,6 @@ export function ManagementTaskCard({
             </div>
           </button>
         </div>
-
-        <DeleteTaskModal
-          isOpen={isDeleteModalOpen}
-          onOpenChange={setIsDeleteModalOpen}
-          onConfirm={() => console.log("Deleted")}
-        />
       </div>
     </>
   );

@@ -90,18 +90,11 @@ export function Sidebar() {
         top-0
       "
     >
-      <div className="flex h-full flex-col px-4 py-5">
-        {/* =====================================================
-            LOGO
-        ====================================================== */}
+      <div className="flex h-full flex-col px-4 py-3">
         <div className="flex h-10 shrink-0 items-center px-2">
           <Logo className="w-30" />
         </div>
-
-        {/* =====================================================
-            MAIN NAVIGATION
-        ====================================================== */}
-        <nav className="mt-8 flex flex-col gap-1">
+        <nav className="mt-7 flex flex-col gap-1">
           {links.map((node) => (
             <Link
               key={node.to}
@@ -136,15 +129,7 @@ export function Sidebar() {
             </Link>
           ))}
         </nav>
-
-        {/* =====================================================
-            SPACER
-        ====================================================== */}
         <div className="flex-1" />
-
-        {/* =====================================================
-            BOTTOM SECTION
-        ====================================================== */}
         <div className="shrink-0 space-y-2">
           {/* Divider */}
           <div className="mx-2 mb-3 h-px bg-gray-950/[0.07]" />
