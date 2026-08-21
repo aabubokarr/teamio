@@ -44,7 +44,7 @@ const { link, icon } = sidebarStyles();
 
 export const links = [
   {
-    to: "/",
+    to: "/timeline",
     title: "Timeline",
     icon: IconSmartHome,
   },

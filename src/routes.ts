@@ -7,6 +7,7 @@ export const routes = rootRoute("root.tsx", [
     route("/$user/status/$id", "$user/status/$id/index.tsx"),
   ]),
   layout("2col-layout", "(2col)/layout.tsx", [
+    route("/timeline", "(2col)/timeline/index.tsx"),
     route("/managements", "(2col)/managements/index.tsx"),
     route("/messages", "(2col)/messages/index.tsx"),
     route("/calendar", "(2col)/calendar/index.tsx"),
