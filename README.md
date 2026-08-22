@@ -58,6 +58,38 @@ Welcome to the **Teamio** project! This README provides an overview of the proje
 
 ```
 teamio/
+├── .github/
+│   ├── workflows/               # Github actions
+├── public/                      # Public directory
+├── src/                         # Main source-code directory
+│   ├── components/              # Reusable UI components
+│   │   ├── hooks/               # Reusable custom React hooks
+│   │   ├── icons/               # Custom and reusable icons
+│   │   ├── layout/              # Application-wide layouts\navigation
+│   │   ├── ui/                  # Generic UI components
+│   │   └── utilities/           # Shared UI utilities
+│   ├── features/                # Feature-specific logic and components
+│   ├── lib/                     # Shared application utilities
+│   ├── routes/                  # Application pages
+│   │
+│   ├── main.tsx                 # Application entry point
+│   ├── reportWebVitals.ts       # Performance and web-vitals reporting
+│   ├── routes.ts                # TanStack Router configuration
+│   ├── routeTree.gen.ts         # Auto generated TanStack route tree
+│   └── styles.css               # Global styles and CSS variables
+├── .cta.json                    # Configuration for the project's CTA
+├── .gitignore                   # Files and folders that Git ignores
+├── biome.json                   # Biome formatter and linter config
+├── Dockerfile                   # Instructions for Docker
+├── index.html                   # Main HTML document
+├── LICENSE                      # Project's license
+├── loader.json                  # Loader/tooling configuration
+├── package-lock.json            # Locks exact NPM dependency versions
+├── package.json                 # Project metadata and dependencies
+├── README.md                    # Project documentation and instructions
+├── tsconfig.json                # Typescript configuration file
+├── vite.config.js               # Vite configuration file
+└── 
 ```
 
 ## Contributors

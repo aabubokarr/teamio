@@ -4,13 +4,11 @@ import type { TablerIcon } from "@tabler/icons-react";
 import { useEffect, useRef } from "react";
 import {
   IconArrowRight,
-  IconBell,
   IconBolt,
   IconCheck,
   IconHeart,
   IconMessageCircle,
   IconPlayerPlay,
-  IconShare,
   IconSparkles,
   IconUsers,
   IconWorld,
@@ -33,12 +31,6 @@ const avatars = [
   "https://i.pravatar.cc/100?img=47",
   "https://i.pravatar.cc/100?img=5",
 ];
-
-const avatarNames = ["Alex", "Maya", "Noah", "Emma"];
-
-/* -------------------------------------------------------------------------
-   Motion helpers — plain DOM refs, no extra dependencies.
-------------------------------------------------------------------------- */
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -809,16 +801,10 @@ function Page() {
           </div>
 
           <div className="mt-14 flex flex-col justify-between gap-4 border-t border-gray-100 pt-7 text-xs text-gray-400 sm:flex-row">
-            <p>© 2026 Teamio. All rights reserved.</p>
-
-            <p>Made for people who love people.</p>
+            <p>Copyright © 2026 Teamio. All rights reserved.</p>
           </div>
         </div>
       </footer>
-
-      {/* =====================================================
-          GLOBAL MOTION + 3D STYLES
-      ====================================================== */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
 
