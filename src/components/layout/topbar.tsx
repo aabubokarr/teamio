@@ -7,10 +7,8 @@ import {
   IconMenu,
   IconSearch,
   IconX,
+  IconSparkles,
 } from "@tabler/icons-react";
-
-import _Avatar from "boring-avatars";
-const Avatar = (_Avatar as any).default ?? _Avatar;
 
 import { Link } from "@tanstack/react-router";
 import { LazyMotion, domAnimation } from "motion/react";
@@ -22,7 +20,6 @@ import {
 } from "react-aria-components";
 
 import { Logo } from "@/components/icons/logo";
-import { CreateGroup } from "@/features/group/create-group";
 import { CreatePost } from "@/features/post/create-post";
 
 import { Button } from "@/components/ui/button";
@@ -36,24 +33,22 @@ import { cn } from "@/lib/utils";
 
 const profiles = [
   {
-    name: "Intercom",
-    date: "2 days ago",
+    name: "Maya Rahman",
+    role: "Lead Product Designer",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+    active: true,
   },
   {
-    name: "Marvel Studios",
-    date: "2 weeks ago",
+    name: "Alex Carter",
+    role: "Frontend Engineer",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
+    active: false,
   },
   {
-    name: "Netflix",
-    date: "1 month ago",
-  },
-  {
-    name: "Spotify",
-    date: "3 months ago",
-  },
-  {
-    name: "Google",
-    date: "1 year ago",
+    name: "Sarah Wilson",
+    role: "Product Manager",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80",
+    active: false,
   },
 ];
 
@@ -68,32 +63,21 @@ export function Topbar({ className, ...props }: React.ComponentProps<"div">) {
             z-40
             w-full
             border-b
-            border-gray-950/[0.06]
-            bg-background/95
+            border-slate-200/80
+            bg-white/95
             backdrop-blur-md
+            px-4
+            font-sans
           `,
           className
         )}
         {...props}
       >
-        {/* Full width container */}
-        <div
-          className="
-            flex
-            w-full
-            items-center
-            gap-2
-            py-3
-          "
-        >
-          {/* =====================================================
-              MOBILE MENU
-          ====================================================== */}
+        <div className="flex w-full items-center gap-3 py-3">
+          {/* Mobile Menu */}
           <MobileNav />
 
-          {/* =====================================================
-              SEARCH
-          ====================================================== */}
+          {/* Search */}
           <AriaButton
             className="
               group
@@ -102,123 +86,66 @@ export function Topbar({ className, ...props }: React.ComponentProps<"div">) {
               min-w-0
               flex-1
               items-center
-              gap-2
-              rounded-full
+              gap-2.5
+              rounded-2xl
               border
-              border-gray-950/10
-              bg-white
+              border-slate-200
+              bg-slate-50
               px-3.5
               text-left
-              shadow-sm
+              shadow-xs
               transition-all
-              hover:border-gray-950/15
-              hover:shadow
+              hover:border-indigo-300
+              hover:bg-white
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-primary/20
+              focus-visible:ring-indigo-500/20
             "
           >
             <Icon>
-              <IconSearch
-                className="
-                  size-[18px]
-                  shrink-0
-                  text-gray-950/55
-                  transition-colors
-                  group-hover:text-gray-950/75
-                "
-              />
+              <IconSearch className="size-[17px] shrink-0 text-slate-400 transition-colors group-hover:text-indigo-600" />
             </Icon>
 
-            <span
-              className="
-                min-w-0
-                flex-1
-                truncate
-                text-sm
-                text-gray-950/45
-              "
-            >
-              Search anything...
+            <span className="min-w-0 flex-1 truncate text-xs font-medium text-slate-500">
+              Search team, tasks, DMs or files...
             </span>
 
-            {/* Mac shortcut */}
-            <span
-              className="
-                hidden
-                shrink-0
-                rounded-md
-                border
-                border-gray-950/10
-                bg-gray-50
-                px-1.5
-                py-0.5
-                text-[10px]
-                font-medium
-                text-gray-950/35
-                [[data-platform=macos]_&]:block
-              "
-            >
+            <span className="hidden shrink-0 rounded-lg border border-slate-200 bg-white px-2 py-0.5 text-[10px] font-bold text-slate-400 sm:block">
               ⌘ K
-            </span>
-
-            {/* Windows / Linux shortcut */}
-            <span
-              className="
-                hidden
-                shrink-0
-                rounded-md
-                border
-                border-gray-950/10
-                bg-gray-50
-                px-1.5
-                py-0.5
-                text-[10px]
-                font-medium
-                text-gray-950/35
-                [[data-platform=macos]_&]:hidden
-                sm:block
-              "
-            >
-              Ctrl K
             </span>
           </AriaButton>
 
-          {/* =====================================================
-              NOTIFICATION
-          ====================================================== */}
-          <Button
-            type="button"
-            variant="icon"
-            color="white"
-            isRounded
-            className={{
-              base: `
-                size-10
-                shrink-0
-                border
-                border-gray-950/10
-                bg-white
-                shadow-sm
-                transition-all
-                hover:bg-gray-50
-                hover:shadow
-              `,
-            }}
-          >
-            <Icon>
-              <IconBell className="size-[19px] text-gray-700" />
-            </Icon>
-          </Button>
+          {/* Notification Button */}
+          <div className="relative">
+            <Button
+              type="button"
+              variant="icon"
+              color="white"
+              isRounded
+              className={{
+                base: `
+                  size-10
+                  shrink-0
+                  border
+                  border-slate-200
+                  bg-white
+                  shadow-xs
+                  transition-all
+                  hover:bg-slate-50
+                `,
+              }}
+            >
+              <Icon>
+                <IconBell className="size-[18px] text-slate-700" />
+              </Icon>
+            </Button>
+            <span className="absolute top-1 right-1 h-2.5 w-2.5 rounded-full bg-indigo-600 ring-2 ring-white" />
+          </div>
 
-          {/* =====================================================
-              CREATE POST
-          ====================================================== */}
+          {/* Create Post Action */}
           <CreatePost />
 
-          {/* =====================================================
-              PROFILE
-          ====================================================== */}
+          {/* Profile Switcher */}
           <ProfileSwitcher />
         </div>
       </div>
@@ -234,9 +161,7 @@ function ProfileSwitcher() {
   return (
     <LazyMotion features={domAnimation}>
       <DialogTrigger>
-        {/* =====================================================
-            DESKTOP PROFILE BUTTON
-        ====================================================== */}
+        {/* Desktop Profile Button */}
         <AriaButton
           className="
             group
@@ -245,263 +170,109 @@ function ProfileSwitcher() {
             shrink-0
             grid-cols-[auto_1fr_auto]
             items-center
-            gap-2
-            rounded-full
+            gap-2.5
+            rounded-2xl
             border
-            border-gray-950/10
+            border-slate-200
             bg-white
-            px-1.5
-            shadow-sm
+            px-2
+            shadow-xs
             transition-all
-            hover:border-gray-950/15
-            hover:bg-gray-50
-            hover:shadow
+            hover:border-indigo-300
+            hover:bg-slate-50
             focus-visible:outline-none
-            focus-visible:ring-2
-            focus-visible:ring-gray-950/10
             lg:grid
           "
         >
-          {/* Avatar */}
-          <Avatar name="Harry Potter" className="size-8" variant="beam" />
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+            alt="Maya Rahman"
+            className="size-7 rounded-xl object-cover"
+          />
 
-          {/* User information */}
           <div className="min-w-0 text-left leading-tight">
-            <p className="truncate text-xs font-semibold text-gray-950">
-              Harry Potter
+            <p className="truncate text-xs font-bold text-slate-900">
+              Maya Rahman
             </p>
-
-            <p className="truncate text-[10px] text-gray-950/45">Designer</p>
+            <p className="truncate text-[10px] text-indigo-600 font-semibold">Lead Designer</p>
           </div>
 
-          {/* Chevron */}
-          <span
-            className="
-              grid
-              size-7
-              place-items-center
-              rounded-full
-              border
-              border-gray-950/10
-              text-gray-950/45
-              transition-colors
-              group-data-[pressed=true]:bg-gray-100
-            "
-          >
+          <span className="grid size-6 place-items-center rounded-lg text-slate-400">
             <Icon>
-              <IconChevronDown
-                className="
-                  size-4
-                  transition-transform
-                  duration-300
-                  ease-out
-                  group-data-[pressed=true]:rotate-180
-                "
-              />
+              <IconChevronDown className="size-4 transition-transform duration-200 group-data-[pressed=true]:rotate-180" />
             </Icon>
           </span>
         </AriaButton>
 
-        {/* =====================================================
-            MOBILE PROFILE BUTTON
-        ====================================================== */}
+        {/* Mobile Profile Button */}
         <AriaButton
           aria-label="Open profile switcher"
-          className="
-            grid
-            size-10
-            shrink-0
-            place-items-center
-            rounded-full
-            border
-            border-gray-950/10
-            bg-white
-            p-1
-            shadow-sm
-            transition-all
-            hover:bg-gray-50
-            hover:shadow
-            focus-visible:outline-none
-            focus-visible:ring-2
-            focus-visible:ring-gray-950/10
-            lg:hidden
-          "
+          className="grid size-10 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white p-0.5 shadow-xs lg:hidden"
         >
-          <Avatar name="Harry Potter" variant="beam" className="size-full" />
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+            alt="Maya Rahman"
+            className="size-full rounded-xl object-cover"
+          />
         </AriaButton>
 
-        {/* =====================================================
-            PROFILE MODAL
-        ====================================================== */}
-        <ModalOverlay
-          className="
-            grid
-            items-center
-            justify-items-center
-            p-4
-          "
-        >
-          <Modal
-            className="
-              w-full
-              max-w-[380px]
-              overflow-hidden
-              rounded-2xl
-              border
-              border-gray-950/10
-              bg-background
-              p-3
-              shadow-2xl
-            "
-          >
-            <Dialog
-              aria-label="Profile Switcher"
-              className="focus-visible:outline-none"
-            >
-              {/* =================================================
-                  CURRENT PROFILE
-              ================================================== */}
-              <div
-                className="
-                  mb-3
-                  flex
-                  items-center
-                  gap-3
-                  rounded-xl
-                  bg-gray-950/[0.035]
-                  p-3
-                "
-              >
-                <Avatar
-                  name="Harry Potter"
-                  variant="beam"
-                  className="size-10 shrink-0"
+        {/* Profile Modal */}
+        <ModalOverlay className="grid items-center justify-items-center p-4">
+          <Modal className="w-full max-w-[380px] overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-2xl">
+            <Dialog aria-label="Profile Switcher" className="focus-visible:outline-none font-sans">
+              
+              {/* Current Profile Card */}
+              <div className="mb-4 flex items-center gap-3 rounded-2xl bg-indigo-50/70 border border-indigo-100 p-3">
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+                  alt="Maya Rahman"
+                  className="size-11 rounded-2xl object-cover shrink-0 ring-2 ring-indigo-500/20"
                 />
-
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">Harry Potter</p>
-
-                  <p className="text-xs text-gray-950/45">Designer</p>
+                  <p className="truncate text-xs font-black text-slate-900">Maya Rahman</p>
+                  <p className="text-[11px] font-semibold text-indigo-600">Lead Product Designer @ Teamio</p>
                 </div>
               </div>
 
-              {/* =================================================
-                  MODAL HEADER
-              ================================================== */}
-              <div className="mb-2 px-1">
-                <div className="flex items-center gap-2">
-                  <Logo className="w-16" />
-
-                  <span className="h-3 w-px bg-gray-950/10" />
-
-                  <div>
-                    <h2 className="text-xs font-semibold text-gray-950">
-                      Switch profile
-                    </h2>
-
-                    <p className="text-[10px] text-gray-950/40">
-                      Choose a community
-                    </p>
-                  </div>
-                </div>
+              {/* Header */}
+              <div className="mb-3 flex items-center justify-between px-1">
+                <span className="text-xs font-bold text-slate-900 flex items-center gap-1">
+                  <IconSparkles size={14} className="text-indigo-600" /> Switch Team Member
+                </span>
+                <span className="text-[10px] text-slate-400 font-medium">3 Online</span>
               </div>
 
-              {/* =================================================
-                  PROFILE LIST
-              ================================================== */}
-              <div className="space-y-0.5">
-                {profiles.map((profile, index) => {
-                  const isActive = index === 2;
+              {/* Profiles */}
+              <div className="space-y-1">
+                {profiles.map((profile) => (
+                  <AriaButton
+                    key={profile.name}
+                    className={`group flex items-center gap-3 w-full rounded-2xl p-2.5 text-left outline-none transition ${
+                      profile.active ? "bg-slate-100 border border-slate-200" : "hover:bg-slate-50"
+                    }`}
+                  >
+                    <img
+                      src={profile.avatar}
+                      alt={profile.name}
+                      className="size-9 rounded-xl object-cover shrink-0"
+                    />
 
-                  return (
-                    <AriaButton
-                      key={profile.name}
-                      className="
-                        group
-                        grid
-                        min-h-12
-                        w-full
-                        grid-cols-[auto_1fr_auto]
-                        items-center
-                        gap-3
-                        rounded-xl
-                        px-2.5
-                        text-left
-                        outline-none
-                        transition-colors
-                        hover:bg-gray-950/[0.04]
-                        focus-visible:bg-gray-950/[0.04]
-                        data-pressed:bg-gray-950/[0.06]
-                      "
-                    >
-                      {/* Avatar */}
-                      <Avatar
-                        name={profile.name}
-                        className="size-8 shrink-0"
-                        variant="beam"
-                      />
+                    <div className="min-w-0 flex-1">
+                      <p className={`truncate text-xs ${profile.active ? "font-bold text-slate-900" : "font-semibold text-slate-700"}`}>
+                        {profile.name}
+                      </p>
+                      <p className="text-[10px] text-slate-500 truncate">{profile.role}</p>
+                    </div>
 
-                      {/* Profile information */}
-                      <div className="min-w-0 leading-tight">
-                        <p
-                          className={cn(
-                            "truncate text-sm",
-                            isActive
-                              ? "font-semibold text-gray-950"
-                              : "font-medium text-gray-800"
-                          )}
-                        >
-                          {profile.name}
-                        </p>
-
-                        <p className="mt-0.5 text-[11px] text-gray-950/40">
-                          Active {profile.date}
-                        </p>
-                      </div>
-
-                      {/* Active / inactive icon */}
-                      {isActive ? (
-                        <span
-                          className="
-                            grid
-                            size-7
-                            place-items-center
-                            rounded-full
-                            bg-gray-950
-                            text-white
-                          "
-                        >
-                          <Icon>
-                            <IconCheck className="size-4" />
-                          </Icon>
-                        </span>
-                      ) : (
-                        <span
-                          className="
-                            grid
-                            size-7
-                            place-items-center
-                            rounded-full
-                            text-gray-950/25
-                            transition-colors
-                            group-hover:text-gray-950/50
-                          "
-                        >
-                          <Icon>
-                            <IconChevronRight className="size-4" />
-                          </Icon>
-                        </span>
-                      )}
-                    </AriaButton>
-                  );
-                })}
-              </div>
-
-              {/* =================================================
-                  CREATE GROUP
-              ================================================== */}
-              <div className="mt-2 border-t border-gray-950/[0.07] pt-2">
-                <CreateGroup />
+                    {profile.active ? (
+                      <span className="flex size-6 items-center justify-center rounded-full bg-indigo-600 text-white">
+                        <IconCheck size={14} />
+                      </span>
+                    ) : (
+                      <IconChevronRight size={16} className="text-slate-400" />
+                    )}
+                  </AriaButton>
+                ))}
               </div>
             </Dialog>
           </Modal>
@@ -521,7 +292,6 @@ function MobileNav() {
   return (
     <LazyMotion features={domAnimation}>
       <DialogTrigger>
-        {/* Menu button */}
         <Button
           variant="icon"
           color="white"
@@ -531,12 +301,11 @@ function MobileNav() {
               size-10
               shrink-0
               border
-              border-gray-950/10
+              border-slate-200
               bg-white
-              shadow-sm
+              shadow-xs
               transition-all
-              hover:bg-gray-50
-              hover:shadow
+              hover:bg-slate-50
               md:hidden
             `,
           }}
@@ -546,18 +315,16 @@ function MobileNav() {
           </Icon>
         </Button>
 
-        {/* Mobile drawer */}
         <ModalOverlay>
           <MotionModal
             variants={{
               enter: {
                 x: 0,
                 transition: {
-                  duration: 0.35,
+                  duration: 0.3,
                   ease: TRANSITION_EASINGS.appleEase,
                 },
               },
-
               exit: {
                 x: "-100%",
                 transition: {
@@ -574,45 +341,38 @@ function MobileNav() {
               w-[min(86%,--spacing(90))]
               overflow-y-auto
               border-r
-              border-gray-950/10
-              bg-background
-              px-4
-              py-4
+              border-slate-200
+              bg-white
+              p-4
               shadow-2xl
-              will-change-transform
+              font-sans
             "
           >
-            <Dialog
-              aria-label="Mobile Menu"
-              className="focus-visible:outline-none"
-            >
+            <Dialog aria-label="Mobile Menu" className="focus-visible:outline-none">
               {({ close }) => (
                 <div>
-                  {/* =================================================
-                      MOBILE HEADER
-                  ================================================== */}
-                  <div className="flex h-10 items-center justify-between">
-                    <Logo className="w-30" />
+                  <div className="flex h-10 items-center justify-between border-b border-slate-100 pb-3">
+                    <div className="flex items-center gap-2">
+                      <Logo className="size-6 shrink-0" />
+                      <span className="text-base font-black text-slate-900">Teamio</span>
+                    </div>
 
                     <Button
                       variant="icon"
                       color="white"
                       isRounded
                       className={{
-                        base: "size-9 border border-gray-950/10",
+                        base: "size-8 border border-slate-200",
                       }}
                       onPress={close}
                     >
                       <Icon>
-                        <IconX className="size-[18px]" />
+                        <IconX className="size-4" />
                       </Icon>
                     </Button>
                   </div>
 
-                  {/* =================================================
-                      NAVIGATION
-                  ================================================== */}
-                  <nav className="mt-6 space-y-1">
+                  <nav className="mt-4 space-y-1">
                     {links.map((node) => (
                       <Link
                         key={node.to}
@@ -620,48 +380,28 @@ function MobileNav() {
                         onClick={close}
                         className={cn(
                           link(),
-                          `
-                            h-10
-                            rounded-xl
-                            px-3
-                            transition-colors
-                            hover:bg-gray-950/[0.04]
-                          `
+                          "h-10 rounded-xl px-3 hover:bg-slate-100"
                         )}
                       >
                         <span className="grid size-7 place-items-center">
                           <node.icon className={icon()} />
                         </span>
-
-                        <span className="text-sm font-medium">
-                          {node.title}
-                        </span>
+                        <span className="text-xs font-bold">{node.title}</span>
                       </Link>
                     ))}
 
-                    {/* =================================================
-                        LOGOUT
-                    ================================================== */}
                     <Link
                       to="/login"
                       onClick={close}
                       className={cn(
                         link({ color: "red" }),
-                        `
-                          mt-3
-                          h-10
-                          rounded-xl
-                          px-3
-                          transition-colors
-                          hover:bg-red-50
-                        `
+                        "mt-3 h-10 rounded-xl px-3 hover:bg-rose-50"
                       )}
                     >
                       <span className="grid size-7 place-items-center">
                         <IconLogout className={icon()} />
                       </span>
-
-                      <span className="text-sm font-medium">Logout</span>
+                      <span className="text-xs font-bold">Logout</span>
                     </Link>
                   </nav>
                 </div>

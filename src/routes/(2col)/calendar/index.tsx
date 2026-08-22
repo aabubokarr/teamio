@@ -47,16 +47,12 @@ function RouteComponent() {
     year: "numeric",
   });
 
-  // Get first day of month and number of days
   const firstDayOfMonth = new Date(year, month, 1);
   const lastDayOfMonth = new Date(year, month + 1, 0);
   const daysInMonth = lastDayOfMonth.getDate();
 
-  // Get the day of week for the first day
-  // Convert Sunday = 0 to Monday = 0
   const firstDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7;
 
-  // Get previous month's trailing days
   const prevMonth = new Date(year, month - 1, 0);
   const daysInPrevMonth = prevMonth.getDate();
 
@@ -66,11 +62,9 @@ function RouteComponent() {
     trailingDays.push(daysInPrevMonth - i);
   }
 
-  // Get next month's leading days
   const totalCells = Math.ceil((firstDayOfWeek + daysInMonth) / 7) * 7;
-
-  const leadingDays: number[] = [];
   const leadingDaysCount = totalCells - (firstDayOfWeek + daysInMonth);
+  const leadingDays: number[] = [];
 
   for (let i = 1; i <= leadingDaysCount; i++) {
     leadingDays.push(i);
@@ -99,7 +93,6 @@ function RouteComponent() {
     return `${startFormatted} - ${endFormatted}`;
   };
 
-  // Close calendar dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -119,7 +112,6 @@ function RouteComponent() {
     };
   }, [showCalendarDropdown]);
 
-  // Calendar widget functions
   const calendarMonth = calendarViewDate.getMonth();
   const calendarYear = calendarViewDate.getFullYear();
 
@@ -129,11 +121,8 @@ function RouteComponent() {
   });
 
   const calendarFirstDay = new Date(calendarYear, calendarMonth, 1);
-
   const calendarLastDay = new Date(calendarYear, calendarMonth + 1, 0);
-
   const calendarDaysInMonth = calendarLastDay.getDate();
-
   const calendarFirstDayOfWeek = (calendarFirstDay.getDay() + 6) % 7;
 
   const navigateCalendarMonth = (direction: "prev" | "next") => {
@@ -142,61 +131,47 @@ function RouteComponent() {
     );
   };
 
-  // Select a date from the dropdown calendar
   const handleDateSelect = (date: Date) => {
     setSelectedStartDate(date);
-
-    // Update the main calendar
     setCurrentDate(new Date(date.getFullYear(), date.getMonth(), 1));
-
-    // Close dropdown
     setShowCalendarDropdown(false);
   };
 
-  // Get previous month's trailing days for calendar widget
   const calendarPrevMonth = new Date(calendarYear, calendarMonth - 1, 0);
-
   const calendarDaysInPrevMonth = calendarPrevMonth.getDate();
-
   const calendarTrailingDays: number[] = [];
 
   for (let i = calendarFirstDayOfWeek - 1; i >= 0; i--) {
     calendarTrailingDays.push(calendarDaysInPrevMonth - i);
   }
 
-  // Get next month's leading days for calendar widget
   const calendarTotalCells =
     Math.ceil((calendarFirstDayOfWeek + calendarDaysInMonth) / 7) * 7;
-
-  const calendarLeadingDays: number[] = [];
-
   const calendarLeadingDaysCount =
     calendarTotalCells - (calendarFirstDayOfWeek + calendarDaysInMonth);
+  const calendarLeadingDays: number[] = [];
 
   for (let i = 1; i <= calendarLeadingDaysCount; i++) {
     calendarLeadingDays.push(i);
   }
 
   return (
-    <div className="mt-3 space-y-0 font-lufga px-4 md:px-0">
+    <div className="mt-3 space-y-0 font-sans px-4 md:px-0">
       {/* Top Bar Header */}
-      <div
-        className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 lg:gap-4 bg-white p-4 rounded-t-3xl border-x border-t transition-all"
-        style={{ borderColor: "#ededed" }}
-      >
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 lg:gap-4 bg-white p-4 rounded-t-3xl border border-slate-200 shadow-xs">
         <div className="flex items-center gap-3 md:gap-4 flex-wrap">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="flex items-center justify-center size-10 rounded-xl bg-white border border-gray-100 hover:bg-gray-50 transition shadow-sm"
+                className="flex items-center justify-center h-10 w-10 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 shadow-xs"
               >
-                <IconCalendar className="size-6 text-gray-700" />
+                <IconCalendar className="h-5 w-5" />
               </button>
 
               <div className="flex flex-col">
                 <div className="flex items-center gap-1">
-                  <span className="text-base md:text-lg font-bold text-gray-900">
+                  <span className="text-base md:text-lg font-bold text-slate-900">
                     {monthName}
                   </span>
 
@@ -205,120 +180,97 @@ function RouteComponent() {
                       type="button"
                       onClick={() => {
                         if (!showCalendarDropdown) {
-                          // Open the dropdown on the currently
-                          // selected/main calendar month.
                           setCalendarViewDate(currentDate);
                         }
-
                         setShowCalendarDropdown(!showCalendarDropdown);
                       }}
-                      className="flex items-center justify-center size-6 rounded-full hover:bg-gray-100 transition"
+                      className="flex items-center justify-center h-6 w-6 rounded-full hover:bg-slate-100 transition"
                     >
-                      <IconChevronDown className="size-4 text-gray-400" />
+                      <IconChevronDown className="h-4 w-4 text-slate-400" />
                     </button>
 
                     {/* Calendar Dropdown */}
                     {showCalendarDropdown && (
-                      <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl p-5 z-50 w-[300px] border border-gray-100">
-                        {/* Calendar Header */}
-                        <div className="flex items-center justify-between mb-6">
-                          <span className="text-base font-bold text-gray-900">
+                      <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl p-5 z-50 w-[300px] border border-slate-200">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-sm font-bold text-slate-900">
                             {calendarMonthName}
                           </span>
 
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1">
                             <button
                               type="button"
                               onClick={() => navigateCalendarMonth("prev")}
-                              className="flex items-center justify-center size-8 rounded-full hover:bg-gray-50 transition text-gray-500 border border-transparent hover:border-gray-100"
+                              className="flex items-center justify-center h-7 w-7 rounded-lg hover:bg-slate-100 text-slate-500"
                             >
-                              <IconChevronLeft className="size-5" />
+                              <IconChevronLeft className="h-4 w-4" />
                             </button>
 
                             <button
                               type="button"
                               onClick={() => navigateCalendarMonth("next")}
-                              className="flex items-center justify-center size-8 rounded-full hover:bg-gray-50 transition text-gray-500 border border-transparent hover:border-gray-100"
+                              className="flex items-center justify-center h-7 w-7 rounded-lg hover:bg-slate-100 text-slate-500"
                             >
-                              <IconChevronRight className="size-5" />
+                              <IconChevronRight className="h-4 w-4" />
                             </button>
                           </div>
                         </div>
 
                         {/* Days of Week */}
-                        <div className="grid grid-cols-7 gap-1 mb-3">
+                        <div className="grid grid-cols-7 gap-1 mb-2">
                           {daysOfWeekShort.map((day) => (
                             <div
                               key={day}
-                              className="text-center text-[10px] font-bold text-gray-400 uppercase tracking-wider"
+                              className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-wider"
                             >
                               {day}
                             </div>
                           ))}
                         </div>
 
-                        {/* Calendar Grid */}
+                        {/* Days */}
                         <div className="grid grid-cols-7 gap-1">
-                          {/* Previous month trailing days */}
                           {calendarTrailingDays.map((day) => (
                             <button
                               key={`prev-${day}`}
                               type="button"
-                              className="size-9 text-sm text-gray-300 rounded-lg transition"
+                              className="h-8 w-8 text-xs text-slate-300 rounded-lg"
                               disabled
                             >
                               {day}
                             </button>
                           ))}
 
-                          {/* Current month days */}
-                          {Array.from(
-                            {
-                              length: calendarDaysInMonth,
-                            },
-                            (_, i) => {
-                              const day = i + 1;
+                          {Array.from({ length: calendarDaysInMonth }, (_, i) => {
+                            const day = i + 1;
+                            const date = new Date(calendarYear, calendarMonth, day);
+                            const isToday = date.toDateString() === new Date().toDateString();
+                            const isSelected = selectedStartDate?.toDateString() === date.toDateString();
 
-                              const date = new Date(
-                                calendarYear,
-                                calendarMonth,
-                                day
-                              );
+                            return (
+                              <button
+                                key={day}
+                                type="button"
+                                onClick={() => handleDateSelect(date)}
+                                className={cn(
+                                  "h-8 w-8 text-xs rounded-lg font-bold transition",
+                                  isSelected
+                                    ? "bg-indigo-600 text-white shadow-xs"
+                                    : isToday
+                                      ? "bg-cyan-100 text-cyan-900"
+                                      : "text-slate-700 hover:bg-slate-100"
+                                )}
+                              >
+                                {day}
+                              </button>
+                            );
+                          })}
 
-                              const isToday =
-                                date.toDateString() ===
-                                new Date().toDateString();
-
-                              const isSelected =
-                                selectedStartDate?.toDateString() ===
-                                date.toDateString();
-
-                              return (
-                                <button
-                                  key={day}
-                                  type="button"
-                                  onClick={() => handleDateSelect(date)}
-                                  className={cn(
-                                    "size-9 text-sm rounded-lg transition font-medium",
-                                    isSelected
-                                      ? "bg-blue-600 text-white shadow-md"
-                                      : isToday
-                                        ? "bg-green-500 text-white shadow-md shadow-green-100"
-                                        : "text-gray-700 hover:bg-gray-50"
-                                  )}
-                                >
-                                  {day}
-                                </button>
-                              );
-                            }
-                          )}
-
-                          {/* Next month leading days */}
                           {calendarLeadingDays.map((day) => (
                             <button
                               key={`next-${day}`}
                               type="button"
-                              className="size-9 text-sm text-gray-300 rounded transition"
+                              className="h-8 w-8 text-xs text-slate-300 rounded-lg"
                               disabled
                             >
                               {day}
@@ -330,7 +282,7 @@ function RouteComponent() {
                   </div>
                 </div>
 
-                <span className="text-[10px] md:text-xs text-gray-400 font-medium">
+                <span className="text-[10px] md:text-xs text-slate-400 font-medium">
                   {formatDateRange()}
                 </span>
               </div>
@@ -338,75 +290,44 @@ function RouteComponent() {
           </div>
 
           {/* Search */}
-          <div className="relative ml-4">
-            <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-gray-400" />
-
+          <div className="relative">
+            <IconSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               type="search"
-              placeholder="Search"
-              className="w-full sm:w-56 h-10 rounded-xl bg-gray-50/50 border border-transparent px-10 py-2 text-sm text-gray-600 outline-none ring-0 transition focus:bg-white focus:border-gray-200"
+              placeholder="Search meetings..."
+              className="w-full sm:w-56 h-9 rounded-xl bg-slate-50 border border-slate-200 px-9 text-xs text-slate-900 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20"
             />
           </div>
         </div>
 
-        {/* View Mode */}
-        <div className="flex-1 lg:flex-none flex items-center gap-1 bg-gray-50 rounded-xl p-1 border border-gray-100">
-          <button
-            type="button"
-            onClick={() => setViewMode("day")}
-            className={`flex-1 lg:flex-none px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition ${
-              viewMode === "day"
-                ? "bg-white text-gray-900 shadow-sm border border-gray-100"
-                : "text-gray-400"
-            }`}
-          >
-            Day
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setViewMode("week")}
-            className={`flex-1 lg:flex-none px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition ${
-              viewMode === "week"
-                ? "bg-white text-gray-900 shadow-sm border border-gray-100"
-                : "text-gray-400"
-            }`}
-          >
-            Week
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setViewMode("month")}
-            className={`flex-1 lg:flex-none px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition ${
-              viewMode === "month"
-                ? "bg-white text-gray-900 shadow-sm border border-gray-100"
-                : "text-gray-400"
-            }`}
-          >
-            Month
-          </button>
+        {/* View Mode Pills */}
+        <div className="flex items-center gap-1 bg-slate-100 rounded-xl p-1 border border-slate-200">
+          {(["day", "week", "month"] as const).map((mode) => (
+            <button
+              key={mode}
+              type="button"
+              onClick={() => setViewMode(mode)}
+              className={`capitalize px-4 py-1.5 rounded-lg text-xs font-bold transition ${
+                viewMode === mode
+                  ? "bg-white text-slate-900 shadow-xs border border-slate-200"
+                  : "text-slate-500"
+              }`}
+            >
+              {mode}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Main Calendar Grid Area */}
-      <div
-        className="bg-white shadow-sm overflow-hidden border-x border-b rounded-b-3xl"
-        style={{ borderColor: "#ededed" }}
-      >
-        {/* Days of Week Header */}
-        <div
-          className="grid grid-cols-7 border-y bg-gray-50"
-          style={{ borderColor: "#ededed" }}
-        >
+      <div className="bg-white shadow-xs overflow-hidden border-x border-b border-slate-200 rounded-b-3xl">
+        <div className="grid grid-cols-7 border-b border-slate-200 bg-slate-50">
           {daysOfWeek.map((day, index) => (
             <div
               key={day}
-              className="text-center text-xs md:text-[13px] font-bold text-gray-900 py-3 border-r last:border-r-0"
-              style={{ borderColor: "#ededed" }}
+              className="text-center text-xs font-bold text-slate-700 py-3 border-r last:border-r-0 border-slate-200"
             >
               <span className="hidden md:inline">{day}</span>
-
               <span className="md:hidden">{daysOfWeekShort[index]}</span>
             </div>
           ))}
@@ -414,61 +335,62 @@ function RouteComponent() {
 
         {/* Calendar Days */}
         <div className="grid grid-cols-7">
-          {/* Previous month trailing days */}
           {trailingDays.map((day) => (
             <div
               key={`prev-${day}`}
-              className="min-h-[70px] p-4 border-r border-b bg-white flex flex-col items-center"
-              style={{ borderColor: "#ededed" }}
+              className="min-h-[80px] p-3 border-r border-b border-slate-100 bg-slate-50/40 text-slate-300 text-xs font-bold"
             >
-              <span className="text-sm font-bold text-gray-300">{day}</span>
+              {day}
             </div>
           ))}
 
-          {/* Current month days */}
           {Array.from({ length: daysInMonth }, (_, i) => {
             const day = i + 1;
-
             const date = new Date(year, month, day);
-
             const isToday = date.toDateString() === new Date().toDateString();
-
-            const isSelected =
-              selectedStartDate?.toDateString() === date.toDateString();
+            const isSelected = selectedStartDate?.toDateString() === date.toDateString();
 
             return (
               <div
                 key={day}
                 className={cn(
-                  "min-h-[70px] p-3 border-r border-b bg-white flex flex-col group transition-colors hover:bg-gray-50/50",
-                  isToday && "bg-blue-50/30"
+                  "min-h-[80px] p-2.5 border-r border-b border-slate-100 bg-white flex flex-col justify-between transition-colors hover:bg-indigo-50/30",
+                  isToday && "bg-indigo-50/50"
                 )}
-                style={{ borderColor: "#ededed" }}
               >
-                <span
-                  className={cn(
-                    "text-sm font-bold text-center block mb-2 transition-colors",
-                    isToday
-                      ? "text-blue-600"
-                      : isSelected
-                        ? "text-blue-500"
-                        : "text-gray-900"
+                <div className="flex items-center justify-between">
+                  <span
+                    className={cn(
+                      "text-xs font-bold rounded-lg px-1.5 py-0.5",
+                      isToday
+                        ? "bg-indigo-600 text-white"
+                        : isSelected
+                          ? "bg-slate-900 text-white"
+                          : "text-slate-800"
+                    )}
+                  >
+                    {day}
+                  </span>
+                  {isToday && (
+                    <span className="text-[9px] font-bold text-indigo-600 uppercase">Today</span>
                   )}
-                >
-                  {day}
-                </span>
+                </div>
+
+                {[15, 18, 24].includes(day) && (
+                  <div className="mt-1 rounded-md bg-indigo-100 p-1 text-[10px] font-bold text-indigo-900 truncate">
+                    Sprint Sync
+                  </div>
+                )}
               </div>
             );
           })}
 
-          {/* Next month leading days */}
           {leadingDays.map((day) => (
             <div
               key={`next-${day}`}
-              className="min-h-[70px] p-4 border-r border-b bg-white flex flex-col items-center"
-              style={{ borderColor: "#ededed" }}
+              className="min-h-[80px] p-3 border-r border-b border-slate-100 bg-slate-50/40 text-slate-300 text-xs font-bold"
             >
-              <span className="text-sm font-bold text-gray-300">{day}</span>
+              {day}
             </div>
           ))}
         </div>

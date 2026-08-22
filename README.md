@@ -71,7 +71,6 @@ teamio/
 │   ├── features/                # Feature-specific logic and components
 │   ├── lib/                     # Shared application utilities
 │   ├── routes/                  # Application pages
-│   │
 │   ├── main.tsx                 # Application entry point
 │   ├── reportWebVitals.ts       # Performance and web-vitals reporting
 │   ├── routes.ts                # TanStack Router configuration

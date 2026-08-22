@@ -1,5 +1,6 @@
 import { AddTaskModal } from "@/components/ui/addTask";
 import { ManagementTaskCard } from "@/components/ui/taskCard";
+import { Logo } from "@/components/icons/logo";
 import {
   IconCheck,
   IconCircle,
@@ -8,6 +9,7 @@ import {
   IconUsers,
   IconCalendar,
   IconClock,
+  IconSparkles,
 } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
@@ -28,44 +30,28 @@ const initialColumns = [
         title: "Design UX on secret project",
         progress: 0,
         assignees: [
-          "https://i.pravatar.cc/120?img=65",
-          "https://i.pravatar.cc/120?img=70",
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
         ],
-        assigneeCount: 98,
+        assigneeCount: 12,
         priority: "Urgent",
-        priorityColor: "purple",
-        dueDate: "2 August",
-        dueDateColor: "yellow",
+        priorityColor: "purple" as const,
+        dueDate: "24 August",
+        dueDateColor: "yellow" as const,
       },
       {
         id: 2,
-        title: "High-fidelity Wireframe",
-        progress: 0,
+        title: "High-fidelity Wireframes v2",
+        progress: 15,
         assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
         ],
-        assigneeCount: 98,
+        assigneeCount: 8,
         priority: "High Priority",
-        priorityColor: "red",
-        dueDate: "2 August",
-        dueDateColor: "yellow",
-      },
-      {
-        id: 3,
-        title: "Visual Design on Figma",
-        progress: 0,
-        assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
-        ],
-        assigneeCount: 98,
-        priority: "Urgent",
-        priorityColor: "purple",
-        dueDate: "2 August",
-        dueDateColor: "yellow",
+        priorityColor: "red" as const,
+        dueDate: "25 August",
+        dueDateColor: "yellow" as const,
       },
     ],
   },
@@ -76,49 +62,31 @@ const initialColumns = [
     isComplete: false,
     tasks: [
       {
-        id: 4,
+        id: 3,
         title: "Visual Design on Figma",
         progress: 75,
         assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
         ],
-        assigneeCount: 98,
+        assigneeCount: 14,
         priority: "High Priority",
-        priorityColor: "red",
-        dueDate: "2 August",
-        dueDateColor: "purple",
+        priorityColor: "red" as const,
+        dueDate: "26 August",
+        dueDateColor: "purple" as const,
       },
       {
-        id: 5,
-        title: "Website Design",
-        progress: 75,
+        id: 4,
+        title: "Teamio Landing Page Integration",
+        progress: 85,
         assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
         ],
-        assigneeCount: 98,
+        assigneeCount: 5,
         priority: "Urgent",
-        priorityColor: "purple",
-        dueDate: "2 August",
-        dueDateColor: "purple",
-      },
-      {
-        id: 6,
-        title: "Motion Design",
-        progress: 75,
-        assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
-        ],
-        assigneeCount: 98,
-        priority: "Urgent",
-        priorityColor: "purple",
-        dueDate: "2 August",
-        dueDateColor: "purple",
+        priorityColor: "purple" as const,
+        dueDate: "Today",
+        dueDateColor: "purple" as const,
       },
     ],
   },
@@ -129,332 +97,187 @@ const initialColumns = [
     isComplete: true,
     tasks: [
       {
-        id: 7,
-        title: "Design UX on secret project",
+        id: 5,
+        title: "Design System Tokens",
         progress: 100,
         assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
         ],
-        assigneeCount: 96,
+        assigneeCount: 16,
         priority: "Urgent",
-        priorityColor: "purple",
-        dueDate: "2 August",
-        dueDateColor: "green",
-      },
-      {
-        id: 8,
-        title: "Development",
-        progress: 100,
-        assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
-        ],
-        assigneeCount: 96,
-        priority: "High Priority",
-        priorityColor: "red",
-        dueDate: "2 August",
-        dueDateColor: "green",
-      },
-      {
-        id: 9,
-        title: "Project Done",
-        progress: 100,
-        assignees: [
-          "https://i.pravatar.cc/120?img=12",
-          "https://i.pravatar.cc/120?img=32",
-          "https://i.pravatar.cc/120?img=48",
-        ],
-        assigneeCount: 96,
-        priority: "Urgent",
-        priorityColor: "purple",
-        dueDate: "2 August",
-        dueDateColor: "green",
+        priorityColor: "purple" as const,
+        dueDate: "Completed",
+        dueDateColor: "green" as const,
       },
     ],
   },
 ];
 
-type ColumnsState = typeof initialColumns;
-
 const teamMembers = [
-  "https://i.pravatar.cc/120?img=12",
-  "https://i.pravatar.cc/120?img=32",
-  "https://i.pravatar.cc/120?img=48",
-  "https://i.pravatar.cc/120?img=55",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
 ];
 
 function RouteComponent() {
-  const [columns] = useState<ColumnsState>(initialColumns);
+  const [columns] = useState(initialColumns);
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
 
   return (
-    <div className="mt-3 space-y-0 font-lufga px-4 md:px-0">
-      <header className="mb-5 rounded-3xl border border-[#E7E9ED] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-        {/* Top Meta */}
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-xs font-medium text-[#8A9099]">
-            <IconCalendar className="size-4" />
-
-            <span>March 16, 2023</span>
-
-            <span className="text-[#D0D3D8]">•</span>
-
-            <IconClock className="size-4" />
-
-            <span>Updated 13 min ago</span>
+    <div className="mt-3 space-y-4 font-sans px-4 md:px-0">
+      
+      {/* Top Header Card */}
+      <header className="rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-xs">
+        {/* Meta Bar */}
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+            <IconCalendar className="h-4 w-4 text-indigo-600" />
+            <span>August 22, 2026</span>
+            <span className="text-slate-300">•</span>
+            <IconClock className="h-4 w-4 text-indigo-600" />
+            <span>Synced 2 mins ago</span>
           </div>
 
-          <button
-            type="button"
-            className="
-                flex items-center gap-2
-                rounded-lg
-                px-3 py-2
-                text-sm font-medium
-                text-[#6F767E]
-                transition
-                hover:bg-[#F4F5F7]
-                hover:text-[#1A1D1F]
-              "
-          >
-            <IconDots className="size-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-bold text-indigo-700 flex items-center gap-1">
+              <IconSparkles size={12} /> Teamio Active Board
+            </span>
+            <button
+              type="button"
+              className="flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-500 hover:bg-slate-100 transition"
+            >
+              <IconDots className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
-        {/* Project Information */}
+        {/* Project Header Info */}
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-4">
-            <div
-              className="
-                  flex size-12 shrink-0
-                  items-center justify-center
-                  rounded-xl
-                  bg-[#FFE600]
-                  shadow-sm
-                  md:size-14
-                "
-            >
-              <span className="text-lg font-black text-[#1A1D1F]">DS</span>
-            </div>
+            <Logo className="size-10 shrink-0" />
 
             <div>
-              <h1
-                className="
-                    text-2xl
-                    font-bold
-                    tracking-[-0.03em]
-                    text-[#1A1D1F]
-                    md:text-[30px]
-                  "
-              >
-                Design System
+              <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                Teamio Design System Sprint
               </h1>
-
-              <p className="mt-1 text-sm text-[#8A9099]">
-                Manage your design system tasks and project workflow.
+              <p className="mt-0.5 text-xs text-slate-500 font-medium">
+                Manage component specs, user flows, and product design tasks.
               </p>
             </div>
           </div>
 
-          {/* Team */}
+          {/* Team & New Task CTA */}
           <div className="flex items-center gap-4">
-            <div className="flex items-center">
-              {teamMembers.map((avatar, index) => (
+            <div className="flex items-center -space-x-2">
+              {teamMembers.map((avatar, idx) => (
                 <img
-                  key={index}
+                  key={idx}
                   src={avatar}
                   alt="Team member"
-                  className="
-                      size-9
-                      rounded-full
-                      border-2
-                      border-white
-                      object-cover
-                      shadow-sm
-                      -ml-2.5
-                      first:ml-0
-                      md:size-10
-                    "
+                  className="h-9 w-9 rounded-full border-2 border-white object-cover shadow-xs"
                 />
               ))}
 
               <button
                 type="button"
-                className="
-                    ml-2
-                    flex size-9
-                    items-center justify-center
-                    rounded-full
-                    border border-[#E4E6EB]
-                    bg-[#F4F5F7]
-                    text-[#6F767E]
-                    transition
-                    hover:bg-[#E4E6EB]
-                    md:size-10
-                  "
+                className="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 transition"
               >
-                <IconUsers className="size-4.5" />
+                <IconUsers className="h-4 w-4" />
               </button>
             </div>
 
             <button
               type="button"
               onClick={() => setIsAddTaskOpen(true)}
-              className="
-                  flex items-center gap-2
-                  rounded-xl
-                  bg-[#1A1D1F]
-                  px-4 py-2.5
-                  text-sm font-semibold
-                  text-white
-                  shadow-sm
-                  transition
-                  hover:bg-black
-                "
+              className="inline-flex items-center gap-2 rounded-2xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/20 hover:bg-indigo-700 transition"
             >
-              <IconPlus className="size-4.5" stroke={2.5} />
-              <span>New task</span>
+              <IconPlus className="h-4 w-4" stroke={2.5} />
+              <span>New Task</span>
             </button>
           </div>
         </div>
       </header>
-      <div className="animate-in fade-in duration-300">
-        <div className="overflow-x-auto pb-5">
-          <div
-            className="
-                  grid
-                  grid-cols-3
-                  gap-4
-                  xl:gap-5
-                "
-          >
-            {columns.map((column) => (
-              <div
-                key={column.id}
-                className="
-                      flex
-                      min-h-[500px]
-                      flex-col
-                      rounded-2xl
-                      border border-[#E7E9ED]
-                      bg-[#F1F3F5]
-                      p-3
-                      md:p-4
-                    "
-              >
-                {/* Column Header */}
-                <div className="mb-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    {column.id === "todo" ? (
-                      <div className="flex size-7 items-center justify-center rounded-lg bg-white shadow-sm">
-                        <IconCircle
-                          className="size-4 text-[#737982]"
-                          stroke={2}
-                        />
-                      </div>
-                    ) : column.id === "in-progress" ? (
-                      <div className="flex size-7 items-center justify-center rounded-lg bg-white shadow-sm">
-                        <div
-                          className="
-                                size-4
-                                rounded-full
-                                border-2
-                                border-[#737982]
-                                border-r-transparent
-                              "
-                        />
-                      </div>
-                    ) : (
-                      <div className="flex size-7 items-center justify-center rounded-lg bg-[#1A1D1F] text-white shadow-sm">
-                        <IconCheck className="size-4" stroke={3} />
-                      </div>
-                    )}
 
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <h2 className="text-sm font-bold text-[#1A1D1F] md:text-[15px]">
-                          {column.title}
-                        </h2>
-
-                        <span className="rounded-md bg-white px-1.5 py-0.5 text-[11px] font-semibold text-[#8A9099]">
-                          {column.tasks.length}
-                        </span>
-                      </div>
+      {/* Kanban Board Columns */}
+      <div className="overflow-x-auto pb-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-w-[800px]">
+          {columns.map((column) => (
+            <div
+              key={column.id}
+              className="flex min-h-[500px] flex-col rounded-3xl border border-slate-200 bg-slate-50/70 p-4"
+            >
+              {/* Column Header */}
+              <div className="mb-4 flex items-center justify-between pb-3 border-b border-slate-200/80">
+                <div className="flex items-center gap-2.5">
+                  {column.id === "todo" ? (
+                    <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-white shadow-xs text-slate-500">
+                      <IconCircle className="h-4 w-4" stroke={2} />
                     </div>
+                  ) : column.id === "in-progress" ? (
+                    <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-amber-50 text-amber-600 shadow-xs">
+                      <div className="h-3.5 w-3.5 rounded-full border-2 border-amber-600 border-r-transparent animate-spin" />
+                    </div>
+                  ) : (
+                    <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-xs">
+                      <IconCheck className="h-4 w-4" stroke={3} />
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-xs font-extrabold uppercase tracking-wider text-slate-800">
+                      {column.title}
+                    </h2>
+                    <span className="rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-bold text-slate-700">
+                      {column.tasks.length}
+                    </span>
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setIsAddTaskOpen(true)}
-                    className="
-                          flex size-8
-                          items-center justify-center
-                          rounded-lg
-                          text-[#737982]
-                          transition
-                          hover:bg-white
-                          hover:text-[#1A1D1F]
-                        "
-                    title="Add task"
-                  >
-                    <IconPlus className="size-4" stroke={2.5} />
-                  </button>
                 </div>
 
-                {/* Tasks */}
-                <div className="flex flex-1 flex-col gap-3">
-                  {column.tasks.map((task) => (
-                    <ManagementTaskCard
-                      key={task.id}
-                      title={task.title}
-                      progress={task.progress}
-                      assignees={task.assignees}
-                      totalAssignees={task.assigneeCount}
-                      priority={task.priority}
-                      priorityColor={task.priorityColor as any}
-                      dueDate={task.dueDate}
-                      dueDateColor={task.dueDateColor as any}
-                      variant={
-                        column.id === "todo"
-                          ? "todo"
-                          : column.id === "in-progress"
-                            ? "inprogress"
-                            : "complete"
-                      }
-                    />
-                  ))}
-
-                  {/* Add task */}
-                  <button
-                    type="button"
-                    onClick={() => setIsAddTaskOpen(true)}
-                    className="
-                          mt-auto
-                          flex w-full
-                          items-center justify-center
-                          gap-2
-                          rounded-xl
-                          border border-dashed
-                          border-[#D5D9DE]
-                          py-3
-                          text-xs font-semibold
-                          text-[#8A9099]
-                          transition
-                          hover:border-[#AEB4BC]
-                          hover:bg-white
-                          hover:text-[#1A1D1F]
-                        "
-                  >
-                    <IconPlus className="size-4" />
-                    Add task
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsAddTaskOpen(true)}
+                  className="flex h-7 w-7 items-center justify-center rounded-xl text-slate-400 hover:bg-white hover:text-slate-700 transition"
+                  title="Add task"
+                >
+                  <IconPlus className="h-4 w-4" stroke={2.5} />
+                </button>
               </div>
-            ))}
-          </div>
+
+              {/* Column Tasks */}
+              <div className="flex flex-1 flex-col gap-3">
+                {column.tasks.map((task) => (
+                  <ManagementTaskCard
+                    key={task.id}
+                    title={task.title}
+                    progress={task.progress}
+                    assignees={task.assignees}
+                    totalAssignees={task.assigneeCount}
+                    priority={task.priority}
+                    priorityColor={task.priorityColor}
+                    dueDate={task.dueDate}
+                    dueDateColor={task.dueDateColor}
+                    variant={
+                      column.id === "todo"
+                        ? "todo"
+                        : column.id === "in-progress"
+                          ? "inprogress"
+                          : "complete"
+                    }
+                  />
+                ))}
+
+                <button
+                  type="button"
+                  onClick={() => setIsAddTaskOpen(true)}
+                  className="mt-auto flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-slate-300 py-3 text-xs font-bold text-slate-500 hover:border-indigo-400 hover:bg-white hover:text-indigo-600 transition"
+                >
+                  <IconPlus className="h-4 w-4" /> Add Task
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

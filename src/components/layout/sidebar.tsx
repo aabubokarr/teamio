@@ -6,6 +6,7 @@ import {
   IconLayout2,
   IconSettings,
   IconSmartHome,
+  IconSparkles,
 } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import type React from "react";
@@ -15,26 +16,26 @@ export const sidebarStyles = tv({
   slots: {
     link: [
       "group relative flex items-center gap-3",
-      "h-11 w-full rounded-xl px-3",
-      "text-[14px] font-medium",
-      "text-gray-600",
+      "h-11 w-full rounded-2xl px-3",
+      "text-[13px] font-bold",
+      "text-slate-600",
       "transition-all duration-200",
-      "hover:bg-gray-100/80 hover:text-gray-950",
+      "hover:bg-slate-100 hover:text-slate-900",
     ],
 
     icon: [
       "size-[19px] shrink-0",
-      "text-gray-500",
+      "text-slate-500",
       "transition-colors duration-200",
-      "group-hover:text-gray-900",
+      "group-hover:text-indigo-600",
     ],
   },
 
   variants: {
     color: {
       red: {
-        link: ["text-rose-500", "hover:bg-rose-50 hover:text-rose-600"],
-        icon: "text-rose-400 group-hover:text-rose-500",
+        link: ["text-rose-600", "hover:bg-rose-50 hover:text-rose-700"],
+        icon: "text-rose-500 group-hover:text-rose-600",
       },
     },
   },
@@ -45,17 +46,17 @@ const { link, icon } = sidebarStyles();
 export const links = [
   {
     to: "/timeline",
-    title: "Timeline",
+    title: "Timeline Feed",
     icon: IconSmartHome,
   },
   {
     to: "/managements",
-    title: "Management",
+    title: "Task Board",
     icon: IconLayout2,
   },
   {
     to: "/messages",
-    title: "Messages",
+    title: "Team DMs",
     icon: IconBrandHipchat,
   },
   {
@@ -79,49 +80,45 @@ export function Sidebar() {
   return (
     <aside
       className="
-        [grid-column:left-sidebar]
+        col-[left-sidebar]
         hidden
         h-svh
         w-full
-        max-w-56
+        max-w-60
         overflow-hidden
         md:block
         sticky
         top-0
+        bg-white
+        font-sans
       "
     >
-      <div className="flex h-full flex-col px-4 py-3">
-        <div className="flex h-10 shrink-0 items-center px-2">
-          <Logo className="w-30" />
-        </div>
-        <nav className="mt-7 flex flex-col gap-1">
+      <div className="flex h-full flex-col p-4">
+        {/* Teamio Logo Header */}
+        <Link to="/" className="flex items-center gap-2.5 px-2 py-2 mb-6 group">
+          <Logo className="size-7 shrink-0 transition-transform group-hover:scale-105" />
+          <div>
+            <span className="text-lg font-black tracking-tight text-slate-900 block leading-none">
+              Teamio
+            </span>
+            <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider block mt-0.5">
+              Work & People
+            </span>
+          </div>
+        </Link>
+
+        {/* Navigation Links */}
+        <nav className="space-y-1">
           {links.map((node) => (
             <Link
               key={node.to}
               to={node.to}
               className={link()}
               activeProps={{
-                className: "bg-gray-950/[0.06] text-gray-950 font-semibold",
+                className: "bg-indigo-600 text-white font-bold shadow-md shadow-indigo-500/20 hover:bg-indigo-600 hover:text-white",
               }}
             >
-              {/* Active indicator */}
-              <span
-                className="
-                  absolute
-                  -left-4
-                  top-1/2
-                  h-5
-                  w-1
-                  -translate-y-1/2
-                  rounded-r-full
-                  bg-gray-950
-                  opacity-0
-                  transition-opacity
-                  group-data-[status=active]:opacity-100
-                "
-              />
-
-              <span className="grid size-8 shrink-0 place-items-center rounded-lg">
+              <span className="grid size-8 shrink-0 place-items-center rounded-xl">
                 <node.icon className={icon()} />
               </span>
 
@@ -129,17 +126,27 @@ export function Sidebar() {
             </Link>
           ))}
         </nav>
-        <div className="flex-1" />
-        <div className="shrink-0 space-y-2">
-          {/* Divider */}
-          <div className="mx-2 mb-3 h-px bg-gray-950/[0.07]" />
 
-          {/* Logout */}
+        <div className="flex-1" />
+
+        {/* Workspace Card */}
+        <div className="rounded-2xl bg-slate-50 border border-slate-200/80 p-3 mb-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1">
+              <IconSparkles size={12} /> Teamio Pro
+            </span>
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+          </div>
+          <p className="text-xs font-bold text-slate-900">Design System Hub</p>
+          <p className="text-[10px] text-slate-500 font-medium">8 Team Members Active</p>
+        </div>
+
+        {/* Logout */}
+        <div className="shrink-0 pt-2 border-t border-slate-100">
           <Link to="/login" className={link({ color: "red" })}>
-            <span className="grid size-8 shrink-0 place-items-center rounded-lg">
+            <span className="grid size-8 shrink-0 place-items-center rounded-xl">
               <IconLogout className={icon({ color: "red" })} />
             </span>
-
             <span>Logout</span>
           </Link>
         </div>

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { IconArrowRight, IconDots } from "@tabler/icons-react";
+import { IconArrowRight, IconDots, IconClock, IconUser, IconCheck } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 interface ManagementTaskCardProps {
@@ -42,153 +42,155 @@ export function ManagementTaskCard({
     };
   }, []);
 
+  const getPriorityStyle = (color: "purple" | "red" | "green" | "yellow") => {
+    switch (color) {
+      case "purple":
+        return "bg-indigo-50 text-indigo-700 border-indigo-200";
+      case "red":
+        return "bg-rose-50 text-rose-700 border-rose-200";
+      case "green":
+        return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "yellow":
+        return "bg-amber-50 text-amber-700 border-amber-200";
+    }
+  };
+
+  const getDueDateStyle = (color: "purple" | "red" | "green" | "yellow") => {
+    switch (color) {
+      case "green":
+        return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "yellow":
+        return "bg-amber-50 text-amber-700 border-amber-200";
+      case "purple":
+        return "bg-indigo-50 text-indigo-700 border-indigo-200";
+      case "red":
+        return "bg-rose-50 text-rose-700 border-rose-200";
+    }
+  };
+
   return (
-    <>
-      <div
-        className="bg-white rounded-[20px] p-5 shadow-[0px_4px_20px_rgba(0,0,0,0.02)] border border-transparent hover:border-gray-100 transition-all cursor-pointer group mb-4 last:mb-0"
-        onClick={onClick}
-      >
-        {/* Header */}
-        <div className="flex items-start justify-between mb-2">
-          <h3 className="text-[17px] font-bold text-black tracking-tight leading-snug">
-            {title}
-          </h3>
+    <div
+      onClick={onClick}
+      className="group relative rounded-2xl border border-slate-200/90 bg-white p-4.5 shadow-xs hover:shadow-md hover:border-indigo-300 transition-all duration-200 cursor-pointer mb-3 last:mb-0"
+    >
+      {/* Card Top Header */}
+      <div className="flex items-start justify-between gap-2 mb-2.5">
+        <h3 className="text-xs sm:text-sm font-bold text-slate-900 leading-snug group-hover:text-indigo-600 transition-colors">
+          {title}
+        </h3>
 
-          <div className="relative" ref={menuRef}>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsMenuOpen(!isMenuOpen);
-              }}
-              className="size-8 rounded-full border border-gray-200 flex items-center justify-center bg-white text-black hover:bg-gray-50 flex-shrink-0 -mt-1 -mr-1"
-            >
-              <IconDots className="size-4" stroke={2} />
-            </button>
-          </div>
-        </div>
-
-        {/* Progress & Assignees Container */}
-        <div className="bg-[#F8F9FA] rounded-[10px] p-2 pt-4 mb-2">
-          {/* Progress Bar */}
-          <div className="flex items-center gap-3 mb-1">
-            <div className="flex-1 h-2.5 bg-white rounded-full overflow-hidden">
-              <div
-                className={cn(
-                  "h-full rounded-full transition-all",
-                  progress > 0 ? "bg-[#22C55E]" : "bg-transparent"
-                )}
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-            <span className="text-xs font-semibold text-black">
-              {progress}%
-            </span>
-          </div>
-
-          {/* Assignees */}
-          <div className="flex items-center justify-between bg-white p-1 rounded-md drop-shadow-xs">
-            <div className="flex items-center gap-1">
-              <div className="size-3 rounded-full bg-black flex-shrink-0" />
-              <span className="text-xs text-black mr-1">Assign to</span>
-            </div>
-
-            <div className="flex items-center -space-x-2">
-              {assignees.map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt="User"
-                  className="size-7 rounded-full border border-white object-cover"
-                />
-              ))}
-              {totalAssignees > assignees.length && (
-                <div className="size-7 rounded-full border border-[#22C55E] bg-white flex items-center justify-center text-[9px] font-bold text-black z-10">
-                  {totalAssignees}+
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="flex items-center justify-between pl-1">
-          {/* Tags */}
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5">
-              <div
-                className={cn(
-                  "size-3 rounded-full",
-                  priorityColor === "purple"
-                    ? "bg-[#7C3AED]"
-                    : priorityColor === "red"
-                      ? "bg-[#EF4444]"
-                      : "bg-gray-400"
-                )}
-              />
-              <span
-                className={cn(
-                  "text-xs font-medium",
-                  priorityColor === "purple"
-                    ? "text-[#7C3AED]"
-                    : priorityColor === "red"
-                      ? "text-[#EF4444]"
-                      : "text-gray-600"
-                )}
-              >
-                {priority}
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div
-                className={cn(
-                  "size-3 rounded-full",
-                  dueDateColor === "green"
-                    ? "bg-[#15803D]"
-                    : dueDateColor === "yellow"
-                      ? "bg-[#EAB308]"
-                      : dueDateColor === "purple"
-                        ? "bg-[#7C3AED]"
-                        : "bg-gray-400"
-                )}
-              />
-              <span
-                className={cn(
-                  "text-xs font-medium",
-                  dueDateColor === "green"
-                    ? "text-[#15803D]"
-                    : dueDateColor === "yellow"
-                      ? "text-[#CA8A04]"
-                      : dueDateColor === "purple"
-                        ? "text-[#7C3AED]"
-                        : "text-gray-600"
-                )}
-              >
-                {dueDate}
-              </span>
-            </div>
-          </div>
-
-          {/* Button */}
+        <div className="relative shrink-0" ref={menuRef}>
           <button
-            className={cn(
-              "h-10 pl-5 pr-1.5 rounded-full flex items-center gap-2 transition-all font-bold text-[13px]",
-              variant === "todo"
-                ? "bg-black text-white"
-                : "bg-[#F3F4F6] text-black"
-            )}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMenuOpen(!isMenuOpen);
+            }}
+            className="flex h-7 w-7 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
           >
-            Open
-            <div
-              className={cn(
-                "size-7 rounded-full flex items-center justify-center",
-                variant === "todo" ? "bg-[#86EFAC] text-black" : "bg-[#4ADE80]"
-              )}
-            >
-              <IconArrowRight className="size-4 text-black" stroke={2.5} />
-            </div>
+            <IconDots size={16} />
           </button>
+
+          {/* Action Dropdown Menu */}
+          {isMenuOpen && (
+            <div className="absolute right-0 top-8 z-30 w-44 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl text-xs font-semibold text-slate-700 space-y-1">
+              <button
+                type="button"
+                className="flex w-full items-center gap-2 rounded-xl px-3 py-2 hover:bg-slate-100 transition"
+              >
+                <span>Edit Task</span>
+              </button>
+              <button
+                type="button"
+                className="flex w-full items-center gap-2 rounded-xl px-3 py-2 hover:bg-slate-100 transition"
+              >
+                <span>Move Column</span>
+              </button>
+              <button
+                type="button"
+                className="flex w-full items-center gap-2 rounded-xl px-3 py-2 hover:bg-rose-50 text-rose-600 transition"
+              >
+                <span>Delete Task</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
-    </>
+
+      {/* Progress & Assignees Section */}
+      <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3 mb-3 space-y-2.5">
+        {/* Progress Bar */}
+        <div className="flex items-center gap-2.5">
+          <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div
+              className={cn(
+                "h-full rounded-full transition-all duration-500",
+                progress === 100
+                  ? "bg-emerald-500"
+                  : progress > 0
+                    ? "bg-indigo-600"
+                    : "bg-slate-300"
+              )}
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <span className="text-[11px] font-bold text-slate-700 min-w-[32px] text-right">
+            {progress}%
+          </span>
+        </div>
+
+        {/* Assignees */}
+        <div className="flex items-center justify-between pt-1 text-xs">
+          <span className="flex items-center gap-1 text-[11px] font-medium text-slate-500">
+            <IconUser size={13} className="text-indigo-600" /> Team
+          </span>
+
+          <div className="flex items-center -space-x-2">
+            {assignees.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt="Assignee"
+                className="h-6 w-6 rounded-full border-2 border-white object-cover shadow-xs"
+              />
+            ))}
+            {totalAssignees > assignees.length && (
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100 text-[9px] font-bold text-indigo-700 ring-2 ring-white">
+                +{totalAssignees - assignees.length}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Card Footer: Priority, Due Date & Action Button */}
+      <div className="flex items-center justify-between pt-1 text-xs">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className={`rounded-md border px-2 py-0.5 text-[10px] font-bold ${getPriorityStyle(priorityColor)}`}>
+            {priority}
+          </span>
+          <span className={`flex items-center gap-1 rounded-md border px-2 py-0.5 text-[10px] font-bold ${getDueDateStyle(dueDateColor)}`}>
+            <IconClock size={11} /> {dueDate}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          className={cn(
+            "flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all shadow-xs",
+            variant === "complete"
+              ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
+              : "bg-indigo-600 text-white hover:bg-indigo-700"
+          )}
+        >
+          <span>{variant === "complete" ? "Done" : "Open"}</span>
+          {variant === "complete" ? (
+            <IconCheck size={14} />
+          ) : (
+            <IconArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+          )}
+        </button>
+      </div>
+    </div>
   );
 }
