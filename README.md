@@ -22,13 +22,13 @@ Welcome to the **Teamio** project! This README provides an overview of the proje
 
 ## About
 
-**Teamio** 
+**Teamio** is a modern social workspace designed for working professionals and teams. It combines interactive social timelines, messaging, task management, and calendar scheduling into a unified platform. Built for seamless collaboration, conversations, and work together.
 
 ## Features
 
 - Modern UI/UX
 - Responsive Design
-- Kanban System
+- Task Management
 - Realtime Messenger
 
 ## Installation
@@ -66,6 +66,7 @@ teamio/
 │   │   ├── hooks/               # Reusable custom React hooks
 │   │   ├── icons/               # Custom and reusable icons
 │   │   ├── layout/              # Application-wide layouts\navigation
+│   │   ├── teamio/              # Landing page sections
 │   │   ├── ui/                  # Generic UI components
 │   │   └── utilities/           # Shared UI utilities
 │   ├── features/                # Feature-specific logic and components
@@ -77,18 +78,19 @@ teamio/
 │   ├── routeTree.gen.ts         # Auto generated TanStack route tree
 │   └── styles.css               # Global styles and CSS variables
 ├── .cta.json                    # Configuration for the project's CTA
+├── .dockerignore                # Files and folders that docker ignores
 ├── .gitignore                   # Files and folders that Git ignores
 ├── biome.json                   # Biome formatter and linter config
+├── docker-compose.yml           # Docker compose file
 ├── Dockerfile                   # Instructions for Docker
 ├── index.html                   # Main HTML document
 ├── LICENSE                      # Project's license
-├── loader.json                  # Loader/tooling configuration
+├── nginx.conf                   # Docker configuration
 ├── package-lock.json            # Locks exact NPM dependency versions
 ├── package.json                 # Project metadata and dependencies
 ├── README.md                    # Project documentation and instructions
 ├── tsconfig.json                # Typescript configuration file
-├── vite.config.js               # Vite configuration file
-└── 
+└── vite.config.js               # Vite configuration file
 ```
 
 ## Contributors

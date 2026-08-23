@@ -68,7 +68,6 @@ export function EcosystemSection() {
   return (
     <section className="py-20 bg-white overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-600 mb-4">
@@ -76,11 +75,13 @@ export function EcosystemSection() {
           </div>
 
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
-            One place for your <span className="text-indigo-600">entire workday.</span>
+            One place for your{" "}
+            <span className="text-indigo-600">entire workday.</span>
           </h2>
 
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
-            Everything you need to connect and get work done seamlessly flows in a single feedback loop:
+            Everything you need to connect and get work done seamlessly flows in
+            a single feedback loop:
           </p>
 
           <div className="mt-4 inline-flex flex-wrap items-center justify-center gap-2 font-bold text-xs sm:text-sm text-indigo-900 bg-indigo-50/80 px-4 py-2 rounded-2xl border border-indigo-100">
@@ -114,29 +115,42 @@ export function EcosystemSection() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className={`text-xs font-extrabold uppercase tracking-widest ${isActive ? "text-cyan-400" : "text-slate-400"}`}>
+                    <span
+                      className={`text-xs font-extrabold uppercase tracking-widest ${isActive ? "text-cyan-400" : "text-slate-400"}`}
+                    >
                       {item.step}
                     </span>
-                    <span className={`flex h-10 w-10 items-center justify-center rounded-2xl ${
-                      isActive ? "bg-white/10 text-cyan-300" : item.bgLight
-                    }`}>
+                    <span
+                      className={`flex h-10 w-10 items-center justify-center rounded-2xl ${
+                        isActive ? "bg-white/10 text-cyan-300" : item.bgLight
+                      }`}
+                    >
                       <Icon size={20} />
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-black tracking-tight mb-1">{item.title}</h3>
-                  <p className={`text-xs font-semibold mb-3 ${isActive ? "text-indigo-200" : item.textColor}`}>
+                  <h3 className="text-lg font-black tracking-tight mb-1">
+                    {item.title}
+                  </h3>
+                  <p
+                    className={`text-xs font-semibold mb-3 ${isActive ? "text-indigo-200" : item.textColor}`}
+                  >
                     {item.subtitle}
                   </p>
 
-                  <p className={`text-xs leading-relaxed ${isActive ? "text-slate-300" : "text-slate-500"}`}>
+                  <p
+                    className={`text-xs leading-relaxed ${isActive ? "text-slate-300" : "text-slate-500"}`}
+                  >
                     {item.desc}
                   </p>
                 </div>
 
                 <div className="mt-6 pt-3 border-t border-current/10 flex items-center justify-between text-[11px] font-bold">
                   <span>{isActive ? "Active Phase" : "Select Phase"}</span>
-                  <IconArrowRight size={14} className={isActive ? "text-cyan-400" : "text-slate-400"} />
+                  <IconArrowRight
+                    size={14}
+                    className={isActive ? "text-cyan-400" : "text-slate-400"}
+                  />
                 </div>
               </div>
             );
@@ -146,17 +160,20 @@ export function EcosystemSection() {
         {/* Central Ecosystem Hub Graphic Banner */}
         <div className="mt-12 rounded-3xl bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 p-8 text-white shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl" />
-          
+
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="max-w-xl text-center md:text-left">
               <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
-                Phase {workflowSteps[activeStep].step}: {workflowSteps[activeStep].title}
+                Phase {workflowSteps[activeStep].step}:{" "}
+                {workflowSteps[activeStep].title}
               </span>
               <h3 className="text-2xl font-extrabold mt-1">
                 {workflowSteps[activeStep].subtitle}
               </h3>
               <p className="text-sm text-indigo-100/80 mt-2 leading-relaxed">
-                {workflowSteps[activeStep].desc} All changes and updates are instantly reflected across your team's workspace feed and task dashboards.
+                {workflowSteps[activeStep].desc} All changes and updates are
+                instantly reflected across your team's workspace feed and task
+                dashboards.
               </p>
             </div>
 
@@ -169,7 +186,6 @@ export function EcosystemSection() {
             </a>
           </div>
         </div>
-
       </div>
     </section>
   );

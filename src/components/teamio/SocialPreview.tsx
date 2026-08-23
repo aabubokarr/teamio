@@ -64,8 +64,13 @@ export function SocialPreview() {
             </span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] text-slate-400 font-semibold">Sync 100%</span>
-            <IconDots size={16} className="text-slate-400 cursor-pointer hover:text-slate-600" />
+            <span className="text-[10px] text-slate-400 font-semibold">
+              Sync 100%
+            </span>
+            <IconDots
+              size={16}
+              className="text-slate-400 cursor-pointer hover:text-slate-600"
+            />
           </div>
         </div>
 
@@ -84,13 +89,19 @@ export function SocialPreview() {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <h4 className="text-xs font-extrabold text-slate-900">Maya Rahman</h4>
+                <h4 className="text-xs font-extrabold text-slate-900">
+                  Maya Rahman
+                </h4>
                 <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-600">
                   Product Designer
                 </span>
               </div>
               <p className="text-[10px] text-slate-400">
-                Posted in <span className="font-semibold text-indigo-600">#product-launch</span> · 24m ago
+                Posted in{" "}
+                <span className="font-semibold text-indigo-600">
+                  #product-launch
+                </span>{" "}
+                · 24m ago
               </p>
             </div>
           </div>
@@ -105,8 +116,9 @@ export function SocialPreview() {
         {/* Post Content */}
         <div className="mt-2.5">
           <p className="text-xs leading-relaxed text-slate-800 font-normal">
-            Just wrapped up our product launch 🚀 Proud of what the team accomplished this week!
-            The new designs are live and fully integrated with our task boards.
+            Just wrapped up our product launch 🚀 Proud of what the team
+            accomplished this week! The new designs are live and fully
+            integrated with our task boards.
           </p>
 
           {/* Connected Work Banner */}
@@ -132,7 +144,9 @@ export function SocialPreview() {
               <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-400" />
               <span className="font-semibold text-xs">Teamio v2.0 Sprint</span>
             </div>
-            <span className="text-[10px] text-slate-300">4 Assets Attached</span>
+            <span className="text-[10px] text-slate-300">
+              4 Assets Attached
+            </span>
           </div>
         </div>
 
@@ -191,7 +205,10 @@ export function SocialPreview() {
         {replies.length > 0 && (
           <div className="mt-2 space-y-1 pt-1">
             {replies.map((reply, idx) => (
-              <div key={idx} className="flex items-start gap-1.5 rounded-lg bg-slate-50 p-2 text-[11px]">
+              <div
+                key={idx}
+                className="flex items-start gap-1.5 rounded-lg bg-slate-50 p-2 text-[11px]"
+              >
                 <span className="font-bold text-slate-900">You:</span>
                 <span className="text-slate-700">{reply}</span>
               </div>
@@ -201,7 +218,10 @@ export function SocialPreview() {
 
         {/* Quick Reply Form */}
         {showReplyInput && (
-          <form onSubmit={handleSendReply} className="mt-2 flex items-center gap-1.5">
+          <form
+            onSubmit={handleSendReply}
+            className="mt-2 flex items-center gap-1.5"
+          >
             <input
               type="text"
               value={quickReply}
@@ -237,7 +257,9 @@ export function SocialPreview() {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between">
-              <p className="text-[11px] font-bold text-slate-900 truncate">Sarah Wilson</p>
+              <p className="text-[11px] font-bold text-slate-900 truncate">
+                Sarah Wilson
+              </p>
               <span className="text-[9px] text-slate-400">Now</span>
             </div>
             <p className="mt-0.5 text-[10px] text-slate-600 truncate">
@@ -259,7 +281,9 @@ export function SocialPreview() {
             <IconChecklist size={14} />
           </span>
           <div className="min-w-0">
-            <p className="text-[11px] font-bold text-slate-900 truncate">Website launch</p>
+            <p className="text-[11px] font-bold text-slate-900 truncate">
+              Website launch
+            </p>
             <p className="text-[9px] text-slate-500">4 tasks remaining</p>
           </div>
         </div>
@@ -277,11 +301,15 @@ export function SocialPreview() {
       >
         <div className="flex items-center gap-2.5">
           <div className="flex h-8 w-8 flex-col items-center justify-center rounded-lg bg-indigo-600 text-white font-bold shrink-0">
-            <span className="text-[8px] uppercase tracking-wider font-medium opacity-80 leading-none">TODAY</span>
+            <span className="text-[8px] uppercase tracking-wider font-medium opacity-80 leading-none">
+              TODAY
+            </span>
             <span className="text-xs leading-none mt-0.5">15</span>
           </div>
           <div className="min-w-0">
-            <p className="text-[11px] font-bold text-slate-900 truncate">Product Sync</p>
+            <p className="text-[11px] font-bold text-slate-900 truncate">
+              Product Sync
+            </p>
             <p className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5">
               <IconCalendar size={11} className="text-indigo-600" /> 3:00 PM
             </p>

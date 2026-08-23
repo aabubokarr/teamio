@@ -127,7 +127,6 @@ function RouteComponent() {
 
   return (
     <div className="mt-3 space-y-4 font-sans px-4 md:px-0">
-      
       {/* Top Header Card */}
       <header className="rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-xs">
         {/* Meta Bar */}
@@ -202,11 +201,11 @@ function RouteComponent() {
 
       {/* Kanban Board Columns */}
       <div className="overflow-x-auto pb-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-w-[800px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-w-200">
           {columns.map((column) => (
             <div
               key={column.id}
-              className="flex min-h-[500px] flex-col rounded-3xl border border-slate-200 bg-slate-50/70 p-4"
+              className="flex min-h-125 flex-col rounded-3xl border border-slate-200 bg-slate-50/70 p-4"
             >
               {/* Column Header */}
               <div className="mb-4 flex items-center justify-between pb-3 border-b border-slate-200/80">

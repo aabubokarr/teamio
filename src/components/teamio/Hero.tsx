@@ -1,4 +1,9 @@
-import { IconArrowRight, IconPlayerPlay, IconSparkles, IconStar } from "@tabler/icons-react";
+import {
+  IconArrowRight,
+  IconPlayerPlay,
+  IconSparkles,
+  IconStar,
+} from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { SocialPreview } from "./SocialPreview";
 
@@ -18,7 +23,6 @@ export function Hero() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-          
           {/* Left Hero Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -47,32 +51,43 @@ export function Hero() {
                   viewBox="0 0 100 6"
                   preserveAspectRatio="none"
                 >
-                  <path d="M0 4 Q 50 0 100 4" stroke="currentColor" strokeWidth="2.5" fill="none" />
+                  <path
+                    d="M0 4 Q 50 0 100 4"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    fill="none"
+                  />
                 </svg>
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="mt-2.5 text-xs sm:text-sm lg:text-base leading-relaxed text-slate-600 max-w-lg mx-auto lg:mx-0">
-              Teamio brings your people, conversations, tasks, and schedule together in one social workspace built for the way modern teams work.
+              Teamio brings your people, conversations, tasks, and schedule
+              together in one social workspace built for the way modern teams
+              work.
             </p>
 
             {/* Supporting Messaging Pillars */}
             <div className="mt-2.5 flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[11px] font-semibold text-slate-500">
               <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" /> Connect
+                <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />{" "}
+                Connect
               </span>
               <span>•</span>
               <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" /> Collaborate
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />{" "}
+                Collaborate
               </span>
               <span>•</span>
               <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-purple-500" /> Organize
+                <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />{" "}
+                Organize
               </span>
               <span>•</span>
               <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Get things done
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Get
+                things done
               </span>
             </div>
 
@@ -83,7 +98,10 @@ export function Hero() {
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-bold text-white shadow-md shadow-slate-900/20 transition-all duration-200 hover:bg-indigo-600 hover:shadow-indigo-500/25"
               >
                 <span>Get Started</span>
-                <IconArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                <IconArrowRight
+                  size={16}
+                  className="transition-transform group-hover:translate-x-1"
+                />
               </a>
 
               <a
@@ -91,7 +109,11 @@ export function Hero() {
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/90 px-5 py-3 text-sm font-bold text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50"
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                  <IconPlayerPlay size={12} className="ml-0.5" fill="currentColor" />
+                  <IconPlayerPlay
+                    size={12}
+                    className="ml-0.5"
+                    fill="currentColor"
+                  />
                 </span>
                 <span>See how Teamio works</span>
               </a>
@@ -114,10 +136,15 @@ export function Hero() {
                   {[...Array(5)].map((_, i) => (
                     <IconStar key={i} size={13} fill="currentColor" />
                   ))}
-                  <span className="ml-1 text-xs font-bold text-slate-900">4.9/5</span>
+                  <span className="ml-1 text-xs font-bold text-slate-900">
+                    4.9/5
+                  </span>
                 </div>
                 <p className="text-[11px] text-slate-500">
-                  Trusted by <span className="font-bold text-slate-800">50,000+ professionals</span>
+                  Trusted by{" "}
+                  <span className="font-bold text-slate-800">
+                    50,000+ professionals
+                  </span>
                 </p>
               </div>
             </div>
@@ -127,7 +154,6 @@ export function Hero() {
           <div className="lg:col-span-6 mt-4 lg:mt-0">
             <SocialPreview />
           </div>
-
         </div>
       </div>
     </section>

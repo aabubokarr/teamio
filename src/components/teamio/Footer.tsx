@@ -2,13 +2,12 @@ import {
   IconBrandTwitter,
   IconBrandLinkedin,
   IconBrandGithub,
-  IconHeart,
 } from "@tabler/icons-react";
 import { Logo } from "@/components/icons/logo";
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200/80 bg-slate-50/50 pt-14 pb-8">
+    <footer className="border-t border-slate-200/80 bg-slate-50/50 pt-14 pb-8 font-sans">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-12 gap-8 pb-12 border-b border-slate-200/80">
           {/* Brand Column (4 cols) */}

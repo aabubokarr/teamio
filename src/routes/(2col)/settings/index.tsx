@@ -22,7 +22,9 @@ export const Route = createFileRoute("/_2col-layout/settings")({
 });
 
 function RouteComponent() {
-  const [activeTab, setActiveTab] = useState<"profile" | "privacy" | "notifications" | "security">("profile");
+  const [activeTab, setActiveTab] = useState<
+    "profile" | "privacy" | "notifications" | "security"
+  >("profile");
 
   // Form State
   const [name, setName] = useState("Maya Rahman");
@@ -30,7 +32,9 @@ function RouteComponent() {
   const [email, setEmail] = useState("maya.rahman@teamio.com");
   const [website, setWebsite] = useState("https://teamio.com/maya");
   const [location, setLocation] = useState("San Francisco, CA");
-  const [bio, setBio] = useState("Designing simple experiences for complex workplace problems.");
+  const [bio, setBio] = useState(
+    "Designing simple experiences for complex workplace problems."
+  );
 
   // Preferences Toggles
   const [publicTimeline, setPublicTimeline] = useState(true);
@@ -60,7 +64,8 @@ function RouteComponent() {
             Account Settings & Preferences
           </h1>
           <p className="text-xs text-slate-500 font-medium">
-            Manage your professional identity, privacy permissions, and notifications.
+            Manage your professional identity, privacy permissions, and
+            notifications.
           </p>
         </div>
 
@@ -86,21 +91,42 @@ function RouteComponent() {
               <IconCheck size={18} className="text-emerald-600" />
               Settings successfully saved to Teamio cloud!
             </span>
-            <span className="text-[11px] text-emerald-600 font-medium">Just now</span>
+            <span className="text-[11px] text-emerald-600 font-medium">
+              Just now
+            </span>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Main Settings Grid */}
       <div className="grid grid-cols-12 gap-6 items-start">
-        
         {/* Left Tabs Menu (3 columns) */}
         <div className="col-span-12 md:col-span-4 rounded-3xl border border-slate-200 bg-white p-3 shadow-xs space-y-1">
           {[
-            { id: "profile", label: "Profile Information", icon: IconUser, desc: "Avatar, name, bio & role" },
-            { id: "privacy", label: "Privacy & Visibility", icon: IconAdjustmentsHorizontal, desc: "Timeline & calendar rules" },
-            { id: "notifications", label: "Notifications", icon: IconBellRinging, desc: "Email digests & push alerts" },
-            { id: "security", label: "Security & 2FA", icon: IconShieldLock, desc: "Password & active devices" },
+            {
+              id: "profile",
+              label: "Profile Information",
+              icon: IconUser,
+              desc: "Avatar, name, bio & role",
+            },
+            {
+              id: "privacy",
+              label: "Privacy & Visibility",
+              icon: IconAdjustmentsHorizontal,
+              desc: "Timeline & calendar rules",
+            },
+            {
+              id: "notifications",
+              label: "Notifications",
+              icon: IconBellRinging,
+              desc: "Email digests & push alerts",
+            },
+            {
+              id: "security",
+              label: "Security & 2FA",
+              icon: IconShieldLock,
+              desc: "Password & active devices",
+            },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -115,14 +141,20 @@ function RouteComponent() {
                     : "text-slate-700 hover:bg-slate-50"
                 }`}
               >
-                <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
-                  isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"
-                }`}>
+                <span
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
+                    isActive
+                      ? "bg-white/20 text-white"
+                      : "bg-slate-100 text-slate-600"
+                  }`}
+                >
                   <Icon size={18} />
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-xs font-bold truncate">{tab.label}</p>
-                  <p className={`text-[10px] truncate ${isActive ? "text-indigo-100" : "text-slate-400"}`}>
+                  <p
+                    className={`text-[10px] truncate ${isActive ? "text-indigo-100" : "text-slate-400"}`}
+                  >
                     {tab.desc}
                   </p>
                 </div>
@@ -133,13 +165,16 @@ function RouteComponent() {
 
         {/* Right Settings Form Content (8 columns) */}
         <div className="col-span-12 md:col-span-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xs">
-          
           {/* TAB 1: PROFILE INFORMATION */}
           {activeTab === "profile" && (
             <form onSubmit={handleSave} className="space-y-6">
               <div className="pb-4 border-b border-slate-100">
-                <h2 className="text-base font-bold text-slate-900">Personal Information</h2>
-                <p className="text-xs text-slate-500">Update how colleagues and team members see you on Teamio.</p>
+                <h2 className="text-base font-bold text-slate-900">
+                  Personal Information
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Update how colleagues and team members see you on Teamio.
+                </p>
               </div>
 
               {/* Avatar Section */}
@@ -159,15 +194,21 @@ function RouteComponent() {
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900">{name}</h3>
-                  <p className="text-xs text-indigo-600 font-semibold">{role}</p>
-                  <p className="text-[11px] text-slate-400 mt-1">Recommended 400x400px JPG or PNG.</p>
+                  <p className="text-xs text-indigo-600 font-semibold">
+                    {role}
+                  </p>
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    Recommended 400x400px JPG or PNG.
+                  </p>
                 </div>
               </div>
 
               {/* Fields Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Full Name
+                  </label>
                   <input
                     type="text"
                     value={name}
@@ -177,7 +218,9 @@ function RouteComponent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Job Title / Role</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Job Title / Role
+                  </label>
                   <input
                     type="text"
                     value={role}
@@ -187,9 +230,14 @@ function RouteComponent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Work Email</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Work Email
+                  </label>
                   <div className="relative">
-                    <IconMail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <IconMail
+                      size={16}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                    />
                     <input
                       type="email"
                       value={email}
@@ -200,9 +248,14 @@ function RouteComponent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Location</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Location
+                  </label>
                   <div className="relative">
-                    <IconMapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <IconMapPin
+                      size={16}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                    />
                     <input
                       type="text"
                       value={location}
@@ -214,9 +267,14 @@ function RouteComponent() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Personal Website</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">
+                  Personal Website
+                </label>
                 <div className="relative">
-                  <IconLink size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <IconLink
+                    size={16}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                  />
                   <input
                     type="url"
                     value={website}
@@ -227,7 +285,9 @@ function RouteComponent() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Short Bio</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">
+                  Short Bio
+                </label>
                 <textarea
                   rows={3}
                   value={bio}
@@ -251,15 +311,24 @@ function RouteComponent() {
           {activeTab === "privacy" && (
             <div className="space-y-6">
               <div className="pb-4 border-b border-slate-100">
-                <h2 className="text-base font-bold text-slate-900">Privacy Rules</h2>
-                <p className="text-xs text-slate-500">Control who can view your posts and calendar availability.</p>
+                <h2 className="text-base font-bold text-slate-900">
+                  Privacy Rules
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Control who can view your posts and calendar availability.
+                </p>
               </div>
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-200">
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900">Public Timeline Feed Discoverability</h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">Allow verified professionals across Teamio to see your work posts.</p>
+                    <h4 className="text-xs font-bold text-slate-900">
+                      Public Timeline Feed Discoverability
+                    </h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      Allow verified professionals across Teamio to see your
+                      work posts.
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -268,16 +337,23 @@ function RouteComponent() {
                       publicTimeline ? "bg-indigo-600" : "bg-slate-300"
                     }`}
                   >
-                    <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                      publicTimeline ? "translate-x-5" : "translate-x-0"
-                    }`} />
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                        publicTimeline ? "translate-x-5" : "translate-x-0"
+                      }`}
+                    />
                   </button>
                 </div>
 
                 <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-200">
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900">Calendar Free/Busy Only Mode</h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">Hide meeting titles from external colleagues while showing open slots.</p>
+                    <h4 className="text-xs font-bold text-slate-900">
+                      Calendar Free/Busy Only Mode
+                    </h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      Hide meeting titles from external colleagues while showing
+                      open slots.
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -286,9 +362,11 @@ function RouteComponent() {
                       calendarBusyOnly ? "bg-indigo-600" : "bg-slate-300"
                     }`}
                   >
-                    <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                      calendarBusyOnly ? "translate-x-5" : "translate-x-0"
-                    }`} />
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                        calendarBusyOnly ? "translate-x-5" : "translate-x-0"
+                      }`}
+                    />
                   </button>
                 </div>
               </div>
@@ -299,15 +377,24 @@ function RouteComponent() {
           {activeTab === "notifications" && (
             <div className="space-y-6">
               <div className="pb-4 border-b border-slate-100">
-                <h2 className="text-base font-bold text-slate-900">Notification Preferences</h2>
-                <p className="text-xs text-slate-500">Tune alert channels so you stay informed without losing focus.</p>
+                <h2 className="text-base font-bold text-slate-900">
+                  Notification Preferences
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Tune alert channels so you stay informed without losing focus.
+                </p>
               </div>
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-200">
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900">Daily Digest Email</h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">Receive a summary of task updates and timeline activity every morning.</p>
+                    <h4 className="text-xs font-bold text-slate-900">
+                      Daily Digest Email
+                    </h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      Receive a summary of task updates and timeline activity
+                      every morning.
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -316,16 +403,23 @@ function RouteComponent() {
                       emailDigest ? "bg-indigo-600" : "bg-slate-300"
                     }`}
                   >
-                    <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                      emailDigest ? "translate-x-5" : "translate-x-0"
-                    }`} />
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                        emailDigest ? "translate-x-5" : "translate-x-0"
+                      }`}
+                    />
                   </button>
                 </div>
 
                 <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-200">
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900">Push Notifications for Mentions & Tasks</h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">Instant alerts when someone tags `@maya` or assigns a task to you.</p>
+                    <h4 className="text-xs font-bold text-slate-900">
+                      Push Notifications for Mentions & Tasks
+                    </h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      Instant alerts when someone tags `@maya` or assigns a task
+                      to you.
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -334,9 +428,11 @@ function RouteComponent() {
                       pushMentions ? "bg-indigo-600" : "bg-slate-300"
                     }`}
                   >
-                    <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                      pushMentions ? "translate-x-5" : "translate-x-0"
-                    }`} />
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                        pushMentions ? "translate-x-5" : "translate-x-0"
+                      }`}
+                    />
                   </button>
                 </div>
               </div>
@@ -347,8 +443,12 @@ function RouteComponent() {
           {activeTab === "security" && (
             <div className="space-y-6">
               <div className="pb-4 border-b border-slate-100">
-                <h2 className="text-base font-bold text-slate-900">Security & Credentials</h2>
-                <p className="text-xs text-slate-500">Manage 2FA, active login sessions, and password security.</p>
+                <h2 className="text-base font-bold text-slate-900">
+                  Security & Credentials
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Manage 2FA, active login sessions, and password security.
+                </p>
               </div>
 
               <div className="space-y-4">
@@ -358,8 +458,12 @@ function RouteComponent() {
                       <IconKey size={18} />
                     </span>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900">Two-Factor Authentication (2FA)</h4>
-                      <p className="text-[11px] text-slate-500 mt-0.5">Require TOTP authenticator code at sign-in.</p>
+                      <h4 className="text-xs font-bold text-slate-900">
+                        Two-Factor Authentication (2FA)
+                      </h4>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        Require TOTP authenticator code at sign-in.
+                      </p>
                     </div>
                   </div>
                   <button
@@ -369,22 +473,33 @@ function RouteComponent() {
                       twoFactor ? "bg-indigo-600" : "bg-slate-300"
                     }`}
                   >
-                    <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                      twoFactor ? "translate-x-5" : "translate-x-0"
-                    }`} />
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                        twoFactor ? "translate-x-5" : "translate-x-0"
+                      }`}
+                    />
                   </button>
                 </div>
 
                 {/* Active Sessions */}
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                  <h4 className="text-xs font-bold text-slate-900">Active Work Sessions</h4>
-                  
+                  <h4 className="text-xs font-bold text-slate-900">
+                    Active Work Sessions
+                  </h4>
+
                   <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200/60">
                     <div className="flex items-center gap-2">
-                      <IconDeviceDesktop size={16} className="text-indigo-600" />
+                      <IconDeviceDesktop
+                        size={16}
+                        className="text-indigo-600"
+                      />
                       <div>
-                        <p className="font-bold text-slate-800">MacBook Pro (16-inch)</p>
-                        <p className="text-[10px] text-slate-400">San Francisco · Current Session</p>
+                        <p className="font-bold text-slate-800">
+                          MacBook Pro (16-inch)
+                        </p>
+                        <p className="text-[10px] text-slate-400">
+                          San Francisco · Current Session
+                        </p>
                       </div>
                     </div>
                     <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
@@ -396,11 +511,18 @@ function RouteComponent() {
                     <div className="flex items-center gap-2">
                       <IconDeviceMobile size={16} className="text-slate-400" />
                       <div>
-                        <p className="font-bold text-slate-800">iPhone 15 Pro</p>
-                        <p className="text-[10px] text-slate-400">San Francisco · Active 2h ago</p>
+                        <p className="font-bold text-slate-800">
+                          iPhone 15 Pro
+                        </p>
+                        <p className="text-[10px] text-slate-400">
+                          San Francisco · Active 2h ago
+                        </p>
                       </div>
                     </div>
-                    <button type="button" className="text-[10px] font-bold text-rose-600 hover:underline">
+                    <button
+                      type="button"
+                      className="text-[10px] font-bold text-rose-600 hover:underline"
+                    >
                       Revoke
                     </button>
                   </div>
@@ -409,8 +531,12 @@ function RouteComponent() {
                 {/* Danger Zone */}
                 <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
                   <div>
-                    <h4 className="text-xs font-bold text-rose-600">Delete Account</h4>
-                    <p className="text-[11px] text-slate-400">Permanently remove your Teamio profile and workspace data.</p>
+                    <h4 className="text-xs font-bold text-rose-600">
+                      Delete Account
+                    </h4>
+                    <p className="text-[11px] text-slate-400">
+                      Permanently remove your Teamio profile and workspace data.
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -422,7 +548,6 @@ function RouteComponent() {
               </div>
             </div>
           )}
-
         </div>
       </div>
     </div>

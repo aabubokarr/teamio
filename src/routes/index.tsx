@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getTitle } from "@/lib/utils";
 import { Navbar } from "@/components/teamio/Navbar";
 import { Hero } from "@/components/teamio/Hero";
 import { StatsSection } from "@/components/teamio/StatsSection";
@@ -18,18 +17,6 @@ import { Footer } from "@/components/teamio/Footer";
 
 export const Route = createFileRoute("/_layout/")({
   component: Page,
-  head: () => ({
-    meta: [
-      {
-        title: getTitle("Teamio — Where work meets people"),
-      },
-      {
-        name: "description",
-        content:
-          "Teamio brings your people, conversations, tasks, and schedule together in one social workspace built for modern teams and working professionals.",
-      },
-    ],
-  }),
 });
 
 function Page() {

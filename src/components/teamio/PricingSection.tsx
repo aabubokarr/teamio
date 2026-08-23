@@ -21,7 +21,8 @@ export function PricingSection() {
       ],
       cta: "Get Started Free",
       popular: false,
-      buttonStyle: "border border-slate-300 bg-white text-slate-900 hover:bg-slate-50",
+      buttonStyle:
+        "border border-slate-300 bg-white text-slate-900 hover:bg-slate-50",
     },
     {
       name: "Pro",
@@ -41,7 +42,8 @@ export function PricingSection() {
       ],
       cta: "Start 14-Day Free Trial",
       popular: true,
-      buttonStyle: "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-500/25",
+      buttonStyle:
+        "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-500/25",
     },
     {
       name: "Enterprise",
@@ -67,7 +69,6 @@ export function PricingSection() {
   return (
     <section id="pricing" className="py-20 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-600 mb-4">
@@ -75,11 +76,13 @@ export function PricingSection() {
           </div>
 
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
-            Simple, transparent <span className="text-indigo-600">pricing.</span>
+            Simple, transparent{" "}
+            <span className="text-indigo-600">pricing.</span>
           </h2>
 
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
-            Start for free as an individual or bring your whole team onboard. No hidden fees.
+            Start for free as an individual or bring your whole team onboard. No
+            hidden fees.
           </p>
 
           {/* Monthly / Annual Toggle */}
@@ -121,14 +124,20 @@ export function PricingSection() {
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className={`rounded-full px-3 py-1 text-xs font-bold ${
-                    plan.popular ? "bg-indigo-100 text-indigo-700" : "bg-slate-200 text-slate-700"
-                  }`}>
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-bold ${
+                      plan.popular
+                        ? "bg-indigo-100 text-indigo-700"
+                        : "bg-slate-200 text-slate-700"
+                    }`}
+                  >
                     {plan.badge}
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-black text-slate-900">{plan.name}</h3>
+                <h3 className="text-2xl font-black text-slate-900">
+                  {plan.name}
+                </h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-500 min-h-[36px]">
                   {plan.desc}
                 </p>
@@ -138,13 +147,18 @@ export function PricingSection() {
                   <span className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900">
                     {annual ? plan.priceAnnual : plan.priceMonthly}
                   </span>
-                  <span className="text-xs text-slate-400 font-medium">/{plan.period}</span>
+                  <span className="text-xs text-slate-400 font-medium">
+                    /{plan.period}
+                  </span>
                 </div>
 
                 {/* Feature List */}
                 <div className="mt-8 space-y-3 pt-6 border-t border-slate-200/70">
                   {plan.features.map((feat, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
+                    <div
+                      key={idx}
+                      className="flex items-start gap-2.5 text-xs text-slate-700"
+                    >
                       <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 mt-0.5">
                         <IconCheck size={11} />
                       </span>
@@ -165,7 +179,6 @@ export function PricingSection() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

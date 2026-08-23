@@ -1,4 +1,9 @@
-import { IconUsers, IconBuildingSkyscraper, IconChecklist, IconBolt } from "@tabler/icons-react";
+import {
+  IconUsers,
+  IconBuildingSkyscraper,
+  IconChecklist,
+  IconBolt,
+} from "@tabler/icons-react";
 import { motion } from "motion/react";
 
 export function StatsSection() {

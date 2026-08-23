@@ -8,13 +8,23 @@ import {
   IconSend,
   IconSparkles,
 } from "@tabler/icons-react";
+import { getTitle } from "@/lib/utils";
 
 export const Route = createFileRoute("/_2col-layout/timeline")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      {
+        title: getTitle("Timeline"),
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {
-  const [activeFilter, setActiveFilter] = useState<"all" | "updates" | "sprints">("all");
+  const [activeFilter, setActiveFilter] = useState<
+    "all" | "updates" | "sprints"
+  >("all");
   const [postText, setPostText] = useState("");
   const [createdPosts, setCreatedPosts] = useState<any[]>([]);
 
@@ -34,7 +44,8 @@ function RouteComponent() {
         name: "Maya Rahman",
         handle: "mayarahman",
         role: "Lead Product Designer @ Teamio",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+        avatar:
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
         location: "San Francisco, CA",
       },
       timeAgo: "Just now",
@@ -51,7 +62,6 @@ function RouteComponent() {
 
   return (
     <div className="mt-3 space-y-4 font-sans px-4 md:px-0 pb-12 max-w-2xl mx-auto">
-      
       {/* Top Post Composer */}
       <div className="rounded-3xl border border-slate-200/90 bg-white p-5 shadow-xs">
         <div className="flex items-center gap-3 mb-3">
@@ -144,7 +154,6 @@ function RouteComponent() {
         <Post id="1" />
         <Post id="2" />
       </div>
-
     </div>
   );
 }

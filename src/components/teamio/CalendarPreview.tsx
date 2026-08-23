@@ -75,7 +75,6 @@ export function CalendarPreview() {
   return (
     <section id="calendar" className="py-20 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-600 mb-4">
@@ -87,28 +86,37 @@ export function CalendarPreview() {
           </h2>
 
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
-            Teamio includes a calendar for planning work. Meetings, project deadlines, and team events are directly connected to your tasks and social updates.
+            Teamio includes a calendar for planning work. Meetings, project
+            deadlines, and team events are directly connected to your tasks and
+            social updates.
           </p>
         </div>
 
         {/* Interactive Calendar Experience */}
         <div className="mt-12 mx-auto max-w-5xl rounded-3xl border border-slate-200 bg-slate-50/50 p-6 sm:p-8 shadow-lg grid grid-cols-12 gap-6">
-          
           {/* Left Mini Calendar Widget (4 cols) */}
           <div className="col-span-12 md:col-span-5 bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-slate-900 text-sm">August 2026</span>
+                  <span className="font-bold text-slate-900 text-sm">
+                    August 2026
+                  </span>
                   <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-bold text-indigo-600">
                     Today
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <button type="button" className="p-1 rounded-lg hover:bg-slate-100 text-slate-500">
+                  <button
+                    type="button"
+                    className="p-1 rounded-lg hover:bg-slate-100 text-slate-500"
+                  >
                     <IconChevronLeft size={16} />
                   </button>
-                  <button type="button" className="p-1 rounded-lg hover:bg-slate-100 text-slate-500">
+                  <button
+                    type="button"
+                    className="p-1 rounded-lg hover:bg-slate-100 text-slate-500"
+                  >
                     <IconChevronRight size={16} />
                   </button>
                 </div>
@@ -116,7 +124,13 @@ export function CalendarPreview() {
 
               {/* Days Grid Header */}
               <div className="grid grid-cols-7 text-center text-[11px] font-bold text-slate-400 mb-2">
-                <span>SU</span><span>MO</span><span>TU</span><span>WE</span><span>TH</span><span>FR</span><span>SA</span>
+                <span>SU</span>
+                <span>MO</span>
+                <span>TU</span>
+                <span>WE</span>
+                <span>TH</span>
+                <span>FR</span>
+                <span>SA</span>
               </div>
 
               {/* Calendar Days */}
@@ -161,14 +175,15 @@ export function CalendarPreview() {
 
           {/* Right Detailed Schedule Feed (7 cols) */}
           <div className="col-span-12 md:col-span-7 bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col">
-            
             {/* Schedule Header */}
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
               <div>
                 <h3 className="text-base font-bold text-slate-900">
                   Agenda for August {selectedDay}, 2026
                 </h3>
-                <p className="text-xs text-slate-400">4 scheduled sessions • 3 tasks linked</p>
+                <p className="text-xs text-slate-400">
+                  4 scheduled sessions • 3 tasks linked
+                </p>
               </div>
 
               {/* View toggle buttons */}
@@ -177,7 +192,9 @@ export function CalendarPreview() {
                   type="button"
                   onClick={() => setViewMode("day")}
                   className={`rounded-lg px-3 py-1 font-semibold transition ${
-                    viewMode === "day" ? "bg-white text-slate-900 shadow-xs" : "text-slate-500"
+                    viewMode === "day"
+                      ? "bg-white text-slate-900 shadow-xs"
+                      : "text-slate-500"
                   }`}
                 >
                   Day
@@ -186,7 +203,9 @@ export function CalendarPreview() {
                   type="button"
                   onClick={() => setViewMode("week")}
                   className={`rounded-lg px-3 py-1 font-semibold transition ${
-                    viewMode === "week" ? "bg-white text-slate-900 shadow-xs" : "text-slate-500"
+                    viewMode === "week"
+                      ? "bg-white text-slate-900 shadow-xs"
+                      : "text-slate-500"
                   }`}
                 >
                   Week
@@ -204,7 +223,9 @@ export function CalendarPreview() {
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${event.pillColor}`}>
+                        <span
+                          className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${event.pillColor}`}
+                        >
                           {event.category}
                         </span>
                         {event.isLive && (
@@ -213,9 +234,12 @@ export function CalendarPreview() {
                           </span>
                         )}
                       </div>
-                      <h4 className="text-sm font-bold text-slate-900">{event.title}</h4>
+                      <h4 className="text-sm font-bold text-slate-900">
+                        {event.title}
+                      </h4>
                       <p className="text-xs text-slate-600 flex items-center gap-1.5 mt-1">
-                        <IconClock size={14} className="text-indigo-600" /> {event.time}
+                        <IconClock size={14} className="text-indigo-600" />{" "}
+                        {event.time}
                       </p>
                     </div>
 
@@ -257,9 +281,7 @@ export function CalendarPreview() {
                 </div>
               ))}
             </div>
-
           </div>
-
         </div>
       </div>
     </section>

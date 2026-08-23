@@ -21,7 +21,8 @@ const conversations = [
     id: 1,
     name: "Sarah Wilson",
     role: "Product Manager",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80",
     lastMessage: "The new design is ready for review.",
     time: "Today, 10:42 AM",
     timestamp: "10:42 AM",
@@ -32,7 +33,8 @@ const conversations = [
     id: 2,
     name: "Alex Carter",
     role: "Frontend Engineer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
     lastMessage: "I'm prepping the component library now.",
     time: "Today, 10:45 AM",
     timestamp: "10:45 AM",
@@ -43,7 +45,8 @@ const conversations = [
     id: 3,
     name: "Maya Rahman",
     role: "Product Designer",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
     lastMessage: "Updated the Figma prototype frames! ✨",
     time: "Yesterday",
     timestamp: "4:15 PM",
@@ -54,7 +57,8 @@ const conversations = [
     id: 4,
     name: "David Chen",
     role: "Tech Lead",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80",
     lastMessage: "Auth microservice deployment completed.",
     time: "Yesterday",
     timestamp: "2:30 PM",
@@ -87,7 +91,8 @@ const initialMessages = [
     sender: "Alex Carter",
     time: "10:45 AM",
     type: "text",
-    content: "I'm already prepping the component library. Should we create a task to track the QA phase?",
+    content:
+      "I'm already prepping the component library. Should we create a task to track the QA phase?",
     isOwn: false,
     reactions: "🚀 👍",
     showDate: true,
@@ -104,9 +109,7 @@ function RouteComponent() {
 
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  const selectedUser = conversations.find(
-    (c) => c.id === selectedConversation
-  );
+  const selectedUser = conversations.find((c) => c.id === selectedConversation);
 
   const getCurrentTime = () => {
     const now = new Date();
@@ -160,13 +163,13 @@ function RouteComponent() {
 
   useEffect(() => {
     if (!messagesContainerRef.current) return;
-    messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    messagesContainerRef.current.scrollTop =
+      messagesContainerRef.current.scrollHeight;
   }, [messages, selectedConversation]);
 
   return (
     <div className="mt-3 h-[calc(100vh-90px)] overflow-hidden font-sans">
       <div className="mx-auto grid h-full w-full gap-4 lg:grid-cols-[340px_minmax(0,1fr)]">
-        
         {/* Sidebar */}
         <aside
           className={`flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-xs ${
@@ -195,7 +198,10 @@ function RouteComponent() {
 
             {/* Search */}
             <div className="relative">
-              <IconSearch size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              <IconSearch
+                size={16}
+                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              />
               <input
                 type="search"
                 placeholder="Search DMs & channels..."
@@ -231,7 +237,9 @@ function RouteComponent() {
 
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-1">
-                      <p className={`truncate text-xs font-bold ${isSelected ? "text-indigo-950" : "text-slate-900"}`}>
+                      <p
+                        className={`truncate text-xs font-bold ${isSelected ? "text-indigo-950" : "text-slate-900"}`}
+                      >
                         {c.name}
                       </p>
                       <span className="text-[10px] text-slate-400 font-medium">
@@ -251,7 +259,8 @@ function RouteComponent() {
           <div className="border-t border-slate-100 p-3 bg-slate-50/60">
             <div className="flex items-center justify-between text-xs text-slate-500">
               <span className="flex items-center gap-1.5 font-medium">
-                <span className="h-2 w-2 rounded-full bg-emerald-500" /> Active in Teamio
+                <span className="h-2 w-2 rounded-full bg-emerald-500" /> Active
+                in Teamio
               </span>
               <span className="font-bold text-indigo-600">4 Online</span>
             </div>
@@ -289,16 +298,26 @@ function RouteComponent() {
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">{selectedUser.name}</h3>
-                    <p className="text-[11px] text-indigo-600 font-medium">{selectedUser.role}</p>
+                    <h3 className="text-sm font-bold text-slate-900">
+                      {selectedUser.name}
+                    </h3>
+                    <p className="text-[11px] text-indigo-600 font-medium">
+                      {selectedUser.role}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-1.5 text-slate-400">
-                  <button type="button" className="p-2 rounded-xl hover:bg-slate-100 hover:text-slate-700">
+                  <button
+                    type="button"
+                    className="p-2 rounded-xl hover:bg-slate-100 hover:text-slate-700"
+                  >
                     <IconPhone size={18} />
                   </button>
-                  <button type="button" className="p-2 rounded-xl hover:bg-slate-100 hover:text-slate-700">
+                  <button
+                    type="button"
+                    className="p-2 rounded-xl hover:bg-slate-100 hover:text-slate-700"
+                  >
                     <IconVideo size={18} />
                   </button>
                 </div>
@@ -312,7 +331,8 @@ function RouteComponent() {
                   className="mx-4 mt-3 rounded-xl bg-emerald-50 border border-emerald-200 p-2.5 text-xs text-emerald-800 flex items-center justify-between"
                 >
                   <span className="flex items-center gap-2 font-medium">
-                    <IconCheck size={16} className="text-emerald-600" /> Message converted to Teamio Kanban Task!
+                    <IconCheck size={16} className="text-emerald-600" /> Message
+                    converted to Teamio Kanban Task!
                   </span>
                 </motion.div>
               )}
@@ -335,10 +355,18 @@ function RouteComponent() {
                       />
                     )}
 
-                    <div className={`max-w-[75%] ${msg.isOwn ? "text-right" : "text-left"}`}>
-                      <div className={`flex items-center gap-2 mb-1 ${msg.isOwn ? "justify-end" : ""}`}>
-                        <span className="text-[11px] font-bold text-slate-800">{msg.sender}</span>
-                        <span className="text-[10px] text-slate-400">{msg.time}</span>
+                    <div
+                      className={`max-w-[75%] ${msg.isOwn ? "text-right" : "text-left"}`}
+                    >
+                      <div
+                        className={`flex items-center gap-2 mb-1 ${msg.isOwn ? "justify-end" : ""}`}
+                      >
+                        <span className="text-[11px] font-bold text-slate-800">
+                          {msg.sender}
+                        </span>
+                        <span className="text-[10px] text-slate-400">
+                          {msg.time}
+                        </span>
                       </div>
 
                       <div
@@ -377,7 +405,10 @@ function RouteComponent() {
                   }}
                   className="flex items-center gap-2"
                 >
-                  <button type="button" className="p-2 rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200">
+                  <button
+                    type="button"
+                    className="p-2 rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200"
+                  >
                     <IconPhoto size={18} />
                   </button>
 
@@ -406,7 +437,6 @@ function RouteComponent() {
             </div>
           )}
         </section>
-
       </div>
     </div>
   );

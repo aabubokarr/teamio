@@ -134,7 +134,7 @@ export function ManagementTaskCard({
               style={{ width: `${progress}%` }}
             />
           </div>
-          <span className="text-[11px] font-bold text-slate-700 min-w-[32px] text-right">
+          <span className="text-[11px] font-bold text-slate-700 min-w-8 text-right">
             {progress}%
           </span>
         </div>

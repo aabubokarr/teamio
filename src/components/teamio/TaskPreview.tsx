@@ -29,7 +29,8 @@ export function TaskPreview() {
       column: "In Progress",
       priority: "High",
       assignee: "Maya Rahman",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
       dueDate: "Aug 24",
       comments: 12,
       label: "UI/UX",
@@ -41,7 +42,8 @@ export function TaskPreview() {
       column: "To Do",
       priority: "Medium",
       assignee: "Sarah Wilson",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
       dueDate: "Aug 25",
       comments: 4,
       label: "Growth",
@@ -52,7 +54,8 @@ export function TaskPreview() {
       column: "Backlog",
       priority: "Low",
       assignee: "David Chen",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
       dueDate: "Aug 28",
       comments: 2,
       label: "Strategy",
@@ -63,7 +66,8 @@ export function TaskPreview() {
       column: "Review",
       priority: "High",
       assignee: "Alex Carter",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
       dueDate: "Today",
       comments: 9,
       label: "Backend",
@@ -75,20 +79,17 @@ export function TaskPreview() {
       column: "Done",
       priority: "Medium",
       assignee: "Maya Rahman",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
       dueDate: "Aug 20",
       comments: 28,
       label: "Release",
     },
   ]);
 
-  const columns: Array<"Backlog" | "To Do" | "In Progress" | "Review" | "Done"> = [
-    "Backlog",
-    "To Do",
-    "In Progress",
-    "Review",
-    "Done",
-  ];
+  const columns: Array<
+    "Backlog" | "To Do" | "In Progress" | "Review" | "Done"
+  > = ["Backlog", "To Do", "In Progress", "Review", "Done"];
 
   const moveTaskNext = (taskId: string) => {
     setTasks(
@@ -115,9 +116,11 @@ export function TaskPreview() {
   };
 
   return (
-    <section id="tasks" className="py-20 bg-slate-50/70 border-y border-slate-200/60">
+    <section
+      id="tasks"
+      className="py-20 bg-slate-50/70 border-y border-slate-200/60"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100/80 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 mb-4">
@@ -125,11 +128,14 @@ export function TaskPreview() {
           </div>
 
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
-            Turn conversations into <span className="text-indigo-600">action.</span>
+            Turn conversations into{" "}
+            <span className="text-indigo-600">action.</span>
           </h2>
 
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
-            Teamio bridges social discussions and real execution. When someone mentions an idea in a timeline post or chat message, turn it into a tracked task with one click.
+            Teamio bridges social discussions and real execution. When someone
+            mentions an idea in a timeline post or chat message, turn it into a
+            tracked task with one click.
           </p>
         </div>
 
@@ -141,9 +147,15 @@ export function TaskPreview() {
             </span>
             <div className="text-xs sm:text-sm">
               <p className="font-semibold text-slate-800">
-                “Sarah mentioned a task in a conversation: <span className="font-bold text-slate-900">Review landing page copy</span>”
+                “Sarah mentioned a task in a conversation:{" "}
+                <span className="font-bold text-slate-900">
+                  Review landing page copy
+                </span>
+                ”
               </p>
-              <p className="text-slate-500 text-xs mt-0.5">Click to convert chat context into tracked project item</p>
+              <p className="text-slate-500 text-xs mt-0.5">
+                Click to convert chat context into tracked project item
+              </p>
             </div>
           </div>
           <button
@@ -174,7 +186,10 @@ export function TaskPreview() {
                         {colTasks.length}
                       </span>
                     </div>
-                    <button type="button" className="text-slate-400 hover:text-slate-600">
+                    <button
+                      type="button"
+                      className="text-slate-400 hover:text-slate-600"
+                    >
                       <IconPlus size={16} />
                     </button>
                   </div>
@@ -195,7 +210,9 @@ export function TaskPreview() {
                         >
                           {/* Priority & Label */}
                           <div className="flex items-center justify-between mb-2">
-                            <span className={`rounded-md border px-2 py-0.5 text-[10px] font-bold ${getPriorityBadge(task.priority)}`}>
+                            <span
+                              className={`rounded-md border px-2 py-0.5 text-[10px] font-bold ${getPriorityBadge(task.priority)}`}
+                            >
                               {task.priority}
                             </span>
                             <span className="text-[10px] font-medium text-slate-400">
@@ -246,7 +263,6 @@ export function TaskPreview() {
             })}
           </div>
         </div>
-
       </div>
     </section>
   );

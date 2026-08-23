@@ -22,7 +22,7 @@ export function AddTaskModal({ isOpen, onOpenChange }: AddTaskModalProps) {
     <DialogTrigger isOpen={isOpen} onOpenChange={onOpenChange}>
       <div style={{ display: "none" }} />
       <ModalOverlay className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm flex items-center justify-center p-4">
-        <Modal className="bg-white rounded-[24px] shadow-2xl w-full max-w-[800px] overflow-hidden outline-none">
+        <Modal className="bg-white rounded-3xl shadow-2xl w-full max-w-200 overflow-hidden outline-none">
           <Dialog className="outline-none flex flex-col p-6 md:p-10 max-h-[90vh] overflow-y-auto custom-scrollbar" aria-label="Add Task">
             {({ close }) => (
               <div className="space-y-6 md:space-y-8">
@@ -54,7 +54,7 @@ export function AddTaskModal({ isOpen, onOpenChange }: AddTaskModalProps) {
                          <input 
                             type="text" 
                             placeholder="Type your Task Name" 
-                            className="w-full h-[48px] md:h-[52px] bg-[#F9F9F9] rounded-[12px] px-4 text-[14px] md:text-[15px] text-[#1A1D1F] placeholder:text-[#747786] outline-none focus:ring-1 focus:ring-gray-200 transition"
+                            className="w-full h-12 md:h-13 bg-[#F9F9F9] rounded-xl px-4 text-[14px] md:text-[15px] text-[#1A1D1F] placeholder:text-[#747786] outline-none focus:ring-1 focus:ring-gray-200 transition"
                             value={formData.taskName}
                             onChange={e => setFormData({...formData, taskName: e.target.value})}
                          />
@@ -64,7 +64,7 @@ export function AddTaskModal({ isOpen, onOpenChange }: AddTaskModalProps) {
                      <div className="space-y-2">
                          <label className="text-[14px] md:text-[15px] font-bold text-[#1A1D1F]">Tag</label>
                          <div className="relative">
-                             <button className="w-full h-[48px] md:h-[52px] bg-[#F9F9F9] rounded-[12px] px-4 flex items-center justify-between transition hover:bg-gray-100">
+                             <button className="w-full h-12 md:h-13 bg-[#F9F9F9] rounded-xl px-4 flex items-center justify-between transition hover:bg-gray-100">
                                  <div className="flex items-center gap-2">
                                      <div className="size-3.5 rounded-full bg-[#FFD600]" /> {/* Yellow for To-do */}
                                      <span className="text-[14px] md:text-[15px] font-medium text-[#1A1D1F]">To-do</span>
@@ -80,7 +80,7 @@ export function AddTaskModal({ isOpen, onOpenChange }: AddTaskModalProps) {
                          <input 
                             type="text" 
                             placeholder="Type Name" 
-                            className="w-full h-[48px] md:h-[52px] bg-[#F9F9F9] rounded-[12px] px-4 text-[14px] md:text-[15px] text-[#1A1D1F] placeholder:text-[#747786] outline-none focus:ring-1 focus:ring-gray-200 transition"
+                            className="w-full h-12 md:h-13 bg-[#F9F9F9] rounded-xl px-4 text-[14px] md:text-[15px] text-[#1A1D1F] placeholder:text-[#747786] outline-none focus:ring-1 focus:ring-gray-200 transition"
                             value={formData.assignTo}
                             onChange={e => setFormData({...formData, assignTo: e.target.value})}
                          />
@@ -90,7 +90,7 @@ export function AddTaskModal({ isOpen, onOpenChange }: AddTaskModalProps) {
                      <div className="space-y-2">
                          <label className="text-[14px] md:text-[15px] font-bold text-[#1A1D1F]">Project</label>
                          <div className="relative">
-                             <button className="w-full h-[48px] md:h-[52px] bg-[#F9F9F9] rounded-[12px] px-4 flex items-center justify-between transition hover:bg-gray-100">
+                             <button className="w-full h-12 md:h-13 bg-[#F9F9F9] rounded-xl px-4 flex items-center justify-between transition hover:bg-gray-100">
                                  <div className="flex items-center gap-2">
                                      <div className="size-6 bg-white border border-black rounded-full flex items-center justify-center shrink-0">
                                          <span className="font-bold text-[8px] tracking-tighter">Sh</span>
@@ -106,7 +106,7 @@ export function AddTaskModal({ isOpen, onOpenChange }: AddTaskModalProps) {
                      <div className="space-y-2">
                          <label className="text-[14px] md:text-[15px] font-bold text-[#1A1D1F]">Priority</label>
                           <div className="relative">
-                             <div className="w-full h-[48px] md:h-[52px] bg-[#F9F9F9] rounded-[12px] px-4 flex items-center justify-between cursor-text">
+                             <div className="w-full h-12 md:h-13 bg-[#F9F9F9] rounded-xl px-4 flex items-center justify-between cursor-text">
                                  <span className="text-[14px] md:text-[15px] font-medium text-[#747786]">High Priority</span>
                              </div>
                          </div>
@@ -122,14 +122,14 @@ export function AddTaskModal({ isOpen, onOpenChange }: AddTaskModalProps) {
                      <textarea 
                         placeholder="Type your Description" 
                         rows={5}
-                        className="w-full bg-[#F9F9F9] rounded-[12px] p-4 text-[14px] md:text-[15px] text-[#1A1D1F] placeholder:text-[#747786] outline-none focus:ring-1 focus:ring-gray-200 transition resize-none"
+                        className="w-full bg-[#F9F9F9] rounded-xl p-4 text-[14px] md:text-[15px] text-[#1A1D1F] placeholder:text-[#747786] outline-none focus:ring-1 focus:ring-gray-200 transition resize-none"
                         value={formData.description}
                         onChange={e => setFormData({...formData, description: e.target.value})}
                      />
                  </div>
 
                  {/* Create Task Button */}
-                 <button className="w-full h-[52px] md:h-[56px] bg-black text-white rounded-[14px] text-[15px] md:text-[16px] font-bold hover:bg-gray-800 transition shadow-lg shadow-black/5">
+                 <button className="w-full h-13 md:h-14 bg-black text-white rounded-[14px] text-[15px] md:text-[16px] font-bold hover:bg-gray-800 transition shadow-lg shadow-black/5">
                      Create Task
                  </button>
               </div>

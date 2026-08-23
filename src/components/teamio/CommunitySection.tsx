@@ -27,7 +27,8 @@ export function CommunitySection() {
       name: "Maya Rahman",
       role: "Product Designer",
       company: "Teamio",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
       bio: "Designing simple experiences for complex problems.",
       skills: ["Design Systems", "Figma", "User Research", "Prototyping"],
       connections: 420,
@@ -39,7 +40,8 @@ export function CommunitySection() {
       name: "Alex Carter",
       role: "Frontend Engineer",
       company: "Teamio",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
       bio: "Building fast, responsive web applications with React & Tailwind.",
       skills: ["React", "TypeScript", "Tailwind CSS", "Motion"],
       connections: 580,
@@ -51,7 +53,8 @@ export function CommunitySection() {
       name: "Sarah Wilson",
       role: "Product Manager",
       company: "Teamio",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
       bio: "Connecting people, roadmap vision, and execution strategy.",
       skills: ["Product Strategy", "Roadmaps", "Agile", "Analytics"],
       connections: 890,
@@ -63,7 +66,8 @@ export function CommunitySection() {
       name: "David Chen",
       role: "Tech Lead",
       company: "Teamio",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
       bio: "Architecting real-time collaboration engines and microservices.",
       skills: ["System Architecture", "Node.js", "WebSockets", "DevOps"],
       connections: 640,
@@ -89,9 +93,11 @@ export function CommunitySection() {
   };
 
   return (
-    <section id="community" className="py-20 bg-slate-50/70 border-y border-slate-200/60">
+    <section
+      id="community"
+      className="py-20 bg-slate-50/70 border-y border-slate-200/60"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-indigo-100/80 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-800 mb-4">
@@ -103,7 +109,8 @@ export function CommunitySection() {
           </h2>
 
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
-            Build your professional identity with a rich Teamio profile. Connect with colleagues, creators, and teams who share your passions.
+            Build your professional identity with a rich Teamio profile. Connect
+            with colleagues, creators, and teams who share your passions.
           </p>
         </div>
 
@@ -127,9 +134,15 @@ export function CommunitySection() {
                     <span className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full bg-emerald-500 ring-2 ring-white" />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-slate-900">{profile.name}</h3>
-                    <p className="text-xs text-indigo-600 font-semibold">{profile.role}</p>
-                    <p className="text-[11px] text-slate-400">{profile.company}</p>
+                    <h3 className="text-base font-bold text-slate-900">
+                      {profile.name}
+                    </h3>
+                    <p className="text-xs text-indigo-600 font-semibold">
+                      {profile.role}
+                    </p>
+                    <p className="text-[11px] text-slate-400">
+                      {profile.company}
+                    </p>
                   </div>
                 </div>
 
@@ -153,10 +166,16 @@ export function CommunitySection() {
                 {/* Stats */}
                 <div className="flex items-center justify-between py-2 border-t border-slate-100 text-xs text-slate-500 mb-4">
                   <span>
-                    <strong className="text-slate-900">{profile.connections}</strong> connections
+                    <strong className="text-slate-900">
+                      {profile.connections}
+                    </strong>{" "}
+                    connections
                   </span>
                   <span>
-                    <strong className="text-slate-900">{profile.projects}</strong> projects
+                    <strong className="text-slate-900">
+                      {profile.projects}
+                    </strong>{" "}
+                    projects
                   </span>
                 </div>
               </div>
@@ -193,7 +212,6 @@ export function CommunitySection() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

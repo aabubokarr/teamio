@@ -191,7 +191,7 @@ function RouteComponent() {
 
                     {/* Calendar Dropdown */}
                     {showCalendarDropdown && (
-                      <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl p-5 z-50 w-[300px] border border-slate-200">
+                      <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl p-5 z-50 w-75 border border-slate-200">
                         <div className="flex items-center justify-between mb-4">
                           <span className="text-sm font-bold text-slate-900">
                             {calendarMonthName}
@@ -241,30 +241,41 @@ function RouteComponent() {
                             </button>
                           ))}
 
-                          {Array.from({ length: calendarDaysInMonth }, (_, i) => {
-                            const day = i + 1;
-                            const date = new Date(calendarYear, calendarMonth, day);
-                            const isToday = date.toDateString() === new Date().toDateString();
-                            const isSelected = selectedStartDate?.toDateString() === date.toDateString();
+                          {Array.from(
+                            { length: calendarDaysInMonth },
+                            (_, i) => {
+                              const day = i + 1;
+                              const date = new Date(
+                                calendarYear,
+                                calendarMonth,
+                                day
+                              );
+                              const isToday =
+                                date.toDateString() ===
+                                new Date().toDateString();
+                              const isSelected =
+                                selectedStartDate?.toDateString() ===
+                                date.toDateString();
 
-                            return (
-                              <button
-                                key={day}
-                                type="button"
-                                onClick={() => handleDateSelect(date)}
-                                className={cn(
-                                  "h-8 w-8 text-xs rounded-lg font-bold transition",
-                                  isSelected
-                                    ? "bg-indigo-600 text-white shadow-xs"
-                                    : isToday
-                                      ? "bg-cyan-100 text-cyan-900"
-                                      : "text-slate-700 hover:bg-slate-100"
-                                )}
-                              >
-                                {day}
-                              </button>
-                            );
-                          })}
+                              return (
+                                <button
+                                  key={day}
+                                  type="button"
+                                  onClick={() => handleDateSelect(date)}
+                                  className={cn(
+                                    "h-8 w-8 text-xs rounded-lg font-bold transition",
+                                    isSelected
+                                      ? "bg-indigo-600 text-white shadow-xs"
+                                      : isToday
+                                        ? "bg-cyan-100 text-cyan-900"
+                                        : "text-slate-700 hover:bg-slate-100"
+                                  )}
+                                >
+                                  {day}
+                                </button>
+                              );
+                            }
+                          )}
 
                           {calendarLeadingDays.map((day) => (
                             <button
@@ -338,7 +349,7 @@ function RouteComponent() {
           {trailingDays.map((day) => (
             <div
               key={`prev-${day}`}
-              className="min-h-[80px] p-3 border-r border-b border-slate-100 bg-slate-50/40 text-slate-300 text-xs font-bold"
+              className="min-h-20 p-3 border-r border-b border-slate-100 bg-slate-50/40 text-slate-300 text-xs font-bold"
             >
               {day}
             </div>
@@ -348,13 +359,14 @@ function RouteComponent() {
             const day = i + 1;
             const date = new Date(year, month, day);
             const isToday = date.toDateString() === new Date().toDateString();
-            const isSelected = selectedStartDate?.toDateString() === date.toDateString();
+            const isSelected =
+              selectedStartDate?.toDateString() === date.toDateString();
 
             return (
               <div
                 key={day}
                 className={cn(
-                  "min-h-[80px] p-2.5 border-r border-b border-slate-100 bg-white flex flex-col justify-between transition-colors hover:bg-indigo-50/30",
+                  "min-h-20 p-2.5 border-r border-b border-slate-100 bg-white flex flex-col justify-between transition-colors hover:bg-indigo-50/30",
                   isToday && "bg-indigo-50/50"
                 )}
               >
@@ -372,7 +384,9 @@ function RouteComponent() {
                     {day}
                   </span>
                   {isToday && (
-                    <span className="text-[9px] font-bold text-indigo-600 uppercase">Today</span>
+                    <span className="text-[9px] font-bold text-indigo-600 uppercase">
+                      Today
+                    </span>
                   )}
                 </div>
 
@@ -388,7 +402,7 @@ function RouteComponent() {
           {leadingDays.map((day) => (
             <div
               key={`next-${day}`}
-              className="min-h-[80px] p-3 border-r border-b border-slate-100 bg-slate-50/40 text-slate-300 text-xs font-bold"
+              className="min-h-20 p-3 border-r border-b border-slate-100 bg-slate-50/40 text-slate-300 text-xs font-bold"
             >
               {day}
             </div>

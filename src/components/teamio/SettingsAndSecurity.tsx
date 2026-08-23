@@ -8,7 +8,9 @@ import {
 } from "@tabler/icons-react";
 
 export function SettingsAndSecurity() {
-  const [activeTab, setActiveTab] = useState<"privacy" | "notifications" | "security">("privacy");
+  const [activeTab, setActiveTab] = useState<
+    "privacy" | "notifications" | "security"
+  >("privacy");
   const [privacyPublic, setPrivacyPublic] = useState(true);
   const [notifyEmail, setNotifyEmail] = useState(true);
   const [notifyMention, setNotifyMention] = useState(true);
@@ -17,7 +19,6 @@ export function SettingsAndSecurity() {
   return (
     <section className="py-20 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-700 mb-4">
@@ -25,17 +26,19 @@ export function SettingsAndSecurity() {
           </div>
 
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
-            Your work. Your people. <span className="text-indigo-600">Your control.</span>
+            Your work. Your people.{" "}
+            <span className="text-indigo-600">Your control.</span>
           </h2>
 
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
-            Designed specifically for working professionals and enterprise teams, Teamio keeps your data safe with enterprise encryption and granular privacy controls.
+            Designed specifically for working professionals and enterprise
+            teams, Teamio keeps your data safe with enterprise encryption and
+            granular privacy controls.
           </p>
         </div>
 
         {/* Grid showing security pillars + settings preview */}
         <div className="mt-14 grid gap-8 lg:grid-cols-12 items-center">
-          
           {/* Left Column: Security Features List (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             {[
@@ -70,12 +73,18 @@ export function SettingsAndSecurity() {
                   key={idx}
                   className="flex items-start gap-4 p-4 rounded-2xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:shadow-md transition-all duration-300"
                 >
-                  <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border ${sec.color}`}>
+                  <span
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border ${sec.color}`}
+                  >
                     <Icon size={20} />
                   </span>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">{sec.title}</h4>
-                    <p className="text-xs leading-relaxed text-slate-500 mt-1">{sec.desc}</p>
+                    <h4 className="text-sm font-bold text-slate-900">
+                      {sec.title}
+                    </h4>
+                    <p className="text-xs leading-relaxed text-slate-500 mt-1">
+                      {sec.desc}
+                    </p>
                   </div>
                 </div>
               );
@@ -86,8 +95,13 @@ export function SettingsAndSecurity() {
           <div className="lg:col-span-7 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
               <div className="flex items-center gap-2">
-                <IconAdjustmentsHorizontal size={20} className="text-indigo-600" />
-                <h3 className="text-base font-bold text-slate-900">Teamio Settings Center</h3>
+                <IconAdjustmentsHorizontal
+                  size={20}
+                  className="text-indigo-600"
+                />
+                <h3 className="text-base font-bold text-slate-900">
+                  Teamio Settings Center
+                </h3>
               </div>
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
                 Live Interactive Preview
@@ -122,8 +136,12 @@ export function SettingsAndSecurity() {
                 <>
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                     <div>
-                      <h5 className="text-xs font-bold text-slate-900">Public Timeline Visibility</h5>
-                      <p className="text-[11px] text-slate-500">Allow verified professionals to discover your work posts</p>
+                      <h5 className="text-xs font-bold text-slate-900">
+                        Public Timeline Visibility
+                      </h5>
+                      <p className="text-[11px] text-slate-500">
+                        Allow verified professionals to discover your work posts
+                      </p>
                     </div>
                     <button
                       type="button"
@@ -132,18 +150,27 @@ export function SettingsAndSecurity() {
                         privacyPublic ? "bg-indigo-600" : "bg-slate-300"
                       }`}
                     >
-                      <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                        privacyPublic ? "translate-x-5" : "translate-x-0"
-                      }`} />
+                      <span
+                        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                          privacyPublic ? "translate-x-5" : "translate-x-0"
+                        }`}
+                      />
                     </button>
                   </div>
 
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                     <div>
-                      <h5 className="text-xs font-bold text-slate-900">Calendar Free/Busy Availability</h5>
-                      <p className="text-[11px] text-slate-500">Show open meeting slots while keeping event details private</p>
+                      <h5 className="text-xs font-bold text-slate-900">
+                        Calendar Free/Busy Availability
+                      </h5>
+                      <p className="text-[11px] text-slate-500">
+                        Show open meeting slots while keeping event details
+                        private
+                      </p>
                     </div>
-                    <span className="text-xs font-bold text-emerald-600">Enabled</span>
+                    <span className="text-xs font-bold text-emerald-600">
+                      Enabled
+                    </span>
                   </div>
                 </>
               )}
@@ -152,8 +179,13 @@ export function SettingsAndSecurity() {
                 <>
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                     <div>
-                      <h5 className="text-xs font-bold text-slate-900">Email Digest of Team Mentions</h5>
-                      <p className="text-[11px] text-slate-500">Receive a daily summary of task updates and timeline mentions</p>
+                      <h5 className="text-xs font-bold text-slate-900">
+                        Email Digest of Team Mentions
+                      </h5>
+                      <p className="text-[11px] text-slate-500">
+                        Receive a daily summary of task updates and timeline
+                        mentions
+                      </p>
                     </div>
                     <button
                       type="button"
@@ -162,16 +194,22 @@ export function SettingsAndSecurity() {
                         notifyEmail ? "bg-indigo-600" : "bg-slate-300"
                       }`}
                     >
-                      <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                        notifyEmail ? "translate-x-5" : "translate-x-0"
-                      }`} />
+                      <span
+                        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                          notifyEmail ? "translate-x-5" : "translate-x-0"
+                        }`}
+                      />
                     </button>
                   </div>
 
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                     <div>
-                      <h5 className="text-xs font-bold text-slate-900">Push Notifications for Direct Messages</h5>
-                      <p className="text-[11px] text-slate-500">Instant alerts when colleagues DM or assign urgent tasks</p>
+                      <h5 className="text-xs font-bold text-slate-900">
+                        Push Notifications for Direct Messages
+                      </h5>
+                      <p className="text-[11px] text-slate-500">
+                        Instant alerts when colleagues DM or assign urgent tasks
+                      </p>
                     </div>
                     <button
                       type="button"
@@ -180,9 +218,11 @@ export function SettingsAndSecurity() {
                         notifyMention ? "bg-indigo-600" : "bg-slate-300"
                       }`}
                     >
-                      <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                        notifyMention ? "translate-x-5" : "translate-x-0"
-                      }`} />
+                      <span
+                        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                          notifyMention ? "translate-x-5" : "translate-x-0"
+                        }`}
+                      />
                     </button>
                   </div>
                 </>
@@ -192,8 +232,13 @@ export function SettingsAndSecurity() {
                 <>
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                     <div>
-                      <h5 className="text-xs font-bold text-slate-900">Two-Factor Authentication (2FA)</h5>
-                      <p className="text-[11px] text-slate-500">Authenticator app or hardware security key required at sign-in</p>
+                      <h5 className="text-xs font-bold text-slate-900">
+                        Two-Factor Authentication (2FA)
+                      </h5>
+                      <p className="text-[11px] text-slate-500">
+                        Authenticator app or hardware security key required at
+                        sign-in
+                      </p>
                     </div>
                     <button
                       type="button"
@@ -202,18 +247,27 @@ export function SettingsAndSecurity() {
                         twoFactor ? "bg-indigo-600" : "bg-slate-300"
                       }`}
                     >
-                      <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                        twoFactor ? "translate-x-5" : "translate-x-0"
-                      }`} />
+                      <span
+                        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
+                          twoFactor ? "translate-x-5" : "translate-x-0"
+                        }`}
+                      />
                     </button>
                   </div>
 
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                     <div>
-                      <h5 className="text-xs font-bold text-slate-900">Active Work Sessions</h5>
-                      <p className="text-[11px] text-slate-500">2 active devices (MacBook Pro, iPhone 15 Pro)</p>
+                      <h5 className="text-xs font-bold text-slate-900">
+                        Active Work Sessions
+                      </h5>
+                      <p className="text-[11px] text-slate-500">
+                        2 active devices (MacBook Pro, iPhone 15 Pro)
+                      </p>
                     </div>
-                    <button type="button" className="text-xs font-bold text-rose-600 hover:underline">
+                    <button
+                      type="button"
+                      className="text-xs font-bold text-rose-600 hover:underline"
+                    >
                       Revoke Others
                     </button>
                   </div>
@@ -223,10 +277,11 @@ export function SettingsAndSecurity() {
 
             <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
               <span>All changes auto-saved to cloud</span>
-              <span className="text-indigo-600 font-semibold">Security Grade: A+</span>
+              <span className="text-indigo-600 font-semibold">
+                Security Grade: A+
+              </span>
             </div>
           </div>
-
         </div>
       </div>
     </section>

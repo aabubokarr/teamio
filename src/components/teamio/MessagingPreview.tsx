@@ -19,7 +19,8 @@ export function MessagingPreview() {
     {
       id: 1,
       sender: "Sarah Wilson",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
       role: "Product Manager",
       text: "The new design is ready for review.",
       time: "10:42 AM",
@@ -29,7 +30,8 @@ export function MessagingPreview() {
     {
       id: 2,
       sender: "You",
-      avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
       role: "Product Lead",
       text: "Looks great! I'll review it before the meeting.",
       time: "10:44 AM",
@@ -37,7 +39,8 @@ export function MessagingPreview() {
     {
       id: 3,
       sender: "Alex Carter",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
       role: "Frontend Engineer",
       text: "I'm already prepping the component library. Should we create a task to track the QA phase?",
       time: "10:45 AM",
@@ -56,7 +59,8 @@ export function MessagingPreview() {
       {
         id: Date.now(),
         sender: "You",
-        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
+        avatar:
+          "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
         role: "Product Lead",
         text: inputMsg,
         time: "Just now",
@@ -71,9 +75,11 @@ export function MessagingPreview() {
   };
 
   return (
-    <section id="messaging" className="py-20 bg-slate-50/70 border-y border-slate-200/60">
+    <section
+      id="messaging"
+      className="py-20 bg-slate-50/70 border-y border-slate-200/60"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 mb-4">
@@ -81,23 +87,26 @@ export function MessagingPreview() {
           </div>
 
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
-            Conversations that <span className="text-indigo-600">move work forward.</span>
+            Conversations that{" "}
+            <span className="text-indigo-600">move work forward.</span>
           </h2>
 
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
-            Communicate privately or in team channels without leaving Teamio. Seamlessly convert discussion threads directly into tracked tasks.
+            Communicate privately or in team channels without leaving Teamio.
+            Seamlessly convert discussion threads directly into tracked tasks.
           </p>
         </div>
 
         {/* Messaging Interface Mockup */}
         <div className="mt-12 mx-auto max-w-5xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl grid grid-cols-12 min-h-[520px]">
-          
           {/* Sidebar Channels & DMs (3 columns) */}
           <div className="col-span-12 sm:col-span-4 border-r border-slate-200 bg-slate-50/80 p-4">
-            
             {/* Search Input */}
             <div className="relative mb-4">
-              <IconSearch size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              <IconSearch
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              />
               <input
                 type="text"
                 placeholder="Search messages..."
@@ -131,9 +140,13 @@ export function MessagingPreview() {
                         <IconHash size={15} /> #{ch.name}
                       </span>
                       {ch.unread > 0 && (
-                        <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-                          activeChannel === ch.id ? "bg-white text-indigo-600" : "bg-indigo-100 text-indigo-700"
-                        }`}>
+                        <span
+                          className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                            activeChannel === ch.id
+                              ? "bg-white text-indigo-600"
+                              : "bg-indigo-100 text-indigo-700"
+                          }`}
+                        >
                           {ch.unread}
                         </span>
                       )}
@@ -158,10 +171,14 @@ export function MessagingPreview() {
                       className="flex items-center justify-between rounded-xl px-3 py-2 text-xs text-slate-700 hover:bg-slate-200/60 cursor-pointer"
                     >
                       <div className="flex items-center gap-2">
-                        <span className={`h-2 w-2 rounded-full ${dm.online ? "bg-emerald-500" : "bg-slate-300"}`} />
+                        <span
+                          className={`h-2 w-2 rounded-full ${dm.online ? "bg-emerald-500" : "bg-slate-300"}`}
+                        />
                         <span className="font-medium">{dm.name}</span>
                       </div>
-                      <span className="text-[10px] text-slate-400">{dm.role}</span>
+                      <span className="text-[10px] text-slate-400">
+                        {dm.role}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -171,21 +188,30 @@ export function MessagingPreview() {
 
           {/* Main Chat Area (8 columns) */}
           <div className="col-span-12 sm:col-span-8 flex flex-col justify-between p-4 sm:p-6 bg-white">
-            
             {/* Chat Top Header */}
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
               <div className="flex items-center gap-2">
                 <IconHash size={20} className="text-indigo-600" />
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">#design-review</h3>
-                  <p className="text-[11px] text-slate-400">3 members online • 12 active threads</p>
+                  <h3 className="text-sm font-bold text-slate-900">
+                    #design-review
+                  </h3>
+                  <p className="text-[11px] text-slate-400">
+                    3 members online • 12 active threads
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button type="button" className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700">
+                <button
+                  type="button"
+                  className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                >
                   <IconPhone size={18} />
                 </button>
-                <button type="button" className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700">
+                <button
+                  type="button"
+                  className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                >
                   <IconVideo size={18} />
                 </button>
               </div>
@@ -200,7 +226,8 @@ export function MessagingPreview() {
                 className="mb-3 rounded-xl bg-emerald-50 border border-emerald-200 p-2.5 text-xs text-emerald-800 flex items-center justify-between"
               >
                 <span className="flex items-center gap-2 font-medium">
-                  <IconCheck size={16} className="text-emerald-600" /> Task created & synced to Kanban Board!
+                  <IconCheck size={16} className="text-emerald-600" /> Task
+                  created & synced to Kanban Board!
                 </span>
                 <span className="font-bold text-emerald-700">View Task →</span>
               </motion.div>
@@ -217,8 +244,12 @@ export function MessagingPreview() {
                   />
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-slate-900">{msg.sender}</span>
-                      <span className="text-[10px] text-slate-400">{msg.time}</span>
+                      <span className="text-xs font-bold text-slate-900">
+                        {msg.sender}
+                      </span>
+                      <span className="text-[10px] text-slate-400">
+                        {msg.time}
+                      </span>
                     </div>
 
                     <div className="mt-1 rounded-2xl bg-slate-50 border border-slate-100 p-3 text-xs text-slate-800 max-w-md">
@@ -228,8 +259,12 @@ export function MessagingPreview() {
                         <div className="mt-2.5 flex items-center gap-2.5 rounded-xl bg-white border border-slate-200 p-2 text-xs">
                           <IconFileText size={20} className="text-indigo-600" />
                           <div className="flex-1 min-w-0">
-                            <p className="font-bold text-slate-900 truncate">{msg.fileName}</p>
-                            <p className="text-[10px] text-slate-400">2.4 MB • PDF Document</p>
+                            <p className="font-bold text-slate-900 truncate">
+                              {msg.fileName}
+                            </p>
+                            <p className="text-[10px] text-slate-400">
+                              2.4 MB • PDF Document
+                            </p>
                           </div>
                         </div>
                       )}
@@ -257,7 +292,10 @@ export function MessagingPreview() {
             </div>
 
             {/* Chat Input Bar */}
-            <form onSubmit={handleSendMessage} className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+            <form
+              onSubmit={handleSendMessage}
+              className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2"
+            >
               <button
                 type="button"
                 className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200 transition"
@@ -280,10 +318,8 @@ export function MessagingPreview() {
                 <IconSend size={16} />
               </button>
             </form>
-
           </div>
         </div>
-
       </div>
     </section>
   );

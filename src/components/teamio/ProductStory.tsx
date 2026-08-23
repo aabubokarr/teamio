@@ -53,9 +53,11 @@ export function ProductStory() {
   ];
 
   return (
-    <section id="story" className="relative py-20 bg-slate-50/70 border-y border-slate-200/60">
+    <section
+      id="story"
+      className="relative py-20 bg-slate-50/70 border-y border-slate-200/60"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-indigo-100/70 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-700 mb-4">
@@ -68,13 +70,14 @@ export function ProductStory() {
           </h2>
 
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
-            Modern professionals lose up to 4 hours a day constantly switching contexts between separate timeline feeds, messaging tools, task boards, calendars, and team chats.
+            Modern professionals lose up to 4 hours a day constantly switching
+            contexts between separate timeline feeds, messaging tools, task
+            boards, calendars, and team chats.
           </p>
         </div>
 
         {/* Visual Graphic: Fragmented Apps vs Teamio Workspace */}
         <div className="mt-14 grid gap-8 lg:grid-cols-12 items-center">
-          
           {/* Left Column: Fragmented Apps Stack */}
           <div className="lg:col-span-5 space-y-3">
             <div className="mb-4">
@@ -98,11 +101,15 @@ export function ProductStory() {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className={`flex h-10 w-10 items-center justify-center rounded-xl border ${app.color}`}>
+                    <span
+                      className={`flex h-10 w-10 items-center justify-center rounded-xl border ${app.color}`}
+                    >
                       <Icon size={20} />
                     </span>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900">{app.name}</h4>
+                      <h4 className="text-sm font-bold text-slate-900">
+                        {app.name}
+                      </h4>
                       <p className="text-xs text-slate-500">{app.desc}</p>
                     </div>
                   </div>
@@ -122,7 +129,10 @@ export function ProductStory() {
             <span className="mt-3 text-xs font-bold uppercase tracking-wider text-indigo-600">
               Flows Into
             </span>
-            <IconArrowRight size={20} className="text-indigo-600 mt-1 hidden lg:block" />
+            <IconArrowRight
+              size={20}
+              className="text-indigo-600 mt-1 hidden lg:block"
+            />
           </div>
 
           {/* Right Column: Unified Teamio Engine */}
@@ -130,15 +140,19 @@ export function ProductStory() {
             <div className="relative overflow-hidden rounded-3xl border border-indigo-200 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 p-6 sm:p-8 text-white shadow-2xl">
               {/* Decorative Glow */}
               <div className="absolute top-0 right-0 -mt-10 -mr-10 h-60 w-60 rounded-full bg-cyan-500/20 blur-3xl" />
-              
+
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2.5">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 font-black text-lg">
                     T
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold">Teamio Unified Workspace</h3>
-                    <p className="text-xs text-indigo-200/80">All-in-one social platform</p>
+                    <h3 className="text-lg font-bold">
+                      Teamio Unified Workspace
+                    </h3>
+                    <p className="text-xs text-indigo-200/80">
+                      All-in-one social platform
+                    </p>
                   </div>
                 </div>
                 <span className="rounded-full bg-emerald-500/20 border border-emerald-400/30 px-2.5 py-1 text-xs font-semibold text-emerald-300 flex items-center gap-1">
@@ -147,7 +161,9 @@ export function ProductStory() {
               </div>
 
               <p className="text-sm leading-relaxed text-indigo-100/90 mb-6">
-                Teamio combines social feeds, private DMs, task boards, and shared calendars into a single, intuitive timeline. No tabs to switch, no lost context.
+                Teamio combines social feeds, private DMs, task boards, and
+                shared calendars into a single, intuitive timeline. No tabs to
+                switch, no lost context.
               </p>
 
               <div className="space-y-3">
@@ -157,7 +173,10 @@ export function ProductStory() {
                   "Calendar Sync → Automatic meeting timeline updates",
                   "Team Directory → See live working status",
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2.5 rounded-xl bg-white/10 p-2.5 text-xs font-medium text-white backdrop-blur-md">
+                  <div
+                    key={idx}
+                    className="flex items-center gap-2.5 rounded-xl bg-white/10 p-2.5 text-xs font-medium text-white backdrop-blur-md"
+                  >
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cyan-400 text-slate-950 font-bold text-[10px]">
                       ✓
                     </span>
@@ -168,11 +187,12 @@ export function ProductStory() {
 
               <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-indigo-200">
                 <span>Result: 99% less app switching</span>
-                <span className="font-bold text-cyan-300">Save ~4.5 hrs/week</span>
+                <span className="font-bold text-cyan-300">
+                  Save ~4.5 hrs/week
+                </span>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

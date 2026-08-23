@@ -20,11 +20,6 @@ function RouteComponent() {
   const [email, setEmail] = useState("maya.rahman@teamio.com");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    window.location.href = "/";
-  };
-
   return (
     <div className="relative min-h-screen h-screen w-full flex items-center justify-center bg-[#FAFAFC] px-4 py-6 overflow-hidden font-sans">
       {/* Ambient background glows */}
@@ -41,7 +36,7 @@ function RouteComponent() {
           <Link to="/" className="inline-flex items-center gap-2 mb-2">
             <Logo className="size-8 shrink-0" />
           </Link>
-          
+
           <h1 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900">
             Welcome to Teamio<span className="text-indigo-600">.</span>
           </h1>
@@ -51,8 +46,7 @@ function RouteComponent() {
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="mt-5 space-y-3.5">
-          
+        <form className="mt-5 space-y-3.5">
           {/* Email Field */}
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1">
@@ -77,7 +71,10 @@ function RouteComponent() {
               <label className="block text-xs font-bold text-slate-700">
                 Password
               </label>
-              <a href="#" className="text-[11px] font-semibold text-indigo-600 hover:underline">
+              <a
+                href="#"
+                className="text-[11px] font-semibold text-indigo-600 hover:underline"
+              >
                 Forgot password?
               </a>
             </div>
@@ -102,13 +99,16 @@ function RouteComponent() {
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
+          <Link
+            to="/timeline"
             className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-indigo-600 py-3 text-xs font-bold text-white shadow-md shadow-indigo-500/20 transition-all duration-200 hover:bg-indigo-700 hover:shadow-indigo-500/30"
           >
             <span>Log in to Teamio</span>
-            <IconArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-          </button>
+            <IconArrowRight
+              size={15}
+              className="transition-transform group-hover:translate-x-1"
+            />
+          </Link>
 
           {/* Divider */}
           <div className="relative my-4 text-center">
@@ -134,16 +134,24 @@ function RouteComponent() {
         <div className="mt-5 pt-3 border-t border-slate-100 text-center">
           <p className="text-xs text-slate-500">
             Don't have an account?{" "}
-            <a href="#get-started" className="font-bold text-indigo-600 hover:underline">
+            <a
+              href="#get-started"
+              className="font-bold text-indigo-600 hover:underline"
+            >
               Join Teamio
             </a>
           </p>
 
           <p className="mt-3 text-[10px] text-slate-400 leading-relaxed">
             By logging in, you agree to Teamio's{" "}
-            <a href="#" className="underline hover:text-slate-600">Terms of Service</a>{" "}
+            <a href="#" className="underline hover:text-slate-600">
+              Terms of Service
+            </a>{" "}
             and{" "}
-            <a href="#" className="underline hover:text-slate-600">Privacy Policy</a>.
+            <a href="#" className="underline hover:text-slate-600">
+              Privacy Policy
+            </a>
+            .
           </p>
         </div>
       </motion.div>

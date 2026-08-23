@@ -50,24 +50,16 @@ export function Navbar() {
           </nav>
 
           {/* Right CTAs */}
-          <div className="hidden items-center gap-3 md:flex">
-            <Link
-              to="/login"
-              className="px-4 py-2 text-sm font-semibold text-slate-700 transition hover:text-indigo-600"
-            >
-              Log in
-            </Link>
-            <a
-              href="#get-started"
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all duration-300 hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <span>Join Teamio</span>
-              <IconArrowRight
-                size={16}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </a>
-          </div>
+          <Link
+            to="/login"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all duration-300 hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5 active:translate-y-0"
+          >
+            <span>Login</span>
+            <IconArrowRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
 
           {/* Mobile Hamburger Button */}
           <button
