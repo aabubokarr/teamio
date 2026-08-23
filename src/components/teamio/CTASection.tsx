@@ -3,7 +3,7 @@ import { IconArrowRight, IconSparkles } from "@tabler/icons-react";
 
 export function CTASection() {
   return (
-    <section id="get-started" className="py-20 lg:py-28 bg-white px-4 sm:px-6 lg:px-8">
+    <section id="get-started" className="py-20 bg-white px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         
         <div className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 p-8 sm:p-14 lg:p-20 text-center text-white shadow-2xl">

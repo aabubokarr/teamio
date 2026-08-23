@@ -115,7 +115,7 @@ export function TaskPreview() {
   };
 
   return (
-    <section id="tasks" className="py-20 lg:py-28 bg-slate-50/70 border-y border-slate-200/60">
+    <section id="tasks" className="py-20 bg-slate-50/70 border-y border-slate-200/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

@@ -66,7 +66,7 @@ export function EcosystemSection() {
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-white overflow-hidden">
+    <section className="py-20 bg-white overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
